@@ -1,1 +1,19 @@
+### 1. Se créer un compte sur GitHub
 
+### 2. Ajouter le git à PHPStorm
+
+ -Aller dans: File -> Settings
+  
+ -Dans les "Settings" dérouler "Version control" puis sélectionner "GitHub"
+ 
+ -Saisir les informations suivantes : 
+        Host : github.com             Auth Type: Password
+        Login : votre_login_git
+        Password : Votre_passwd
+        
+ -Tester la connetion en cliquant sur 'Test'
+ 
+ -Décocher 'Clone git repositories using ssh'
+ 
+ 
+        
