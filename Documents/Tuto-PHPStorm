@@ -15,5 +15,11 @@
  
  -Décocher 'Clone git repositories using ssh'
  
+ -Quitter settings et aller dans :  VCS -> Git -> Clone
  
-        
+ -Saisir les infos suivantes : 
+   Git Repository URL: https://github.com/oiraMm/ProjetCarPark.git
+   Parent Directory : /votre/chemin/PhpstormProjects
+   Directory name : ProjetCarPark
+   
+   
