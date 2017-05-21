@@ -1,6 +1,6 @@
 ### 1. Se créer un compte sur GitHub
 
-Envoyer moi votre addresse mail que vous avez utilisé pour créer votre compte pour que je vous donne les droits sur le repo.
+Envoyez moi votre addresse mail que vous avez utilisé pour créer votre compte pour que je vous donne les droits sur le repo.
 
 ### 2. Ajouter le git à PHPStorm
 
