@@ -22,8 +22,9 @@ class utilisateur_viewer
 
     public function templateConnexionAccept()
     {
-        $myform=new htmlForm('index.php', 'POST');
-        $myform->addFreeText('Connexion Réussi');
-        echo  $myform->render();
+        //$myform=new htmlForm('index.php', 'POST');
+        //$myform->addFreeText('Connexion Réussi');
+        //echo  $myform->render();
+        echo "ok you're connected";
     }
 }

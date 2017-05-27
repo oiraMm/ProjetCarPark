@@ -8,7 +8,7 @@
 include_once './pkg_utilisateur/utilisateur_loader.php';
 if (isset($_SESSION['current_user']))
 {
-    echo 'CONNEXION EFFECTUER';
+    echo 'CONNEXION EFFECTUE';
     unset($_SESSION['current_user']);
     session_destroy();
 }
