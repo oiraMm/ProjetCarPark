@@ -12,7 +12,7 @@ class utilisateur_controller
     private $obj_utilisateur_model;
     private $obj_utilisateur_viewer;
 
-    public function _construct()
+    public function __construct($str_action = "")
     {
         $this->obj_utilisateur_model = new utilisateur_model();
         $this->obj_utilisateur_viewer = new utilisateur_viewer();
@@ -31,14 +31,18 @@ class utilisateur_controller
 
             }
         }
+        if ($str_action == 'actionAfficheConnexion')
+        {
+            $this->obj_utilisateur_viewer->templateConnexion();
+        }
     }
 
     public function connexion ()
     {
         //vérifie l'existance des données saisie
-        if (isset($_POST['mailSaisie']) && isset($_POST['mdpSaisie']))
+        if (isset($_POST['mail_connect']) && isset($_POST['mdp_connect']))
         {
-            $_POST['connexion_reussi'] = $this->utilisateur_entity->getUtilisateurModel()->verifConnexion($_POST['mailSaisie'], $_POST['mdpSaisie']);
+            $_POST['connexion_reussi'] = $this->obj_utilisateur_model->verifConnexion($_POST['mail_connect'], $_POST['mdp_connect']);
         }
     }
 

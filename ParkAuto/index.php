@@ -5,13 +5,14 @@
  * Date: 26/05/2017
  * Time: 13:48
  */
-
-include_once 'pkg_mysql/bdd.php';
-session_start();
-
-$obj_bdd = new bdd();
-$str_select = 'SELECT utilisateur_id FROM utilisateur WHERE utilisateur_id = 1';
-$arr_result = $obj_bdd->select($str_select);
-echo '<pre>';
-var_dump($arr_result);
-echo '</pre>';
+include_once './pkg_utilisateur/utilisateur_loader.php';
+if (isset($_SESSION['current_user']))
+{
+    echo 'CONNEXION EFFECTUER';
+    unset($_SESSION['current_user']);
+    session_destroy();
+}
+else
+{
+    $obj_utilisateur_controller = new utilisateur_controller('actionAfficheConnexion');
+}

@@ -20,7 +20,7 @@ class utilisateur_entity
     private $obj_role;
     private $obj_responsable;
 
-    public function _construct()
+    public function __construct()
     {
 
     }
