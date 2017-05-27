@@ -20,17 +20,6 @@ class utilisateur_controller
         {
             $this->connexion();
         }
-        if (isset($_POST['connexion_reussi']))
-        {
-            if ($_POST['connexion_reussi'])
-            {
-                $this->obj_utilisateur_viewer->templateConnexionAccept();
-            }
-            else
-            {
-                $this->obj_utilisateur_viewer->templateConnexion();
-            }
-        }
         if ($str_action == 'actionAfficheConnexion')
         {
             $this->obj_utilisateur_viewer->templateConnexion();
@@ -43,6 +32,17 @@ class utilisateur_controller
         if (isset($_POST['mail_connect']) && isset($_POST['mdp_connect']))
         {
             $_POST['connexion_reussi'] = $this->obj_utilisateur_model->verifConnexion($_POST['mail_connect'], $_POST['mdp_connect']);
+            if (isset($_POST['connexion_reussi']))
+            {
+                if ($_POST['connexion_reussi'])
+                {
+                    $this->obj_utilisateur_viewer->templateConnexionAccept();
+                }
+                else
+                {
+                    $this->obj_utilisateur_viewer->templateConnexion();
+                }
+            }
         }else{
             $this->obj_utilisateur_viewer->templateConnexion();
         }
