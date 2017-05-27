@@ -12,7 +12,6 @@ if (isset($_SESSION['current_user']))
     unset($_SESSION['current_user']);
     session_destroy();
 }
-else
-{
+else {
     $obj_utilisateur_controller = new utilisateur_controller('actionAfficheConnexion');
 }

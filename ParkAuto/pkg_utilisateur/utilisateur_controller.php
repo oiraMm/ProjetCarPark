@@ -20,7 +20,7 @@ class utilisateur_controller
         {
             $this->connexion();
         }
-        if ($str_action == 'actionAfficheConnexion')
+        elseif ($str_action == 'actionAfficheConnexion')
         {
             $this->obj_utilisateur_viewer->templateConnexion();
         }
