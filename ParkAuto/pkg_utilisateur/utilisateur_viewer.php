@@ -19,4 +19,11 @@ class utilisateur_viewer
         $myform->addBtSubmit('valider');
         echo $myform->render();
     }
+
+    public function templateConnexionAccept()
+    {
+        $myform=new htmlForm('index.php', 'POST');
+        $myform->addFreeText('Connexion Réussi');
+        echo  $myform->render();
+    }
 }

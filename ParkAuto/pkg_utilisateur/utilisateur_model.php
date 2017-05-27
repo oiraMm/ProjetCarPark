@@ -54,5 +54,6 @@ class utilisateur_model
                 return true;
             }
         }
+        return false;
     }
 }
