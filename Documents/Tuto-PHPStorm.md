@@ -51,6 +51,11 @@ Envoyez moi votre addresse mail que vous avez utilisé pour créer votre compte 
     Fast-forward
     Documents/Tuto-PHPStorm | 8 +++++++-
     1 file changed, 7 insertions(+), 1 deletion(-)
+    
+ Si jamais vous avez des problèmes de version e voulez revenir à la version du Git en ligne:
+ 
+    $ git fetch --all
+    $ git reset --hard origin/master
 
 
    
