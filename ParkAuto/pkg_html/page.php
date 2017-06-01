@@ -6,5 +6,6 @@
  * Time: 19:29
  */
     $content=file_get_contents("navbar.html");
+    $content=str_replace("%footer%",file_get_contents("footer.html"),$content);
     echo $content;
 
