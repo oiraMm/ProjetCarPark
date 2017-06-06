@@ -13,3 +13,4 @@ include_once  'pkg_utilisateur/utilisateur_loader.php';
 include_once  'pkg_news/news_loader.php';
 include_once  'pkg_menu/menu_loader.php';
 include_once  'pkg_role/role_loader.php';
+include_once  'pkg_service/service_loader.php';

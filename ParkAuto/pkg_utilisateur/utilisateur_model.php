@@ -30,13 +30,25 @@ class utilisateur_model
                 $obj_utilisateur->setDteDateDeNaissance($arr_result[0]['utilisateur_mail']);
                 $obj_utilisateur->setStrTelephone($arr_result[0]['utilisateur_telephone']);
                 $obj_utilisateur->setStrMotDePasse($arr_result[0]['utilisateur_motDePasse']);
-                $obj_utilisateur->setObjService($arr_result[0]['utilisateur_service']);
+                if ($arr_result[0]['utilisateur_responsable'] != null) {
+                    //instancie le modele de l'objet utilisateur
+                    $obj_service_model = new service_model();
+                    //utilise le model charger pour charger l'objet role de l'utilisateur
+                    $obj_service = $obj_service_model->serviceOf($arr_result[0]['utilisateur_service']);
+                    $obj_utilisateur->setObjService($obj_service);
+                }
                 //instancie le modele de l'objet utilisateur
                 $obj_role_model = new role_model();
                 //utilise le model charger pour charger l'objet role de l'utilisateur
                 $obj_role = $obj_role_model->roleOf($arr_result[0]['utilisateur_role']);
                 $obj_utilisateur->setObjRole($obj_role);
-                $obj_utilisateur->setObjResponsable($arr_result[0]['utilisateur_responsable']);
+                if ($arr_result[0]['utilisateur_responsable'] != null){
+                    //instancie le modele de l'objet utilisateur
+                    $obj_utilisateur_model = new utilisateur_model();
+                    //utilise le model charger pour charger l'objet role de l'utilisateur
+                    $obj_responsable = $obj_utilisateur_model->loadUtilisateurById($arr_result[0]['utilisateur_responsable']);
+                    $obj_utilisateur->setObjResponsable($obj_responsable);
+                }
             }
         }
         return $obj_utilisateur;
