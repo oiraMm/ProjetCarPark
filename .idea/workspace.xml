@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f045f453-1171-4ae7-8397-e8f1c6c50f5c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/index.php" afterPath="$PROJECT_DIR$/ParkAuto/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_menu/menu_controller.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_menu/menu_controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_role/role_controller.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_role/role_controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_role/role_entity.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_role/role_entity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_role/role_loader.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_role/role_loader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_role/role_model.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_role/role_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_model.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_model.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -443,7 +436,7 @@
       <workItem from="1496679370869" duration="3246000" />
       <workItem from="1496734995673" duration="26000" />
       <workItem from="1496736112574" duration="1915000" />
-      <workItem from="1496738472462" duration="4992000" />
+      <workItem from="1496738472462" duration="5008000" />
     </task>
     <task id="LOCAL-00001" summary="test phpstorm">
       <created>1494441088298</created>
@@ -494,11 +487,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496738827942</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Ajout de pkg (news, role, menu) + mise a jour de l'utilisateur et de l'index + ajout du system de loader">
+      <created>1496747035997</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1496747035997</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40026000" />
+    <option name="totallyTimeSpent" value="40042000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
