@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f045f453-1171-4ae7-8397-e8f1c6c50f5c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ParkAuto/pkg_html/STable.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ParkAuto/pkg_html/html_loader.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ParkAuto/pkg_html/footer.html" afterPath="$PROJECT_DIR$/ParkAuto/pkg_graphique/footer.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ParkAuto/pkg_html/navbar.html" afterPath="$PROJECT_DIR$/ParkAuto/pkg_graphique/navbar.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ParkAuto/pkg_html/page.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_graphique/page.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ParkAuto/pkg_html/sign-in.html" afterPath="$PROJECT_DIR$/ParkAuto/pkg_graphique/sign-in.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/general_loader.php" afterPath="$PROJECT_DIR$/ParkAuto/general_loader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_menu/menu_viewer.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_menu/menu_viewer.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,21 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="menu_viewer.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="menu_viewer.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_menu/menu_viewer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="STable.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_html/STable.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+            <state relative-caret-position="962">
+              <caret line="87" column="23" lean-forward="false" selection-start-line="87" selection-start-column="23" selection-end-line="87" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -86,8 +82,6 @@
         <option value="$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_controller.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_menu/menu_loader.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_html/htmlForm.php" />
-        <option value="$PROJECT_DIR$/ParkAuto/pkg_menu/menu_viewer.php" />
-        <option value="$PROJECT_DIR$/ParkAuto/general_loader.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_role/role_entity.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_role/role_controller.php" />
         <option value="$PROJECT_DIR$/ParkAuto/index.php" />
@@ -97,6 +91,9 @@
         <option value="$PROJECT_DIR$/ParkAuto/pkg_menu/menu_controller.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_html/htmlTable.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_html/STable.php" />
+        <option value="$PROJECT_DIR$/ParkAuto/pkg_html/html_loader.php" />
+        <option value="$PROJECT_DIR$/ParkAuto/general_loader.php" />
+        <option value="$PROJECT_DIR$/ParkAuto/pkg_menu/menu_viewer.php" />
       </list>
     </option>
   </component>
@@ -270,6 +267,24 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="pkg_graphique" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjetCarPark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjetCarPark" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ParkAuto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="pkg_bootstrap" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -295,6 +310,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\ProjetCarPark\ParkAuto\pkg_graphique" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -404,7 +424,7 @@
       <workItem from="1496679370869" duration="3246000" />
       <workItem from="1496734995673" duration="26000" />
       <workItem from="1496736112574" duration="1915000" />
-      <workItem from="1496738472462" duration="6302000" />
+      <workItem from="1496738472462" duration="8404000" />
     </task>
     <task id="LOCAL-00001" summary="test phpstorm">
       <created>1494441088298</created>
@@ -469,11 +489,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496747060382</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Ajout de la classe servant à généré des tableau publier ici http://www.shayanderson.com/php/php-html-table-class.htm">
+      <created>1496748590068</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1496748590068</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41336000" />
+    <option name="totallyTimeSpent" value="43438000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -537,29 +564,14 @@
     <MESSAGE value="test phpstorm 2 22" />
     <MESSAGE value="Ajout de pkg (news, role, menu) + mise a jour de l'utilisateur et de l'index + ajout du system de loader" />
     <MESSAGE value="Mise en place des role" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mise en place des role" />
+    <MESSAGE value="Ajout de la classe servant à généré des tableau publier ici http://www.shayanderson.com/php/php-html-table-class.htm" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout de la classe servant à généré des tableau publier ici http://www.shayanderson.com/php/php-html-table-class.htm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_loader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="32" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_viewer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -740,7 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ParkAuto/general_loader.php" />
     <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_html/htmlForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
@@ -789,14 +800,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_menu/menu_loader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -870,14 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_menu/menu_viewer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_html/htmlTable.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -886,10 +881,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_graphique/page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_menu/menu_loader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="40" lean-forward="true" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ParkAuto/general_loader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="39" lean-forward="false" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_html/html_loader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_html/STable.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_menu/menu_viewer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="962">
+          <caret line="87" column="23" lean-forward="false" selection-start-line="87" selection-start-column="23" selection-end-line="87" selection-end-column="23" />
           <folding />
         </state>
       </provider>

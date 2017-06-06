@@ -12,66 +12,81 @@ class menu_viewer
     {
         $case1 =new htmlForm('index.php', 'POST');
         $case1->addBtSubmit('Accueil');
-        echo $case1->render();
         $case2 =new htmlForm('index.php', 'POST');
         $case2->addBtSubmit('Mes reservations');
-        echo $case2->render();
         $case3 =new htmlForm('index.php', 'POST');
         $case3->addBtSubmit('Signalement');
-        echo $case3->render();
         $case4 =new htmlForm('index.php', 'POST');
         $case4->addBtSubmit('Profil');
-        echo $case4->render();
-        $case6 =new htmlForm('index.php', 'POST');
-        $case6->addBtSubmit('Deconnexion');
-        echo $case6->render();
+        $case5 =new htmlForm('index.php', 'POST');
+        $case5->addBtSubmit('Deconnexion');
+        //création d'un tableau html pour le rendu
+        $table = new STable();
+        $table->tr()
+            ->td($case1->render())
+            ->td($case2->render())
+            ->td($case3->render())
+            ->td($case4->render())
+            ->td($case5->render());
+        //affichage du tableau
+        echo $table->getTable();
     }
     public function templateMenuValidateur()
     {
         $case1 =new htmlForm('index.php', 'POST');
         $case1->addBtSubmit('Accueil');
-        echo $case1->render();
         $case2 =new htmlForm('index.php', 'POST');
         $case2->addBtSubmit('Mes reservations');
-        echo $case2->render();
-        $case5 =new htmlForm('index.php', 'POST');
-        $case5->addBtSubmit('Validation');
-        echo $case5->render();
+        $case3 =new htmlForm('index.php', 'POST');
+        $case3->addBtSubmit('Validation');
         $case4 =new htmlForm('index.php', 'POST');
         $case4->addBtSubmit('Signalement');
-        echo $case4->render();
         $case5 =new htmlForm('index.php', 'POST');
         $case5->addBtSubmit('Profil');
-        echo $case5->render();
         $case6 =new htmlForm('index.php', 'POST');
         $case6->addBtSubmit('Deconnexion');
-        echo $case6->render();
+        //création d'un tableau html pour le rendu
+        $table = new STable();
+        $table->tr()
+            ->td($case1->render())
+            ->td($case2->render())
+            ->td($case3->render())
+            ->td($case4->render())
+            ->td($case5->render())
+            ->td($case6->render());
+        //affichage du tableau
+        echo $table->getTable();
     }
     public function templateMenuAdmin()
     {
         $case1 =new htmlForm('index.php', 'POST');
         $case1->addBtSubmit('Accueil');
-        echo $case1->render();
         $case2 =new htmlForm('index.php', 'POST');
         $case2->addBtSubmit('Etat du parc');
-        echo $case2->render();
         $case3 =new htmlForm('index.php', 'POST');
         $case3->addBtSubmit('Mes reservations');
-        echo $case3->render();
-        $case5 =new htmlForm('index.php', 'POST');
-        $case5->addBtSubmit('Validation');
-        echo $case5->render();
         $case4 =new htmlForm('index.php', 'POST');
-        $case4->addBtSubmit('Signalement');
-        echo $case4->render();
+        $case4->addBtSubmit('Validation');
         $case5 =new htmlForm('index.php', 'POST');
-        $case5->addBtSubmit('Profil');
-        echo $case5->render();
+        $case5->addBtSubmit('Signalement');
         $case6 =new htmlForm('index.php', 'POST');
-        $case6->addBtSubmit('Administration');
-        echo $case6->render();
-        $case6 =new htmlForm('index.php', 'POST');
-        $case6->addBtSubmit('Deconnexion');
-        echo $case6->render();
+        $case6->addBtSubmit('Profil');
+        $case7 =new htmlForm('index.php', 'POST');
+        $case7->addBtSubmit('Administration');
+        $case8 =new htmlForm('index.php', 'POST');
+        $case8->addBtSubmit('Deconnexion');
+        //création d'un tableau html pour le rendu
+        $table = new STable();
+        $table->tr()
+            ->td($case1->render())
+            ->td($case2->render())
+            ->td($case3->render())
+            ->td($case4->render())
+            ->td($case5->render())
+            ->td($case6->render())
+            ->td($case7->render())
+            ->td($case8->render());
+        //affichage du tableau
+        echo $table->getTable();
     }
 }

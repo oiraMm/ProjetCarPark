@@ -8,7 +8,7 @@
 
 session_start();
 include_once 'pkg_mysql/bdd.php';
-include_once  'pkg_html/htmlForm.php';
+include_once  'pkg_html/html_loader.php';
 include_once  'pkg_utilisateur/utilisateur_loader.php';
 include_once  'pkg_news/news_loader.php';
 include_once  'pkg_menu/menu_loader.php';
