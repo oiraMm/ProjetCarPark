@@ -6,7 +6,7 @@
  * Time: 13:48
  */
 include_once 'general_loader.php';
-if (isset($_POST['Submit']) && $_SESSION['current_user'])
+if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
 {
     $str_page_request = $_POST['Submit'];
     if ($str_page_request == 'Accueil')

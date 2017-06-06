@@ -31,7 +31,11 @@ class utilisateur_model
                 $obj_utilisateur->setStrTelephone($arr_result[0]['utilisateur_telephone']);
                 $obj_utilisateur->setStrMotDePasse($arr_result[0]['utilisateur_motDePasse']);
                 $obj_utilisateur->setObjService($arr_result[0]['utilisateur_service']);
-                $obj_utilisateur->setObjRole($arr_result[0]['utilisateur_role']);
+                //instancie le modele de l'objet utilisateur
+                $obj_role_model = new role_model();
+                //utilise le model charger pour charger l'objet role de l'utilisateur
+                $obj_role = $obj_role_model->roleOf($arr_result[0]['utilisateur_role']);
+                $obj_utilisateur->setObjRole($obj_role);
                 $obj_utilisateur->setObjResponsable($arr_result[0]['utilisateur_responsable']);
             }
         }
@@ -50,7 +54,7 @@ class utilisateur_model
             {
                 $int_utilisateur_id = $arr_result[0]['utilisateur_id'];
                 $obj_current_user = $this->loadUtilisateurById($int_utilisateur_id);
-                $_SESSION['current_user'] = $obj_current_user;
+                $_SESSION['current_user'] = $obj_current_user->getIntId();
                 return true;
             }
         }
