@@ -28,22 +28,6 @@ class utilisateur_entity
     /**
      * @return mixed
      */
-    public function getUtilisateurController()
-    {
-        return $this->obj_utilisateur_controller;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUtilisateurModel()
-    {
-        return $this->obj_utilisateur_model;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getIntId()
     {
         return $this->int_id;
