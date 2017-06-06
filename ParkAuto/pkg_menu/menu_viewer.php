@@ -90,7 +90,7 @@ class menu_viewer
             $menu.="<li class=\"nav-item\">".$item->render()."</li>";
         }
 
-        $page=str_replace("%menu%",file_get_contents("pkg_graphique/navbar.html"),$menu);
+        $page=str_replace("%menu%",file_get_contents("../pkg_graphique/navbarTest.html"),$menu);
 
         echo $page;
 
