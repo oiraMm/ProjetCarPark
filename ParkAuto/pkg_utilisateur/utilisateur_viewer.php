@@ -12,12 +12,18 @@ class utilisateur_viewer
     public function templateConnexion()
     {
         $myform=new htmlForm('index.php', 'POST');
-        $myform->addFreeText('Email : ');
-        $myform->addText('mail_connect', '', '', '');
-        $myform->addFreeText('Mot de passe : ');
-        $myform->addPassword('mdp_connect', '', '', '');
-        $myform->addBtSubmit('valider');
-        echo $myform->render();
+        $myform->addFreeText("<h2 class=\"form-signin-heading\">Please sign in</h2>");
+        $myform->addFreeText("Email :");
+        $myform->addText('mail_connect', '', '', '',"form-control","email");
+        $myform->addFreeText("Mot de passe :");
+        $myform->addPassword('mdp_connect', '', '', '',"form-control");
+        $myform->addBtSubmit('valider',"Submit",'btn btn-lg btn-primary btn-block');
+
+        $page=str_replace("%form%",$myform->render(),file_get_contents("pkg_graphique/sign-in.html"));
+
+
+
+        echo $page;
     }
 /*
     public function templateConnexionAccept()
