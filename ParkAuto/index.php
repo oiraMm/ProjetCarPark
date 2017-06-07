@@ -13,7 +13,10 @@ if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
     if ($str_page_request == 'Accueil')
     {
         $obj_menu = new menu_controller();
-        $obj_news_controller = new news_controller('actionAfficheAllNews');
+        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+        $obj_news_controller = new news_controller();
+        $page=str_replace("%content%",$obj_news_controller->getTemplateNews(),$page);
+        $page=str_replace("%title%",'Accueil',$page);
     }
     elseif ($str_page_request == 'Etat du parc')
     {
@@ -57,6 +60,7 @@ else if (isset($_SESSION['current_user']))
     $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
     $obj_news_controller = new news_controller();
     $page=str_replace("%content%",$obj_news_controller->getTemplateNews(),$page);
+    $page=str_replace("%title%",'Accueil',$page);
 }
 else
 {
@@ -70,6 +74,7 @@ else
         $form=str_replace("%form%",$obj_utilisateur_controller->getTemplateConnexion(),file_get_contents("pkg_graphique/sign-in.html"));
         $page=str_replace("%navbar%",'',$page);
         $page=str_replace("%content%",$form,$page);
+        $page=str_replace("%title%",'Connexion',$page);
     }
 }
 echo $page;
