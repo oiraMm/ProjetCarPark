@@ -12,7 +12,7 @@ class utilisateur_viewer
     public function templateConnexion()
     {
         $myform=new htmlForm('index.php', 'POST');
-        $myform->addFreeText("<h2 class=\"form-signin-heading\">Please sign in</h2>");
+        $myform->addFreeText("<h2 class=\"form-signin-heading\">Connexion</h2>");
         $myform->addFreeText("Email :");
         $myform->addText('mail_connect', '', '', '',"form-control","email");
         $myform->addFreeText("Mot de passe :");
