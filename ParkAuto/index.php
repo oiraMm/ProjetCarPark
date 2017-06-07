@@ -7,11 +7,13 @@
  */
 include_once 'general_loader.php';
 $page=file_get_contents("pkg_graphique/page.html");
+
 if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
 {
     $str_page_request = $_POST['Submit'];
     if ($str_page_request == 'Accueil')
     {
+
         $obj_menu = new menu_controller();
         $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
         $obj_news_controller = new news_controller();
@@ -67,8 +69,17 @@ else
     if (isset($_POST['mail_connect']) && isset($_POST['mdp_connect']))
     {
         $obj_utilisateur_controller = new utilisateur_controller('connexion');
+        if (! isset($_SESSION['current_user']))
+        {
+            $obj_utilisateur_controller = new utilisateur_controller();
+            $form=str_replace("%form%",$obj_utilisateur_controller->getTemplateConnexion(),file_get_contents("pkg_graphique/sign-in.html"));
+            $page=str_replace("%navbar%",'<div class="alert alert-danger">Mot de passe ou mail incorrect</div>',$page);
+            $page=str_replace("%content%",$form,$page);
+            $page=str_replace("%title%",'Connexion',$page);
+
+        }
     }
-    else
+else
     {
         $obj_utilisateur_controller = new utilisateur_controller();
         $form=str_replace("%form%",$obj_utilisateur_controller->getTemplateConnexion(),file_get_contents("pkg_graphique/sign-in.html"));
@@ -77,4 +88,6 @@ else
         $page=str_replace("%title%",'Connexion',$page);
     }
 }
+
+
 echo $page;
