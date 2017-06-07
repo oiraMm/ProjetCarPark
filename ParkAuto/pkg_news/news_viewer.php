@@ -12,7 +12,7 @@ class news_viewer
     {
         foreach ($arrNews as $obj_news)
         {
-            $arraNews = $this->templateNewsUnitaire($obj_news);
+            $arraNews[] = $this->templateNewsUnitaire($obj_news);
         }
         return $arraNews;
     }

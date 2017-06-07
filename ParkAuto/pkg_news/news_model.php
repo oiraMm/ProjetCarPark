@@ -12,7 +12,7 @@ class news_model
     {
         //charge les donné de l'utilisateur connecté dans l'objet utilisateur en fonction de l'identifiant fournie
         $obj_bdd = new bdd();
-        $str_select = 'SELECT news_id FROM news';
+        $str_select = 'SELECT news_id FROM news ORDER BY news_createdAt DESC';
         $arr_result = $obj_bdd->select($str_select);
         $arr_obj_news = null;
         if (isset($arr_result))

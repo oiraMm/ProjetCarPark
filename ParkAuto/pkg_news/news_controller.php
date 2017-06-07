@@ -23,7 +23,24 @@ class news_controller
     {
         $arr_news = $this->obj_news_model->loadAllNews();
         if ($arr_news !=null) {
-            return $this->obj_news_viewer->templateNewsMasse($arr_news);
+            $arr_news_template = $this->obj_news_viewer->templateNewsMasse($arr_news);
+            $str_news_template = '<ul class="list-group">';
+            $bool_alterne = true;
+            foreach ($arr_news_template as $news_template)
+            {
+                if ($bool_alterne == true) {
+                    $str_news_template .= '<li class="list-group-item list-group-item-info">';
+                    $bool_alterne = false;
+                }
+                else{
+                    $str_news_template .= '<li class="list-group-item list-group-item-success">';
+                    $bool_alterne = true;
+                }
+                $str_news_template .= $news_template;
+                $str_news_template .= '</li>';
+            }
+            $str_news_template .= '</ul>';
+            return $str_news_template;
         }
         else
         {
