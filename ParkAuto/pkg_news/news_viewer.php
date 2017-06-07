@@ -12,8 +12,9 @@ class news_viewer
     {
         foreach ($arrNews as $obj_news)
         {
-            $this->templateNewsUnitaire($obj_news);
+            $arraNews = $this->templateNewsUnitaire($obj_news);
         }
+        return $arraNews;
     }
 
     public function templateNewsUnitaire($obj_news)
@@ -24,11 +25,11 @@ class news_viewer
         $str_template .= $obj_news->getObjAuteur()->getStrNom() .' '.$obj_news->getObjAuteur()->getStrPrenom();
         $str_template .= '</p>';
         $str_template .= '</div>';
-        echo $str_template;
+        return $str_template;
     }
     public function templateNoNews ()
     {
         $str_template = '<div class = "news"> <p>Aucune news n\'as été publier</p></div>';
-        echo $str_template;
+        return $str_template;
     }
 }

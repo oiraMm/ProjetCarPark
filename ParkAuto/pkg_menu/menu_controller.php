@@ -15,25 +15,27 @@ class menu_controller
     public function __construct($str_action = "")
     {
         $this->obj_menu_viewer = new menu_viewer();
-        //test le role de l'utilisateur $_session['current_user'] pour lancer l'affichage du menu correspondant
+
+    }
+    public function getTemplateMenu()
+    {
         if (isset($_SESSION['current_user']))
-        {//session_destroy();
-            //$obj_current_user = new utilisateur_entity();
+        {
             $int_id_current_user = $_SESSION['current_user'];
             $current_user_model = new utilisateur_model();
             $current_user = $current_user_model->loadUtilisateurById($int_id_current_user);
             $obj_role = $current_user->getObjRole();
             if ($current_user->getObjRole()->getStrLibelle() == 'admin')
             {
-                $this->obj_menu_viewer->templateMenuAdmin();
+                return $this->obj_menu_viewer->templateMenuAdmin();
             }
             elseif ($current_user->getObjRole()->getStrLibelle() == 'validateur')
             {
-                $this->obj_menu_viewer->templateMenuValidateur();
+                return $this->obj_menu_viewer->templateMenuValidateur();
             }
             elseif ($current_user->getObjRole()->getStrLibelle() == 'user')
             {
-                $this->obj_menu_viewer->templateMenuUser();
+                return $this->obj_menu_viewer->templateMenuUser();
             }
         }
     }

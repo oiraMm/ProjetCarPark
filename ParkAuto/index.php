@@ -6,6 +6,7 @@
  * Time: 13:48
  */
 include_once 'general_loader.php';
+$page=file_get_contents("pkg_graphique/page.html");
 if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
 {
     $str_page_request = $_POST['Submit'];
@@ -53,7 +54,9 @@ if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
 else if (isset($_SESSION['current_user']))
 {
     $obj_menu = new menu_controller();
-    $obj_news_controller = new news_controller('actionAfficheAllNews');
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $obj_news_controller = new news_controller();
+    $page=str_replace("%content%",$obj_news_controller->getTemplateNews(),$page);
 }
 else
 {
@@ -63,9 +66,10 @@ else
     }
     else
     {
-        $obj_utilisateur_controller = new utilisateur_controller('actionAfficheConnexion');
+        $obj_utilisateur_controller = new utilisateur_controller();
+        $form=str_replace("%form%",$obj_utilisateur_controller->getTemplateConnexion(),file_get_contents("pkg_graphique/sign-in.html"));
+        $page=str_replace("%navbar%",'',$page);
+        $page=str_replace("%content%",$form,$page);
     }
 }
-
-
-include_once 'pkg_graphique/footer.html';
+echo $page;

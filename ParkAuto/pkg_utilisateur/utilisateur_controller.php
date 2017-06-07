@@ -18,10 +18,10 @@ class utilisateur_controller
         $this->obj_utilisateur_model = new utilisateur_model();
         $this->obj_utilisateur_viewer = new utilisateur_viewer();
 
-        if ($str_action == 'actionAfficheConnexion') {
-            $this->obj_utilisateur_viewer->templateConnexion();
+        /*if ($str_action == 'actionAfficheConnexion') {
+            return $this->obj_utilisateur_viewer->templateConnexion();
         }
-        elseif ($str_action == 'connexion') {
+        else*/if ($str_action == 'connexion') {
             $this->connexion();
             return 0;
         }
@@ -44,5 +44,10 @@ class utilisateur_controller
             $this->obj_utilisateur_viewer->templateConnexion();
         }
 
+    }
+
+    public function getTemplateConnexion()
+    {
+        return $this->obj_utilisateur_viewer->templateConnexion();
     }
 }

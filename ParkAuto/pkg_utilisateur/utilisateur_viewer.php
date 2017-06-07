@@ -19,11 +19,12 @@ class utilisateur_viewer
         $myform->addPassword('mdp_connect', '', '', '',"form-control");
         $myform->addBtSubmit('valider',"Submit",'btn btn-lg btn-primary btn-block');
 
-        $page=str_replace("%form%",$myform->render(),file_get_contents("pkg_graphique/sign-in.html"));
+        //$page=str_replace("%form%",$myform->render(),file_get_contents("pkg_graphique/sign-in.html"));
 
 
 
-        echo $page;
+        //echo $page;
+        return $myform->render();
     }
 /*
     public function templateConnexionAccept()

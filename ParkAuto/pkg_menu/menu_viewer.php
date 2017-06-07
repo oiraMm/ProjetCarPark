@@ -18,7 +18,7 @@ class menu_viewer
             $collection[]=$this->addItem($item);
         }
 
-        $this->afficherMenu($collection);
+        return $this->afficherMenu($collection);
 
     }
     public function templateMenuValidateur()
@@ -30,7 +30,7 @@ class menu_viewer
             $collection[]=$this->addItem($item);
         }
 
-        $this->afficherMenu($collection);
+        return $this->afficherMenu($collection);
     }
     public function templateMenuAdmin()
     {
@@ -43,7 +43,7 @@ class menu_viewer
         }
 
 
-        $this->afficherMenu($collection);
+        return $this->afficherMenu($collection);
 
 
     }
@@ -55,11 +55,9 @@ class menu_viewer
             $menu.="<li class=\"nav-item\">".$item->render()."</li>";
         }
 
-        $page=str_replace("%menu%",$menu,file_get_contents("pkg_graphique/navbarTest.html"));
+        $navbar=str_replace("%menu%",$menu,file_get_contents("pkg_graphique/navbar.html"));
 
-        $page=str_replace("%title%","Accueil",$page);
-
-        echo $page;
+        return $navbar;
 
     }
 
