@@ -20,6 +20,7 @@ class bdd
         $select = $db->prepare($str_requete);
         $select->execute();
         $result = $select->fetchAll();
+
         return $result;
     }
 

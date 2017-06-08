@@ -13,7 +13,6 @@ if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
     $str_page_request = $_POST['Submit'];
     if ($str_page_request == 'Accueil')
     {
-
         $obj_menu = new menu_controller();
         $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
         $obj_news_controller = new news_controller();
@@ -23,32 +22,45 @@ if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
     elseif ($str_page_request == 'Etat du parc')
     {
         $obj_menu = new menu_controller();
-        echo 'Etat du parc est un écran à venir';
+        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+        $page=str_replace("%content%",'Etat du parc est un écran à venir',$page);
+        $page=str_replace("%title%",'Etat du parc',$page);
     }
     elseif ($str_page_request == 'Mes reservations')
     {
+
         $obj_menu = new menu_controller();
-        echo 'Mes reservations est un écran à venir';
+        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+        $page=str_replace("%content%",'Mes reservations est un écran à venir',$page);
+        $page=str_replace("%title%",'Mes reservations',$page);
     }
     elseif ($str_page_request == 'Signalement')
     {
         $obj_menu = new menu_controller();
-        echo 'Signalement est un écran à venir';
+        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+        $page=str_replace("%content%",'Signalement est un écran à venir',$page);
+        $page=str_replace("%title%",'Signalement',$page);
     }
     elseif ($str_page_request == 'Profil')
     {
         $obj_menu = new menu_controller();
-        echo 'Profil est un écran à venir';
+        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+        $page=str_replace("%content%",'Profil est un écran à venir',$page);
+        $page=str_replace("%title%",'Profil',$page);
     }
     elseif ($str_page_request == 'Administration')
     {
         $obj_menu = new menu_controller();
-        echo 'Administration est un écran à venir';
+        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+        $page=str_replace("%content%",'Administration est un écran à venir',$page);
+        $page=str_replace("%title%",'Administration',$page);
     }
     elseif ($str_page_request == 'Validation')
     {
         $obj_menu = new menu_controller();
-        echo 'Validation est un écran à venir';
+        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+        $page=str_replace("%content%",'Validation est un écran à venir',$page);
+        $page=str_replace("%title%",'Validation',$page);
     }
     elseif ($str_page_request == 'Deconnexion')
     {
