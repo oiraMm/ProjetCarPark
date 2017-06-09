@@ -48,7 +48,7 @@ class menu_viewer
                 $collection[$this->addItem($item)->render()]=$type;
             }
             elseif ($type == 'DropDown'){
-                //$collection[$this->addDropDownMenuItems($item,$listeActionDropDown)]='DropDownMenu';
+                $collection[$this->addDropDownMenuItems($item,$listeActionDropDown)]='DropDownMenu';
             }
 
         }
@@ -59,7 +59,7 @@ class menu_viewer
 
     }
 
-    public function afficherMenu($collection){
+    public function afficherMenu($collection,$navbar='true'){
 
         $menu="";
         foreach ($collection as $item => $type){
@@ -67,18 +67,19 @@ class menu_viewer
                 $menu.="<li class=\"nav-item\">".$item."</li>";
             }
             elseif ($type == 'DropDownMenu'){
-                $menu.="<li class=\"nav-item dropdown\"><a class=\"nav-link dropdown-toggle\" href=\"http://example.com\" id=\"navbarDropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-          Dropdown link
-        </a><div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">".$item."</div></li>";
+                $menu.=$item;
             }
             elseif ($type == 'DropDownItem'){
-
+                $menu.="<li class='dropdown-item'>".$item."</li>";
             }
         }
 
-        $navbar=str_replace("%menu%",$menu,file_get_contents("pkg_graphique/navbar.html"));
+        if ($navbar){
+            $navbar=str_replace("%menu%",$menu,file_get_contents("pkg_graphique/navbar.html"));
+            return $navbar;
+        }
 
-        return $navbar;
+        return $menu;
 
     }
 
@@ -98,10 +99,13 @@ class menu_viewer
 
         foreach ($collection as $item => $title ){
             if($title == $TopItem){
-                $dropdown[$this->addItemDropDown($item)->render()]='Simple';
+                $dropdown[$this->addItemDropDown($item)->render()]='DropDownItem';
             }
         }
 
-        return $this->afficherMenu($dropdown);
+        return "<li class=\"nav-item dropdown\">
+                    <a class=\"nav-link dropdown-toggle\" id=\"dropdown01\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">".$TopItem." 
+                        <span class=\"caret\"></span></a>
+                    <ul class=\"dropdown-menu\">".$this->afficherMenu($dropdown,false)."</ul></li>";
     }
 }
