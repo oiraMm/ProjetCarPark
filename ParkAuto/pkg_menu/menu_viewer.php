@@ -41,6 +41,16 @@ class menu_viewer
         //liste des titres dropdown menu
         $listeActionDropDown=array('Gestion des utilisateurs'=> 'Administration','Gestion des vehicules'=> 'Administration');
 
+        //Genere chaque formulaire en tenant compte des drop down menu...
+        $collection=$this->generateMenu($listeAction,$listeActionDropDown);
+
+        //retourne le code html de la navbar
+        return $this->afficherMenu($collection);
+
+
+    }
+
+    public function generateMenu($listeAction,$listeActionDropDown){
 
         foreach ($listeAction as $item => $type){
 
@@ -53,10 +63,7 @@ class menu_viewer
 
         }
 
-
-        return $this->afficherMenu($collection);
-
-
+        return $collection;
     }
 
     public function afficherMenu($collection,$navbar='true'){
