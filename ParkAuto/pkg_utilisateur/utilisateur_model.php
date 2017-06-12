@@ -16,8 +16,10 @@ class utilisateur_model
     {
         //charge les donné de l'utilisateur connecté dans l'objet utilisateur en fonction de l'identifiant fournie
         $obj_bdd = new bdd();
-        $str_select = 'SELECT * FROM utilisateur WHERE utilisateur_id = '.$id;
-        $arr_result = $obj_bdd->select($str_select);
+        $champ = '*';
+        $table = 'utilisateur';
+        $condition = 'utilisateur_id = "'.$id.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
         $obj_utilisateur =  new utilisateur_entity();
         if (isset($arr_result[0]))
         {
@@ -58,8 +60,10 @@ class utilisateur_model
     {
         //vérifie si un utilisateur exist avec ce couple de mail/mdp et renvoie son id si il existe
         $obj_bdd = new bdd();
-        $str_select = 'SELECT utilisateur_id FROM utilisateur WHERE utilisateur_mail = "'.$mail .'" AND utilisateur_motDePasse="'. $motDePasse.'"';
-        $arr_result = $obj_bdd->select($str_select);
+        $champ = 'utilisateur_id';
+        $table = 'utilisateur';
+        $condition = 'utilisateur_mail = "'.$mail .'" AND utilisateur_motDePasse="'. $motDePasse. '"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
         if (isset($arr_result[0]))
         {
             if ($arr_result[0]['utilisateur_id'] != null)

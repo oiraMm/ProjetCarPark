@@ -12,8 +12,10 @@ class service_model
     {
         //charge les donné de la news dont l'id est passez en paramètre
         $obj_bdd = new bdd();
-        $str_select = 'SELECT * FROM service WHERE service_id = '.$id;
-        $arr_result = $obj_bdd->select($str_select);
+        $champ = '*';
+        $table = 'service';
+        $condition = 'service_id = "'.$id.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
         $obj_service =  new service_entity();
         if (isset($arr_result[0]))
         {

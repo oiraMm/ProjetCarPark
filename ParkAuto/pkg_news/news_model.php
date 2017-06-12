@@ -12,8 +12,10 @@ class news_model
     {
         //charge les donné de l'utilisateur connecté dans l'objet utilisateur en fonction de l'identifiant fournie
         $obj_bdd = new bdd();
-        $str_select = 'SELECT news_id FROM news ORDER BY news_createdAt DESC';
-        $arr_result = $obj_bdd->select($str_select);
+        $champ = 'news_id';
+        $table = 'news';
+        $order = 'news_createdAt DESC';
+        $arr_result = $obj_bdd->select($champ, $table, '', $order);
         $arr_obj_news = null;
         if (isset($arr_result))
         {
@@ -30,7 +32,10 @@ class news_model
         //charge les donné de la news dont l'id est passez en paramètre
         $obj_bdd = new bdd();
         $str_select = 'SELECT * FROM news WHERE news_id = '.$id ["news_id"];
-        $arr_result = $obj_bdd->select($str_select);
+        $champ = '*';
+        $table = 'news';
+        $condition = 'news_id = "'.$id ["news_id"].'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
         $obj_news =  new news_entity();
         if (isset($arr_result[0]))
         {

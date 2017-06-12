@@ -12,8 +12,10 @@ class role_model
     {
         //charge les donné de la news dont l'id est passez en paramètre
         $obj_bdd = new bdd();
-        $str_select = 'SELECT * FROM role WHERE role_id = '.$id;
-        $arr_result = $obj_bdd->select($str_select);
+        $champ = '*';
+        $table = 'role';
+        $condition = 'role_id = "'.$id.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
         $obj_role =  new role_entity();
         if (isset($arr_result[0]))
         {
