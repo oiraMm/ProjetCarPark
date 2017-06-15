@@ -21,7 +21,7 @@ class etat_vehicule_controller
     /**
      * @return etat_vehicule_model
      */
-    public function getObjEtatVehiculeModel(): etat_vehicule_model
+    public function getObjEtatVehiculeModel()
     {
         return $this->obj_etat_vehicule_model;
     }
@@ -37,7 +37,7 @@ class etat_vehicule_controller
     /**
      * @return etat_vehicule_viewer
      */
-    public function getObjEtatVehiculeViewer(): etat_vehicule_viewer
+    public function getObjEtatVehiculeViewer()
     {
         return $this->obj_etat_vehicule_viewer;
     }

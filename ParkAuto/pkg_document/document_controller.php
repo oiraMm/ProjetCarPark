@@ -21,7 +21,7 @@ class document_controller
     /**
      * @return document_model
      */
-    public function getObjDocumentModel(): document_model
+    public function getObjDocumentModel()
     {
         return $this->obj_document_model;
     }
@@ -37,7 +37,7 @@ class document_controller
     /**
      * @return document_viewer
      */
-    public function getObjDocumentViewer(): document_viewer
+    public function getObjDocumentViewer()
     {
         return $this->obj_document_viewer;
     }

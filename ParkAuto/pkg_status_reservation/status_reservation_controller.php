@@ -21,7 +21,7 @@ class status_reservation_controller
     /**
      * @return status_reservation_model
      */
-    public function getObjStatusReservationModel(): status_reservation_model
+    public function getObjStatusReservationModel()
     {
         return $this->obj_status_reservation_model;
     }
@@ -37,7 +37,7 @@ class status_reservation_controller
     /**
      * @return status_reservation_viewer
      */
-    public function getObjStatusReservationViewer(): status_reservation_viewer
+    public function getObjStatusReservationViewer()
     {
         return $this->obj_status_reservation_viewer;
     }

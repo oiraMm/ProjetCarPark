@@ -21,7 +21,7 @@ class reservation_controller
     /**
      * @return reservation_model
      */
-    public function getObjReservationModel(): reservation_model
+    public function getObjReservationModel()
     {
         return $this->obj_reservation_model;
     }
@@ -37,7 +37,7 @@ class reservation_controller
     /**
      * @return reservation_viewer
      */
-    public function getObjReservationViewer(): reservation_viewer
+    public function getObjReservationViewer()
     {
         return $this->obj_reservation_viewer;
     }

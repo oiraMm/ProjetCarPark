@@ -22,7 +22,7 @@ class service_controller
     /**
      * @return service_model
      */
-    public function getObjServiceModel(): service_model
+    public function getObjServiceModel()
     {
         return $this->obj_service_model;
     }
@@ -38,7 +38,7 @@ class service_controller
     /**
      * @return service_viewer
      */
-    public function getObjServiceViewer(): service_viewer
+    public function getObjServiceViewer()
     {
         return $this->obj_service_viewer;
     }

@@ -12,7 +12,7 @@ class role_controller
     //controller et model de la classe
     private $obj_role_model;
     private $obj_role_viewer;
-    public function __construct($str_action = "", $roleId)
+    public function __construct($str_action = "", $roleId = null)
     {
         $this->obj_role_model = new role_model();
         $this->obj_role_viewer = new role_viewer();
@@ -25,7 +25,7 @@ class role_controller
     /**
      * @return role_model
      */
-    public function getObjRoleModel(): role_model
+    public function getObjRoleModel()
     {
         return $this->obj_role_model;
     }
@@ -41,7 +41,7 @@ class role_controller
     /**
      * @return role_viewer
      */
-    public function getObjRoleViewer(): role_viewer
+    public function getObjRoleViewer()
     {
         return $this->obj_role_viewer;
     }

@@ -21,7 +21,7 @@ class niveau_carburant_controller
     /**
      * @return niveau_carburant_model
      */
-    public function getObjNiveauCarburantModel(): niveau_carburant_model
+    public function getObjNiveauCarburantModel()
     {
         return $this->obj_niveau_carburant_model;
     }
@@ -37,7 +37,7 @@ class niveau_carburant_controller
     /**
      * @return niveau_carburant_viewer
      */
-    public function getObjNiveauCarburantViewer(): niveau_carburant_viewer
+    public function getObjNiveauCarburantViewer()
     {
         return $this->obj_niveau_carburant_viewer;
     }

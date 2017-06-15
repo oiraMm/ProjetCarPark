@@ -51,7 +51,7 @@ class news_controller
     /**
      * @return news_model
      */
-    public function getObjNewsModel(): news_model
+    public function getObjNewsModel()
     {
         return $this->obj_news_model;
     }
@@ -67,7 +67,7 @@ class news_controller
     /**
      * @return news_viewer
      */
-    public function getObjNewsViewer(): news_viewer
+    public function getObjNewsViewer()
     {
         return $this->obj_news_viewer;
     }

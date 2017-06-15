@@ -69,7 +69,7 @@ class utilisateur_controller
     /**
      * @return utilisateur_model
      */
-    public function getObjUtilisateurModel(): utilisateur_model
+    public function getObjUtilisateurModel()
     {
         return $this->obj_utilisateur_model;
     }
@@ -85,7 +85,7 @@ class utilisateur_controller
     /**
      * @return utilisateur_viewer
      */
-    public function getObjUtilisateurViewer(): utilisateur_viewer
+    public function getObjUtilisateurViewer()
     {
         return $this->obj_utilisateur_viewer;
     }

@@ -21,7 +21,7 @@ class vehicule_controller
     /**
      * @return vehicule_model
      */
-    public function getObjVehiculeModel(): vehicule_model
+    public function getObjVehiculeModel()
     {
         return $this->obj_vehicule_model;
     }
@@ -37,7 +37,7 @@ class vehicule_controller
     /**
      * @return vehicule_viewer
      */
-    public function getObjVehiculeViewer(): vehicule_viewer
+    public function getObjVehiculeViewer()
     {
         return $this->obj_vehicule_viewer;
     }
