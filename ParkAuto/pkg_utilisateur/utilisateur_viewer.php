@@ -30,6 +30,9 @@ class utilisateur_viewer
         //TODO tableau contenant tout les utilisateur ainsi qu'une colonne action (edit, update, delete)
         //la trasmission d'info se fera via formulaire et champ caché (un formulaire pour le tableau, le click sur un bouton transmettra l'action et l'id de l'utilisateur concerné
         $obj_table = new STable();
+        $myform=new htmlForm('index.php', 'POST');
+        $myform->addHidden('action', '', 'action');
+        $myform->addHidden('userId', '', 'userId');
         $obj_table->border = 1;
         $obj_table->thead()
             ->th("Nom")
@@ -65,8 +68,7 @@ class utilisateur_viewer
                 ->td($reponsable)
                 ->td('EDIT, DELETE');
         }
-
-        return $obj_table->getTable();
+        return $obj_table->getTable().$myform->render();
 
         //TODO détection de l'action delete pour afficher un message de confirmation si cette derniere à eu lieux
     }

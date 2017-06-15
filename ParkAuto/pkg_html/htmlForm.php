@@ -106,11 +106,12 @@ class htmlForm
     // input type HIDDEN
     //---------------------------------------------------------------------------------------------------------
 
-    public function addHidden($name,$val,$rules='')
+    public function addHidden($name,$val, $id='', $rules='')
     {
         $this->_items[$name]['type']='hidden';
         $this->_items[$name]['name']=$name;
         $this->_items[$name]['val']=$val;
+        $this->_items[$name]['id']=$id;
         $this->_items[$name]['rules']=$rules;
     }
 
@@ -118,7 +119,7 @@ class htmlForm
     private static function getHTMLhidden($carac)
     {
         $r='';
-        $r.='<input type="hidden" name="'.$carac['name'].'"';
+        $r.='<input type="hidden" name="'.$carac['name'].'"  id="'.$carac['id'].'"';
         if(isset($carac['val'])) {$r.=' value="'.$carac['val'].'"';}
         $r.='>'.PHP_EOL;
         return $r;
