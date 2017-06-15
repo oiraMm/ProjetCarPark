@@ -8,7 +8,6 @@
 
 include_once 'general_loader.php';
 $page=file_get_contents("pkg_graphique/page.html");
-
 if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
 {
     $str_page_request = $_POST['Submit'];
@@ -29,6 +28,9 @@ if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
             $page = profil($page);
             break;
         case 'Gestion des utilisateurs':
+        case 'Editer utilisateur':
+        case 'Supprimer utilisateur':
+        case 'Ajouter utilisateur':
             $page = gestionUtilisateur($page);
             break;
         case 'Gestion des vehicules':

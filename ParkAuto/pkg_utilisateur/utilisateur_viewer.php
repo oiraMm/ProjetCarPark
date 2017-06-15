@@ -30,9 +30,6 @@ class utilisateur_viewer
         //TODO tableau contenant tout les utilisateur ainsi qu'une colonne action (edit, update, delete)
         //la trasmission d'info se fera via formulaire et champ caché (un formulaire pour le tableau, le click sur un bouton transmettra l'action et l'id de l'utilisateur concerné
         $obj_table = new STable();
-        $myform=new htmlForm('index.php', 'POST');
-        $myform->addHidden('action', '', 'action');
-        $myform->addHidden('userId', '', 'userId');
         $obj_table->border = 1;
         $obj_table->thead()
             ->th("Nom")
@@ -56,6 +53,14 @@ class utilisateur_viewer
             $service=($user->getObjService()==null)?'-':$user->getObjService()->getObjChef()->__toString();
             $role=($user->getObjRole()==null)?'-':$user->getObjRole()->getStrLibelle();
             $reponsable=($user->getObjResponsable()==null)?'-':$user->getObjResponsable()->__toString();
+            $formEdit = new htmlForm('index.php', 'POST');
+            $formEdit->addHidden('idUserEdit', $user->getIntId());
+            $formEdit->addHidden('mode', 'edit');
+            $formEdit->addBtSubmit('Editer utilisateur',"Submit","btn");
+            $formDelete = new htmlForm('index.php', 'POST');
+            $formDelete->addHidden('idUserDelete', $user->getIntId());
+            $formDelete->addHidden('mode', 'delete');
+            $formDelete->addBtSubmit('Supprimer utilisateur',"Submit","btn");
             $obj_table->tr()
                 ->td($nom)
                 ->td($prenom)
@@ -66,9 +71,12 @@ class utilisateur_viewer
                 ->td($service)
                 ->td($role)
                 ->td($reponsable)
-                ->td('EDIT, DELETE');
+                ->td($formEdit->render().$formDelete->render());
         }
-        return $obj_table->getTable().$myform->render();
+        $formAdd = new htmlForm('index.php', 'POST');
+        $formAdd->addHidden('mode', 'add');
+        $formAdd->addBtSubmit('Ajouter utilisateur',"Submit","btn");
+        return $obj_table->getTable().$formAdd->render();
 
         //TODO détection de l'action delete pour afficher un message de confirmation si cette derniere à eu lieux
     }

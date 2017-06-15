@@ -284,10 +284,11 @@ class htmlForm
     // SUBMIT button
     //---------------------------------------------------------------------------------------------------------
 
-    function addBtSubmit($val="Submit",$name="Submit",$class='')
+    function addBtSubmit($val="Submit",$name="Submit",$class='', $id='')
     {
         $this->_items[$name]['type']='submit';
         $this->_items[$name]['name']=$name;
+        $this->_items[$name]['id']=$id;
         $this->_items[$name]['val']=$val;
         $this->_items[$name]['class']=$class;
     }
@@ -297,10 +298,10 @@ class htmlForm
     {
         $r='<input type="submit"';
         if(!empty($carac['class'])) {$r.=' class="'.$carac['class'].'"';}
+        if(!empty($carac['id'])) {$r.=' id="'.$carac['id'].'"';}
         $r.=' name="'.$carac['name'].'" value="'.$carac['val'].'">'.PHP_EOL;
         return $r;
     }
-
     //---------------------------------------------------------------------------------------------------------
     // return bool if the form has been submitted
     //---------------------------------------------------------------------------------------------------------

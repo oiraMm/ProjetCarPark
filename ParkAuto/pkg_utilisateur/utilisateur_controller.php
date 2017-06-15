@@ -53,16 +53,25 @@ class utilisateur_controller
 
     public function getTemplateCrudUser()
     {
-        switch ($_POST['crudUser']) {
-            case 'edit' :
-                $str_template = $this->obj_utilisateur_viewer->templateCrudUser('edit');
-                break;
-            case 'add' :
-                $str_template = $this->obj_utilisateur_viewer->templateCrudUser('add');
-                break;
-            default:
-                $arr_user = $this->obj_utilisateur_model->loadAllUser();
-                $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
+        if (isset($_POST['mode']))
+        {
+            switch ($_POST['mode']) {
+                case 'edit' :
+                    echo 'edit';
+                    $str_template = $this->obj_utilisateur_viewer->templateCrudUser('edit');
+                    break;
+                case 'add' :
+                    $str_template = $this->obj_utilisateur_viewer->templateCrudUser('add');
+                    break;
+                default:
+                    $arr_user = $this->obj_utilisateur_model->loadAllUser();
+                    $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
+            }
+        }
+        else
+        {
+            $arr_user = $this->obj_utilisateur_model->loadAllUser();
+            $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
         }
         return $str_template;
     }
