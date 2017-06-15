@@ -55,13 +55,14 @@ class utilisateur_controller
     {
         switch ($_POST['crudUser']) {
             case 'edit' :
-                $str_template = $this->obj_utilisateur_viewer->templateCrudUserAdd();
+                $str_template = $this->obj_utilisateur_viewer->templateCrudUser('edit');
                 break;
             case 'add' :
-                $str_template = $this->obj_utilisateur_viewer->templateCrudUserEdit();
+                $str_template = $this->obj_utilisateur_viewer->templateCrudUser('add');
                 break;
             default:
-                $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault();
+                $arr_user = $this->obj_utilisateur_model->loadAllUser();
+                $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
         }
         return $str_template;
     }

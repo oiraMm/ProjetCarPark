@@ -185,4 +185,10 @@ class utilisateur_entity
         $this->obj_responsable = $obj_responsable;
     }
 
+    function __toString()
+    {
+        return $this->getStrNom().' '.$this->getStrPrenom();
+    }
+
+
 }

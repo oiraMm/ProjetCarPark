@@ -83,8 +83,9 @@ echo $page;
 function gestionUtilisateur($page)
 {
     $obj_menu = new menu_controller();
+    $obj_utilisateur_controller = new utilisateur_controller();
     $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-    $page=str_replace("%content%",'Gestion utilisateur est un écran à venir',$page);
+    $page=str_replace("%content%",$obj_utilisateur_controller->getTemplateCrudUser(),$page);
     $page=str_replace("%title%",'Gestion utilisateur',$page);
     return $page;
 }

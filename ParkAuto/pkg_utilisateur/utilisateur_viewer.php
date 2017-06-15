@@ -20,15 +20,58 @@ class utilisateur_viewer
         $myform->addBtSubmit('valider',"Submit",'btn btn-lg btn-primary btn-block');
 
         //$page=str_replace("%form%",$myform->render(),file_get_contents("pkg_graphique/sign-in.html"));
-
-
-
         //echo $page;
         return $myform->render();
     }
 
     public function templateCrudUserDefault($arr_user)
     {
+        //echo'<pre>';var_dump($arr_user);echo'</pre>';
+        //TODO tableau contenant tout les utilisateur ainsi qu'une colonne action (edit, update, delete)
+        //la trasmission d'info se fera via formulaire et champ caché (un formulaire pour le tableau, le click sur un bouton transmettra l'action et l'id de l'utilisateur concerné
+        $obj_table = new STable();
+        $obj_table->border = 1;
+        $obj_table->thead()
+            ->th("Nom")
+            ->th("Prenom")
+            ->th("E-mail")
+            ->th("Date de naissance")
+            ->th("Téléphone")
+            ->th("Mot de passe")
+            ->th("Service")
+            ->th("Role")
+            ->th("Responsable")
+            ->th("Action");
+        foreach ($arr_user as $user)
+        {
+            $nom=($user->getStrNom()==null)?'-':$user->getStrNom();
+            $prenom=($user->getStrPrenom()==null)?'-':$user->getStrPrenom();
+            $mail=($user->getStrMail()==null)?'-':$user->getStrMail();
+            $dateNaissance=($user->getDteDateDeNaissance()==null)?'-':$user->getDteDateDeNaissance();
+            $numTel=($user->getStrTelephone()==null)?'-':$user->getStrTelephone();
+            $mdp=($user->getStrMotDePasse()==null)?'-':$user->getStrMotDePasse();
+            $service=($user->getObjService()==null)?'-':$user->getObjService()->getObjChef()->__toString();
+            $role=($user->getObjRole()==null)?'-':$user->getObjRole()->getStrLibelle();
+            $reponsable=($user->getObjResponsable()==null)?'-':$user->getObjResponsable()->__toString();
+            $obj_table->tr()
+                ->td($nom)
+                ->td($prenom)
+                ->td($mail)
+                ->td($dateNaissance)
+                ->td($numTel)
+                ->td($mdp)
+                ->td($service)
+                ->td($role)
+                ->td($reponsable)
+                ->td('EDIT, DELETE');
+        }
 
+        return $obj_table->getTable();
+
+        //TODO détection de l'action delete pour afficher un message de confirmation si cette derniere à eu lieux
+    }
+    public function templateCrudUser($str_mode = 'add', $int_user_id = null)
+    {
+        //TODO Formulaire d'ajout d'utilisateur, pré-remplie grace à l'id si action édit sinon vide
     }
 }
