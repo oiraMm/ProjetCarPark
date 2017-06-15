@@ -47,4 +47,38 @@ class news_controller
             return $this->obj_news_viewer->templateNoNews();
         }
     }
+
+    /**
+     * @return news_model
+     */
+    public function getObjNewsModel(): news_model
+    {
+        return $this->obj_news_model;
+    }
+
+    /**
+     * @param news_model $obj_news_model
+     */
+    public function setObjNewsModel(news_model $obj_news_model)
+    {
+        $this->obj_news_model = $obj_news_model;
+    }
+
+    /**
+     * @return news_viewer
+     */
+    public function getObjNewsViewer(): news_viewer
+    {
+        return $this->obj_news_viewer;
+    }
+
+    /**
+     * @param news_viewer $obj_news_viewer
+     */
+    public function setObjNewsViewer(news_viewer $obj_news_viewer)
+    {
+        $this->obj_news_viewer = $obj_news_viewer;
+    }
+
+
 }

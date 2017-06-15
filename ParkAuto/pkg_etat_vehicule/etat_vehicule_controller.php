@@ -17,4 +17,37 @@ class etat_vehicule_controller
         $this->obj_etat_vehicule_model = new etat_vehicule_model();
         $this->obj_etat_vehicule_viewer = new etat_vehicule_viewer();
     }
+
+    /**
+     * @return etat_vehicule_model
+     */
+    public function getObjEtatVehiculeModel(): etat_vehicule_model
+    {
+        return $this->obj_etat_vehicule_model;
+    }
+
+    /**
+     * @param etat_vehicule_model $obj_etat_vehicule_model
+     */
+    public function setObjEtatVehiculeModel(etat_vehicule_model $obj_etat_vehicule_model)
+    {
+        $this->obj_etat_vehicule_model = $obj_etat_vehicule_model;
+    }
+
+    /**
+     * @return etat_vehicule_viewer
+     */
+    public function getObjEtatVehiculeViewer(): etat_vehicule_viewer
+    {
+        return $this->obj_etat_vehicule_viewer;
+    }
+
+    /**
+     * @param etat_vehicule_viewer $obj_etat_vehicule_viewer
+     */
+    public function setObjEtatVehiculeViewer(etat_vehicule_viewer $obj_etat_vehicule_viewer)
+    {
+        $this->obj_etat_vehicule_viewer = $obj_etat_vehicule_viewer;
+    }
+
 }

@@ -44,9 +44,9 @@ class news_model
                 $obj_news->setIntId($arr_result[0]['news_id']);
                 $obj_news->setStrContenu($arr_result[0]['news_contenu']);
                 //instancie le modele de l'objet utilisateur
-                $obj_utilisateur_model = new utilisateur_model();
+                $obj_utilisateur_controller = new utilisateur_controller();
                 //utilise le model charger pour charger l'utilisateur qui est auteur de la news par son ID
-                $obj_auteur = $obj_utilisateur_model->loadUtilisateurById($arr_result[0]['news_auteur']);
+                $obj_auteur = $obj_utilisateur_controller->getObjUtilisateurModel()->loadUtilisateurById($arr_result[0]['news_auteur']);
                 $obj_news->setObjAuteur($obj_auteur);
             }
         }

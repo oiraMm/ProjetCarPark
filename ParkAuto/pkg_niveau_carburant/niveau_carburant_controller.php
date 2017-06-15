@@ -17,4 +17,37 @@ class niveau_carburant_controller
         $this->obj_niveau_carburant_model = new niveau_carburant_model();
         $this->obj_niveau_carburant_viewer = new niveau_carburant_viewer();
     }
+
+    /**
+     * @return niveau_carburant_model
+     */
+    public function getObjNiveauCarburantModel(): niveau_carburant_model
+    {
+        return $this->obj_niveau_carburant_model;
+    }
+
+    /**
+     * @param niveau_carburant_model $obj_niveau_carburant_model
+     */
+    public function setObjNiveauCarburantModel(niveau_carburant_model $obj_niveau_carburant_model)
+    {
+        $this->obj_niveau_carburant_model = $obj_niveau_carburant_model;
+    }
+
+    /**
+     * @return niveau_carburant_viewer
+     */
+    public function getObjNiveauCarburantViewer(): niveau_carburant_viewer
+    {
+        return $this->obj_niveau_carburant_viewer;
+    }
+
+    /**
+     * @param niveau_carburant_viewer $obj_niveau_carburant_viewer
+     */
+    public function setObjNiveauCarburantViewer(niveau_carburant_viewer $obj_niveau_carburant_viewer)
+    {
+        $this->obj_niveau_carburant_viewer = $obj_niveau_carburant_viewer;
+    }
+
 }

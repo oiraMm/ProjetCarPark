@@ -18,4 +18,37 @@ class service_controller
         $this->obj_service_model = new service_model();
         $this->obj_service_viewer = new service_viewer();
     }
+
+    /**
+     * @return service_model
+     */
+    public function getObjServiceModel(): service_model
+    {
+        return $this->obj_service_model;
+    }
+
+    /**
+     * @param service_model $obj_service_model
+     */
+    public function setObjServiceModel(service_model $obj_service_model)
+    {
+        $this->obj_service_model = $obj_service_model;
+    }
+
+    /**
+     * @return service_viewer
+     */
+    public function getObjServiceViewer(): service_viewer
+    {
+        return $this->obj_service_viewer;
+    }
+
+    /**
+     * @param service_viewer $obj_service_viewer
+     */
+    public function setObjServiceViewer(service_viewer $obj_service_viewer)
+    {
+        $this->obj_service_viewer = $obj_service_viewer;
+    }
+
 }

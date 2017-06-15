@@ -21,4 +21,37 @@ class role_controller
             return $obj_role;
         }
     }
+
+    /**
+     * @return role_model
+     */
+    public function getObjRoleModel(): role_model
+    {
+        return $this->obj_role_model;
+    }
+
+    /**
+     * @param role_model $obj_role_model
+     */
+    public function setObjRoleModel(role_model $obj_role_model)
+    {
+        $this->obj_role_model = $obj_role_model;
+    }
+
+    /**
+     * @return role_viewer
+     */
+    public function getObjRoleViewer(): role_viewer
+    {
+        return $this->obj_role_viewer;
+    }
+
+    /**
+     * @param role_viewer $obj_role_viewer
+     */
+    public function setObjRoleViewer(role_viewer $obj_role_viewer)
+    {
+        $this->obj_role_viewer = $obj_role_viewer;
+    }
+
 }

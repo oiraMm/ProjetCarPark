@@ -5,67 +5,42 @@
  * Date: 26/05/2017
  * Time: 13:48
  */
+
 include_once 'general_loader.php';
 $page=file_get_contents("pkg_graphique/page.html");
 
 if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
 {
     $str_page_request = $_POST['Submit'];
-    if ($str_page_request == 'Accueil')
-    {
-        $obj_menu = new menu_controller();
-        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-        $obj_news_controller = new news_controller();
-        $page=str_replace("%content%",$obj_news_controller->getTemplateNews(),$page);
-        $page=str_replace("%title%",'Accueil',$page);
-    }
-    elseif ($str_page_request == 'Etat du parc')
-    {
-        $obj_menu = new menu_controller();
-        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-        $page=str_replace("%content%",'Etat du parc est un écran à venir',$page);
-        $page=str_replace("%title%",'Etat du parc',$page);
-    }
-    elseif ($str_page_request == 'Mes reservations')
-    {
-
-        $obj_menu = new menu_controller();
-        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-        $page=str_replace("%content%",'Mes reservations est un écran à venir',$page);
-        $page=str_replace("%title%",'Mes reservations',$page);
-    }
-    elseif ($str_page_request == 'Signalement')
-    {
-        $obj_menu = new menu_controller();
-        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-        $page=str_replace("%content%",'Signalement est un écran à venir',$page);
-        $page=str_replace("%title%",'Signalement',$page);
-    }
-    elseif ($str_page_request == 'Profil')
-    {
-        $obj_menu = new menu_controller();
-        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-        $page=str_replace("%content%",'Profil est un écran à venir',$page);
-        $page=str_replace("%title%",'Profil',$page);
-    }
-    elseif ($str_page_request == 'Administration')
-    {
-        $obj_menu = new menu_controller();
-        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-        $page=str_replace("%content%",'Administration est un écran à venir',$page);
-        $page=str_replace("%title%",'Administration',$page);
-    }
-    elseif ($str_page_request == 'Validation')
-    {
-        $obj_menu = new menu_controller();
-        $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-        $page=str_replace("%content%",'Validation est un écran à venir',$page);
-        $page=str_replace("%title%",'Validation',$page);
-    }
-    elseif ($str_page_request == 'Deconnexion')
-    {
-        session_destroy();
-        header('Location: index.php');
+    switch ($str_page_request){
+        case 'Accueil':
+            $page = acceuil($page);
+            break;
+        case 'Etat du parc':
+            $page = etatPark($page);
+            break;
+        case 'Mes reservations':
+            $page = reservation($page);
+            break;
+        case 'Signalement':
+            $page = signalement($page);
+            break;
+        case 'Profil':
+            $page = profil($page);
+            break;
+        case 'Gestion des utilisateurs':
+            $page = gestionUtilisateur($page);
+            break;
+        case 'Gestion des vehicules':
+            $page = gestionVehicules($page);
+            break;
+        case 'Validation':
+        $page = validation($page);
+        break;
+        case'Deconnexion':
+            session_destroy();
+            header('Location: index.php');
+            break;
     }
 }
 else if (isset($_SESSION['current_user']))
@@ -103,3 +78,71 @@ else
 
 
 echo $page;
+
+
+function gestionUtilisateur($page)
+{
+    $obj_menu = new menu_controller();
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $page=str_replace("%content%",'Gestion utilisateur est un écran à venir',$page);
+    $page=str_replace("%title%",'Gestion utilisateur',$page);
+    return $page;
+}
+function gestionVehicules($page)
+{
+    $obj_menu = new menu_controller();
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $page=str_replace("%content%",'Gestion vehicule est un écran à venir',$page);
+    $page=str_replace("%title%",'Gestion vehicule',$page);
+    return $page;
+}
+function acceuil($page)
+{
+    $obj_menu = new menu_controller();
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $obj_news_controller = new news_controller();
+    $page=str_replace("%content%",$obj_news_controller->getTemplateNews(),$page);
+    $page=str_replace("%title%",'Accueil',$page);
+    return $page;
+}
+
+function etatPark($page)
+{
+    $obj_menu = new menu_controller();
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $page=str_replace("%content%",'Etat du parc est un écran à venir',$page);
+    $page=str_replace("%title%",'Etat du parc',$page);
+    return $page;
+}
+function reservation($page)
+{
+    $obj_menu = new menu_controller();
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $page=str_replace("%content%",'Mes reservations est un écran à venir',$page);
+    $page=str_replace("%title%",'Mes reservations',$page);
+    return $page;
+}
+function signalement($page)
+{
+    $obj_menu = new menu_controller();
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $page=str_replace("%content%",'Signalement est un écran à venir',$page);
+    $page=str_replace("%title%",'Signalement',$page);
+    return $page;
+}
+function profil($page)
+{
+    $obj_menu = new menu_controller();
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $page=str_replace("%content%",'Profil est un écran à venir',$page);
+    $page=str_replace("%title%",'Profil',$page);
+    return $page;
+}
+function validation($page)
+{
+    $obj_menu = new menu_controller();
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $page=str_replace("%content%",'Validation est un écran à venir',$page);
+    $page=str_replace("%title%",'Validation',$page);
+    return $page;
+}

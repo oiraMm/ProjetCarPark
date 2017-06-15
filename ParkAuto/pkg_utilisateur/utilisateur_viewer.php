@@ -26,12 +26,9 @@ class utilisateur_viewer
         //echo $page;
         return $myform->render();
     }
-/*
-    public function templateConnexionAccept()
+
+    public function templateCrudUserDefault($arr_user)
     {
-        //$myform=new htmlForm('index.php', 'POST');
-        //$myform->addFreeText('Connexion Réussi');
-        //echo  $myform->render();
-        echo "ok you're connected";
-    }*/
+
+    }
 }

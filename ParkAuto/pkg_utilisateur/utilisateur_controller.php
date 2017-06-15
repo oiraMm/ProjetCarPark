@@ -50,4 +50,53 @@ class utilisateur_controller
     {
         return $this->obj_utilisateur_viewer->templateConnexion();
     }
+
+    public function getTemplateCrudUser()
+    {
+        switch ($_POST['crudUser']) {
+            case 'edit' :
+                $str_template = $this->obj_utilisateur_viewer->templateCrudUserAdd();
+                break;
+            case 'add' :
+                $str_template = $this->obj_utilisateur_viewer->templateCrudUserEdit();
+                break;
+            default:
+                $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault();
+        }
+        return $str_template;
+    }
+
+    /**
+     * @return utilisateur_model
+     */
+    public function getObjUtilisateurModel(): utilisateur_model
+    {
+        return $this->obj_utilisateur_model;
+    }
+
+    /**
+     * @param utilisateur_model $obj_utilisateur_model
+     */
+    public function setObjUtilisateurModel(utilisateur_model $obj_utilisateur_model)
+    {
+        $this->obj_utilisateur_model = $obj_utilisateur_model;
+    }
+
+    /**
+     * @return utilisateur_viewer
+     */
+    public function getObjUtilisateurViewer(): utilisateur_viewer
+    {
+        return $this->obj_utilisateur_viewer;
+    }
+
+    /**
+     * @param utilisateur_viewer $obj_utilisateur_viewer
+     */
+    public function setObjUtilisateurViewer(utilisateur_viewer $obj_utilisateur_viewer)
+    {
+        $this->obj_utilisateur_viewer = $obj_utilisateur_viewer;
+    }
+
+
 }

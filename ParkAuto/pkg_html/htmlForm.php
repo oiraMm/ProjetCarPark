@@ -17,7 +17,7 @@ class htmlForm
     private $_method;
 
     //---------------------------------------------------------------------------------------------------------
-    // constructor called with i.e. : $myform=new htmlFrom('index.php','POST');
+    // constructor called with i.e. : $myform=new htmlFrom('prepare_index.php','POST');
     //---------------------------------------------------------------------------------------------------------
 
     public function __construct($action,$method,$name='')

@@ -17,4 +17,37 @@ class status_reservation_controller
         $this->obj_status_reservation_model = new status_reservation_model();
         $this->obj_status_reservation_viewer = new status_reservation_viewer();
     }
+
+    /**
+     * @return status_reservation_model
+     */
+    public function getObjStatusReservationModel(): status_reservation_model
+    {
+        return $this->obj_status_reservation_model;
+    }
+
+    /**
+     * @param status_reservation_model $obj_status_reservation_model
+     */
+    public function setObjStatusReservationModel(status_reservation_model $obj_status_reservation_model)
+    {
+        $this->obj_status_reservation_model = $obj_status_reservation_model;
+    }
+
+    /**
+     * @return status_reservation_viewer
+     */
+    public function getObjStatusReservationViewer(): status_reservation_viewer
+    {
+        return $this->obj_status_reservation_viewer;
+    }
+
+    /**
+     * @param status_reservation_viewer $obj_status_reservation_viewer
+     */
+    public function setObjStatusReservationViewer(status_reservation_viewer $obj_status_reservation_viewer)
+    {
+        $this->obj_status_reservation_viewer = $obj_status_reservation_viewer;
+    }
+
 }

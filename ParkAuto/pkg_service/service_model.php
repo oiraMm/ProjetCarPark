@@ -23,9 +23,9 @@ class service_model
             {
                 $obj_service->setIntId($arr_result[0]['service_id']);
                 //instancie le modele de l'objet utilisateur
-                $obj_utilisateur_model = new utilisateur_model();
+                $obj_utilisateur_controller = new utilisateur_controller();
                 //utilise le model charger pour charger l'objet role de l'utilisateur
-                $obj_utilisateur = $obj_utilisateur_model->loadUtilisateurById($arr_result[0]['service_chef']);
+                $obj_utilisateur = $obj_utilisateur_controller->getObjUtilisateurModel()->loadUtilisateurById($arr_result[0]['service_chef']);
                 $obj_service->setObjChef($obj_utilisateur);
             }
         }

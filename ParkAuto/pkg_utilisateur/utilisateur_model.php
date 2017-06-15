@@ -34,9 +34,9 @@ class utilisateur_model
                 $obj_utilisateur->setStrMotDePasse($arr_result[0]['utilisateur_motDePasse']);
                 if ($arr_result[0]['utilisateur_responsable'] != null) {
                     //instancie le modele de l'objet utilisateur
-                    $obj_service_model = new service_model();
+                    $obj_service_controller = new service_controller();
                     //utilise le model charger pour charger l'objet role de l'utilisateur
-                    $obj_service = $obj_service_model->serviceOf($arr_result[0]['utilisateur_service']);
+                    $obj_service = $obj_service_controller->get->serviceOf($arr_result[0]['utilisateur_service']);
                     $obj_utilisateur->setObjService($obj_service);
                 }
                 //instancie le modele de l'objet utilisateur

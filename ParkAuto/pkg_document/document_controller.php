@@ -17,4 +17,37 @@ class document_controller
         $this->obj_document_model = new document_model();
         $this->obj_document_viewer = new document_viewer();
     }
+
+    /**
+     * @return document_model
+     */
+    public function getObjDocumentModel(): document_model
+    {
+        return $this->obj_document_model;
+    }
+
+    /**
+     * @param document_model $obj_document_model
+     */
+    public function setObjDocumentModel(document_model $obj_document_model)
+    {
+        $this->obj_document_model = $obj_document_model;
+    }
+
+    /**
+     * @return document_viewer
+     */
+    public function getObjDocumentViewer(): document_viewer
+    {
+        return $this->obj_document_viewer;
+    }
+
+    /**
+     * @param document_viewer $obj_document_viewer
+     */
+    public function setObjDocumentViewer(document_viewer $obj_document_viewer)
+    {
+        $this->obj_document_viewer = $obj_document_viewer;
+    }
+
 }
