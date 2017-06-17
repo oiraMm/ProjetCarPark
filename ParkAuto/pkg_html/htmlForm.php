@@ -52,11 +52,12 @@ class htmlForm
     // input type TEXT
     //---------------------------------------------------------------------------------------------------------
 
-    public function addText($name,$val,$size,$maxlength,$class='',$rules='')
+    public function addText($name,$val, $id='',$size,$maxlength,$class='',$rules='')
     {
         $this->_items[$name]['type']='text';
         $this->_items[$name]['name']=$name;
         $this->_items[$name]['val']=$val;
+        $this->_items[$name]['id']=$id;
         $this->_items[$name]['size']=$size;
         $this->_items[$name]['maxlength']=$maxlength;
         $this->_items[$name]['class']=$class;
@@ -70,6 +71,7 @@ class htmlForm
         $r.='<input type="text" name="'.$carac['name'].'"';
         if(!empty($carac['size'])) {$r.=' size="'.$carac['size'].'"';}
         if(isset($carac['val'])) {$r.=' value="'.$carac['val'].'"';}
+        if(!empty($carac['id'])) {$r.=' id="'.$carac['id'].'"';}
         if(!empty($carac['class'])) {$r.=' class="'.$carac['class'].'"';}
         if(!empty($carac['maxlength'])) {$r.=' maxlength="'.$carac['maxlength'].'"';}
         $r.='>'.PHP_EOL;

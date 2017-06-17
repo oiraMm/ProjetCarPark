@@ -92,6 +92,10 @@ function retrievePostData()
     {
         $str_page_request = $_POST['Submit'];
     }
+    else
+    {
+        $str_page_request = null;
+    }
     return $str_page_request;
 }
 

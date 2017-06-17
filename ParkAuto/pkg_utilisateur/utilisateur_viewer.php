@@ -14,9 +14,9 @@ class utilisateur_viewer
         $myform=new htmlForm('index.php', 'POST');
         $myform->addFreeText("<h2 class=\"form-signin-heading\">Connexion</h2>");
         $myform->addFreeText("Email :");
-        $myform->addText('mail_connect', '', '', '',"form-control","email");
+        $myform->addText('mail_connect', '', '', '', '',"form-control","email");
         $myform->addFreeText("Mot de passe :");
-        $myform->addPassword('mdp_connect', '', '', '',"form-control");
+        $myform->addPassword('mdp_connect', '', '', '', '',"form-control");
         $myform->addBtSubmit('valider',"Submit",'btn btn-lg btn-primary btn-block');
 
         //$page=str_replace("%form%",$myform->render(),file_get_contents("pkg_graphique/sign-in.html"));
@@ -86,7 +86,20 @@ class utilisateur_viewer
         echo '<br><br><br>Mode : '.$str_mode;
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('addUser', 'addUser');
-
+        $formAdd->addFreeText('Prénom : ');
+        $formAdd->addText('prenomSaisi','', '', '',"form-control","prenomSaisi");
+        $formAdd->addFreeText('Nom : ');
+        $formAdd->addText('nomSaisi','', '', '',"form-control","nomSaisi");
+        $formAdd->addFreeText('Adresse email : ');
+        $formAdd->addText('mailSaisi','', '', '',"form-control","mailSaisi");
+        $formAdd->addFreeText('Date de naissance : ');
+        $formAdd->addText('dateSaisi',  '', 'datepicker', '', '');
+        $formAdd->addFreeText('Téléphone : ');
+        $formAdd->addText('telSaisi','', '', '',"form-control","telSaisi");
+        $formAdd->addFreeText('Mot de passe : ');
+        $formAdd->addPassword('mdpSaisi', '', '', '');
+        $formAdd->addFreeText('Service : ');
         $formAdd->addBtSubmit('Valider',"Submit","btn");
+        return $formAdd->render();
     }
 }
