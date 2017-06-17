@@ -83,5 +83,10 @@ class utilisateur_viewer
     public function templateCrudUser($str_mode = 'add', $int_user_id = null)
     {
         //TODO Formulaire d'ajout d'utilisateur, pré-remplie grace à l'id si action édit sinon vide
+        echo '<br><br><br>Mode : '.$str_mode;
+        $formAdd = new htmlForm('index.php', 'POST');
+        $formAdd->addHidden('addUser', 'addUser');
+
+        $formAdd->addBtSubmit('Valider',"Submit","btn");
     }
 }

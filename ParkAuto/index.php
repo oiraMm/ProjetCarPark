@@ -8,9 +8,9 @@
 
 include_once 'general_loader.php';
 $page=file_get_contents("pkg_graphique/page.html");
-if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
+$str_page_request = retrievePostData();
+if ($str_page_request != null)
 {
-    $str_page_request = $_POST['Submit'];
     switch ($str_page_request){
         case 'Accueil':
             $page = acceuil($page);
@@ -31,6 +31,7 @@ if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
         case 'Editer utilisateur':
         case 'Supprimer utilisateur':
         case 'Ajouter utilisateur':
+        case 'addUser':
             $page = gestionUtilisateur($page);
             break;
         case 'Gestion des vehicules':
@@ -81,6 +82,18 @@ else
 
 echo $page;
 
+function retrievePostData()
+{
+    if (isset($_POST['addUser']))
+    {
+        $str_page_request = $_POST['addUser'];
+    }
+    else if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
+    {
+        $str_page_request = $_POST['Submit'];
+    }
+    return $str_page_request;
+}
 
 function gestionUtilisateur($page)
 {

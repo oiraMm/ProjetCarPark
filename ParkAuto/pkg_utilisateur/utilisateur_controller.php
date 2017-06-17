@@ -57,16 +57,16 @@ class utilisateur_controller
         {
             switch ($_POST['mode']) {
                 case 'edit' :
-                    echo 'edit';
                     $str_template = $this->obj_utilisateur_viewer->templateCrudUser('edit');
                     break;
                 case 'add' :
                     $str_template = $this->obj_utilisateur_viewer->templateCrudUser('add');
                     break;
-                default:
-                    $arr_user = $this->obj_utilisateur_model->loadAllUser();
-                    $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
             }
+        }
+        elseif ($_POST['addUser'])
+        {
+            //TODO appel du model pour enregistrement et retour du templateCrudUserDefault avec message de confirmation
         }
         else
         {
