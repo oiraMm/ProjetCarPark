@@ -33,5 +33,12 @@ class bdd
         return $result;
     }
 
-    //insert delete update ...
+    // TODO insert delete update ...
+
+    public function HashData ($data)
+    {
+        $algo = 'Whirlpool' ;
+        $data = hash($algo, $data);
+        return $data;
+    }
 }

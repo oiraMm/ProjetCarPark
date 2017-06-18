@@ -62,7 +62,7 @@ class utilisateur_model
         $obj_bdd = new bdd();
         $champ = 'utilisateur_id';
         $table = 'utilisateur';
-        $condition = 'utilisateur_mail = "'.$mail .'" AND utilisateur_motDePasse="'. $motDePasse. '"';
+        $condition = 'utilisateur_mail = "'.$mail .'" AND utilisateur_motDePasse="'. $obj_bdd->HashData($motDePasse). '"';
         $arr_result = $obj_bdd->select($champ, $table, $condition);
         if (isset($arr_result[0]))
         {

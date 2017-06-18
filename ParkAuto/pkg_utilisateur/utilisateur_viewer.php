@@ -16,7 +16,7 @@ class utilisateur_viewer
         $myform->addFreeText("Email :");
         $myform->addText('mail_connect', '', '', '', '',"form-control","email");
         $myform->addFreeText("Mot de passe :");
-        $myform->addPassword('mdp_connect', '', '', '', '',"form-control");
+        $myform->addPassword('mdp_connect', '', '', '', "form-control");
         $myform->addBtSubmit('valider',"Submit",'btn btn-lg btn-primary btn-block');
 
         //$page=str_replace("%form%",$myform->render(),file_get_contents("pkg_graphique/sign-in.html"));
@@ -97,7 +97,7 @@ class utilisateur_viewer
         $formAdd->addFreeText('Téléphone : ');
         $formAdd->addText('telSaisi','', '', '',"form-control","telSaisi");
         $formAdd->addFreeText('Mot de passe : ');
-        $formAdd->addPassword('mdpSaisi', '', '', '');
+        $formAdd->addPassword('mdpSaisi', '', '', '',"form-control","mdpSaisi");
         $formAdd->addFreeText('Service : ');
         $formAdd->addBtSubmit('Valider',"Submit","btn");
         return $formAdd->render();
