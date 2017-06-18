@@ -37,7 +37,6 @@ class utilisateur_viewer
             ->th("E-mail")
             ->th("Date de naissance")
             ->th("Téléphone")
-            ->th("Mot de passe")
             ->th("Service")
             ->th("Role")
             ->th("Responsable")
@@ -49,7 +48,6 @@ class utilisateur_viewer
             $mail=($user->getStrMail()==null)?'-':$user->getStrMail();
             $dateNaissance=($user->getDteDateDeNaissance()==null)?'-':$user->getDteDateDeNaissance();
             $numTel=($user->getStrTelephone()==null)?'-':$user->getStrTelephone();
-            $mdp=($user->getStrMotDePasse()==null)?'-':$user->getStrMotDePasse();
             $service=($user->getObjService()==null)?'-':$user->getObjService()->getObjChef()->__toString();
             $role=($user->getObjRole()==null)?'-':$user->getObjRole()->getStrLibelle();
             $reponsable=($user->getObjResponsable()==null)?'-':$user->getObjResponsable()->__toString();
@@ -67,7 +65,6 @@ class utilisateur_viewer
                 ->td($mail)
                 ->td($dateNaissance)
                 ->td($numTel)
-                ->td($mdp)
                 ->td($service)
                 ->td($role)
                 ->td($reponsable)
@@ -83,22 +80,81 @@ class utilisateur_viewer
     public function templateCrudUser($str_mode = 'add', $int_user_id = null)
     {
         //TODO Formulaire d'ajout d'utilisateur, pré-remplie grace à l'id si action édit sinon vide
-        echo '<br><br><br>Mode : '.$str_mode;
+        //echo '<br><br><br>Mode : '.$str_mode;
+        if ($int_user_id != null)
+        {
+            $user_controller = new utilisateur_controller();
+            $user = $user_controller->getUserById($int_user_id);
+            $valId = $int_user_id;
+            $valPrenom = $user->getStrPrenom();
+            $valNom = $user->getStrNom();
+            $valMail = $user->getStrMail();
+            $valDate = $user->getDteDateDeNaissance();
+            $valTel = $user->getStrTelephone();
+            $valMdp = $user->getStrMotDePasse();
+            //$valService = $user->getObjService()->getIntId();
+            $valService='';
+        }
+        else
+        {
+            $valId = '';
+            $valPrenom = '';
+            $valNom = '';
+            $valMail = '';
+            $valDate = '';
+            $valTel = '';
+            $valMdp='';
+            $valService='';
+        }
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('addUser', 'addUser');
+        $formAdd->addHidden('idUser', $valId);
         $formAdd->addFreeText('Prénom : ');
-        $formAdd->addText('prenomSaisi','', '', '',"form-control","prenomSaisi");
+        $formAdd->addText('prenomSaisi',$valPrenom, '', '', '',"form-control");
         $formAdd->addFreeText('Nom : ');
-        $formAdd->addText('nomSaisi','', '', '',"form-control","nomSaisi");
+        $formAdd->addText('nomSaisi',$valNom, '', '', '',"form-control");
         $formAdd->addFreeText('Adresse email : ');
-        $formAdd->addText('mailSaisi','', '', '',"form-control","mailSaisi");
+        $formAdd->addText('mailSaisi',$valMail, '', '', '',"form-control");
         $formAdd->addFreeText('Date de naissance : ');
-        $formAdd->addText('dateSaisi',  '', 'datepicker', '', '');
+        $formAdd->addText('dateSaisi',$valDate, '', '', '',"form-control");
         $formAdd->addFreeText('Téléphone : ');
-        $formAdd->addText('telSaisi','', '', '',"form-control","telSaisi");
+        $formAdd->addText('telSaisi',$valTel, '', '', '',"form-control");
         $formAdd->addFreeText('Mot de passe : ');
-        $formAdd->addPassword('mdpSaisi', '', '', '',"form-control","mdpSaisi");
+        $formAdd->addPassword('mdpSaisi', $valMdp, '', '',"form-control");
         $formAdd->addFreeText('Service : ');
+        $obj_service_controller = new service_controller();
+        $arr_service = $obj_service_controller->getAllService();
+        $formAdd->addSelect('service', "form-control");
+        foreach ($arr_service as $oneService)
+        {
+            /*if ($valService == $oneService->getIntId())
+            {
+                $selected = true;
+            }
+            else
+            {
+                $selected = false;
+            }*/
+            $formAdd->addSelectOption('service', $oneService->getIntId(), $oneService->getStrLibelle()/*, $selected*/);
+        }
+        $formAdd->addFreeText('Role : ');
+        $obj_role_controller = new role_controller();
+        $arr_role = $obj_role_controller->getAllRole();
+        $formAdd->addSelect('role', "form-control");
+        foreach ($arr_role as $oneRole)
+        {
+            $formAdd->addSelectOption('role', $oneRole->getIntId(), $oneRole->getStrLibelle());
+        }
+
+
+        $formAdd->addFreeText('Responsable : ');
+        $obj_utilisateur_controller = new utilisateur_controller();
+        $arr_utilisateur = $obj_utilisateur_controller->getAllUser();
+        $formAdd->addSelect('utilisateur', "form-control");
+        foreach ($arr_utilisateur as $oneUtilisateur)
+        {
+            $formAdd->addSelectOption('utilisateur', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString());
+        }
         $formAdd->addBtSubmit('Valider',"Submit","btn");
         return $formAdd->render();
     }

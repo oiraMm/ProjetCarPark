@@ -57,7 +57,7 @@ class utilisateur_controller
         {
             switch ($_POST['mode']) {
                 case 'edit' :
-                    $str_template = $this->obj_utilisateur_viewer->templateCrudUser('edit');
+                    $str_template = $this->obj_utilisateur_viewer->templateCrudUser('edit', $_POST['idUserEdit']);
                     break;
                 case 'add' :
                     $str_template = $this->obj_utilisateur_viewer->templateCrudUser('add');
@@ -74,6 +74,18 @@ class utilisateur_controller
             $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
         }
         return $str_template;
+    }
+
+    public function getAllUser()
+    {
+        $arr_user = $this->getObjUtilisateurModel()->loadAllUser();
+        return $arr_user;
+    }
+
+    public function getUserById($id)
+    {
+        $user = $this->getObjUtilisateurModel()->loadUtilisateurById($id);
+        return $user;
     }
 
     /**

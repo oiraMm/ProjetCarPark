@@ -28,15 +28,15 @@ class utilisateur_model
                 $obj_utilisateur->setIntId($arr_result[0]['utilisateur_id']);
                 $obj_utilisateur->setStrNom($arr_result[0]['utilisateur_nom']);
                 $obj_utilisateur->setStrPrenom($arr_result[0]['utilisateur_prenom']);
-                $obj_utilisateur->setStrMail($arr_result[0]['utilisateur_id']);
-                $obj_utilisateur->setDteDateDeNaissance($arr_result[0]['utilisateur_mail']);
+                $obj_utilisateur->setStrMail($arr_result[0]['utilisateur_mail']);
+                $obj_utilisateur->setDteDateDeNaissance($arr_result[0]['utilisateur_dateDeNaissance']);
                 $obj_utilisateur->setStrTelephone($arr_result[0]['utilisateur_telephone']);
                 $obj_utilisateur->setStrMotDePasse($arr_result[0]['utilisateur_motDePasse']);
                 if ($arr_result[0]['utilisateur_service'] != null) {
                     //instancie le modele de l'objet utilisateur
                     $obj_service_controller = new service_controller();
                     //utilise le model charger pour charger l'objet role de l'utilisateur
-                    $obj_service = $obj_service_controller->get->serviceOf($arr_result[0]['utilisateur_service']);
+                    $obj_service = $obj_service_controller->serviceOf($arr_result[0]['utilisateur_service']);
                     $obj_utilisateur->setObjService($obj_service);
                 }
                 //instancie le modele de l'objet utilisateur

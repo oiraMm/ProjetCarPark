@@ -22,6 +22,12 @@ class role_controller
         }
     }
 
+    public function getAllRole()
+    {
+        $arr_role = $this->getObjRoleModel()->loadAllRole();
+        return $arr_role;
+    }
+
     /**
      * @return role_model
      */
