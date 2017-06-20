@@ -51,6 +51,7 @@ class utilisateur_model
                     $obj_responsable = $obj_utilisateur_controller->getObjUtilisateurModel()->loadUtilisateurById($arr_result[0]['utilisateur_responsable']);
                     $obj_utilisateur->setObjResponsable($obj_responsable);
                 }
+                $obj_utilisateur->setBoolIsChefService($arr_result[0]['utilisateur_isChef']);
             }
         }
         return $obj_utilisateur;
@@ -97,7 +98,7 @@ class utilisateur_model
                 //instancie le modele de l'objet utilisateur
                 $obj_service_controller = new service_controller();
                 //utilise le model charger pour charger l'objet role de l'utilisateur
-                $obj_service = $obj_service_controller->get->serviceOf($user['utilisateur_service']);
+                $obj_service = $obj_service_controller->serviceOf($user['utilisateur_service']);
                 $obj_utilisateur->setObjService($obj_service);
             }
             //instancie le modele de l'objet utilisateur
@@ -112,6 +113,7 @@ class utilisateur_model
                 $obj_responsable = $obj_utilisateur_controller->getObjUtilisateurModel()->loadUtilisateurById($user['utilisateur_responsable']);
                 $obj_utilisateur->setObjResponsable($obj_responsable);
             }
+            $obj_utilisateur->setBoolIsChefService($user['utilisateur_isChef']);
             $arr_user[] = $obj_utilisateur;
         }
 

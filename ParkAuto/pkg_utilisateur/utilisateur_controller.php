@@ -64,7 +64,7 @@ class utilisateur_controller
                     break;
             }
         }
-        elseif ($_POST['addUser'])
+        elseif (isset($_POST['addUser']))
         {
             //TODO appel du model pour enregistrement et retour du templateCrudUserDefault avec message de confirmation
         }

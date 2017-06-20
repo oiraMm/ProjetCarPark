@@ -19,6 +19,23 @@ class utilisateur_entity
     private $obj_service;
     private $obj_role;
     private $obj_responsable;
+    private $bool_isChefService;
+
+    /**
+     * @return mixed
+     */
+    public function getBoolIsChefService()
+    {
+        return $this->bool_isChefService;
+    }
+
+    /**
+     * @param mixed $bool_isChefService
+     */
+    public function setBoolIsChefService($bool_isChefService)
+    {
+        $this->bool_isChefService = $bool_isChefService;
+    }
 
     public function __construct()
     {

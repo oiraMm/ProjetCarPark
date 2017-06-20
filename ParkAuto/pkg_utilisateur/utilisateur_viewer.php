@@ -48,7 +48,7 @@ class utilisateur_viewer
             $mail=($user->getStrMail()==null)?'-':$user->getStrMail();
             $dateNaissance=($user->getDteDateDeNaissance()==null)?'-':$user->getDteDateDeNaissance();
             $numTel=($user->getStrTelephone()==null)?'-':$user->getStrTelephone();
-            $service=($user->getObjService()==null)?'-':$user->getObjService()->getObjChef()->__toString();
+            $service=($user->getObjService()==null)?'-':$user->getObjService()->getStrLibelle();
             $role=($user->getObjRole()==null)?'-':$user->getObjRole()->getStrLibelle();
             $reponsable=($user->getObjResponsable()==null)?'-':$user->getObjResponsable()->__toString();
             $formEdit = new htmlForm('index.php', 'POST');
@@ -86,14 +86,16 @@ class utilisateur_viewer
             $user_controller = new utilisateur_controller();
             $user = $user_controller->getUserById($int_user_id);
             $valId = $int_user_id;
-            $valPrenom = $user->getStrPrenom();
-            $valNom = $user->getStrNom();
-            $valMail = $user->getStrMail();
-            $valDate = $user->getDteDateDeNaissance();
-            $valTel = $user->getStrTelephone();
-            $valMdp = $user->getStrMotDePasse();
-            //$valService = $user->getObjService()->getIntId();
-            $valService='';
+            $valPrenom = ($user->getStrPrenom()!=null)?$user->getStrPrenom():'';
+            $valNom = ($user->getStrNom()!=null)?$user->getStrNom():'';
+            $valMail = ($user->getStrMail()!=null)?$user->getStrMail():'';
+            $valDate = ($user->getDteDateDeNaissance()!=null)?$user->getDteDateDeNaissance():'';
+            $valTel = ($user->getStrTelephone()!=null)?$user->getStrTelephone():'';
+            $valMdp = ($user->getStrMotDePasse()!=null)?$user->getStrMotDePasse():'';
+            $valService = ($user->getObjService()!=null)?$user->getObjService()->getIntId():'';
+            $valRole = ($user->getObjRole()!=null)?$user->getObjRole()->getIntId():'';
+            $valResponsable = ($user->getObjResponsable()!=null)?$user->getObjResponsable()->getIntId():'';
+            $valChef = ($user->getBoolIsChefService()!=null)?$user->getBoolIsChefService():'';
         }
         else
         {
@@ -105,6 +107,9 @@ class utilisateur_viewer
             $valTel = '';
             $valMdp='';
             $valService='';
+            $valRole='';
+            $valResponsable='';
+            $valChef='';
         }
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('addUser', 'addUser');
@@ -127,23 +132,33 @@ class utilisateur_viewer
         $formAdd->addSelect('service', "form-control");
         foreach ($arr_service as $oneService)
         {
-            /*if ($valService == $oneService->getIntId())
+            if ($valService == $oneService->getIntId())
             {
                 $selected = true;
             }
             else
             {
                 $selected = false;
-            }*/
-            $formAdd->addSelectOption('service', $oneService->getIntId(), $oneService->getStrLibelle()/*, $selected*/);
+            }
+            $formAdd->addSelectOption('service', $oneService->getIntId(), $oneService->getStrLibelle(), $selected);
         }
+        $formAdd->addFreeText('Est chef de son service : ');
+        $formAdd->addCheckbox('isChefService', "isChefService", $valChef, "form-control col-sm-1");
         $formAdd->addFreeText('Role : ');
         $obj_role_controller = new role_controller();
         $arr_role = $obj_role_controller->getAllRole();
         $formAdd->addSelect('role', "form-control");
         foreach ($arr_role as $oneRole)
         {
-            $formAdd->addSelectOption('role', $oneRole->getIntId(), $oneRole->getStrLibelle());
+            if ($valRole == $oneRole->getIntId())
+            {
+                $selected = true;
+            }
+            else
+            {
+                $selected = false;
+            }
+            $formAdd->addSelectOption('role', $oneRole->getIntId(), $oneRole->getStrLibelle(), $selected);
         }
 
 
@@ -153,7 +168,15 @@ class utilisateur_viewer
         $formAdd->addSelect('utilisateur', "form-control");
         foreach ($arr_utilisateur as $oneUtilisateur)
         {
-            $formAdd->addSelectOption('utilisateur', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString());
+            if ($valResponsable == $oneUtilisateur->getIntId())
+            {
+                $selected = true;
+            }
+            else
+            {
+                $selected = false;
+            }
+            $formAdd->addSelectOption('utilisateur', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString(), $selected);
         }
         $formAdd->addBtSubmit('Valider',"Submit","btn");
         return $formAdd->render();

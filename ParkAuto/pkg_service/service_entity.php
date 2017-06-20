@@ -11,7 +11,6 @@ class service_entity
     //attribut privé de la classe
     private $int_id;
     private $str_libelle;
-    private $obj_chef;
 
     /**
      * @return mixed
@@ -43,22 +42,6 @@ class service_entity
     public function setIntId($int_id)
     {
         $this->int_id = $int_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getObjChef()
-    {
-        return $this->obj_chef;
-    }
-
-    /**
-     * @param mixed $obj_chef
-     */
-    public function setObjChef($obj_chef)
-    {
-        $this->obj_chef = $obj_chef;
     }
 
 
