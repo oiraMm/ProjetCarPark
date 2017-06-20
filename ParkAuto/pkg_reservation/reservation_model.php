@@ -30,12 +30,12 @@ class reservation_model
         $arr_vehicules=$mdl_vehicule->loadAllVehicules();
         
         
-        foreach ($arr_result as $user)
+        foreach ($arr_result as $reservation)
         {
             $obj_reservation =  new reservation_entity();
-            $obj_reservation->setIntId(['reservation_id']);
-            $obj_reservation->setDateDebut(['reservation_dateDebut']);
-            $obj_reservation->setDateFin(['reservation_dateFin']);
+            $obj_reservation->setIntId($reservation['reservation_id']);
+            $obj_reservation->setDateDebut($reservation['reservation_dateDebut']);
+            $obj_reservation->setDateFin($reservation['reservation_dateFin']);
             $obj_reservation->setObjSalarie($salarie);
             $obj_reservation->setObjVehicule($mdl_vehicule->getVehicule($arr_vehicules,['reservation_vehicule']));
             
