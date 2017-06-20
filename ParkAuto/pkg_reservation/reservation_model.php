@@ -26,8 +26,8 @@ class reservation_model
         
         //repasser par le controller!!
         
-        $mdl_vehicule=new vehicule_model();
-        $arr_vehicules=$mdl_vehicule->loadAllVehicules();
+        $ctrl_vehicule=new vehicule_controller();
+        $arr_vehicules=$ctrl_vehicule->getAllVehicules();
         
         
         foreach ($arr_result as $reservation)
@@ -37,14 +37,14 @@ class reservation_model
             $obj_reservation->setDateDebut($reservation['reservation_dateDebut']);
             $obj_reservation->setDateFin($reservation['reservation_dateFin']);
             $obj_reservation->setObjSalarie($salarie);
-            $obj_reservation->setObjVehicule($mdl_vehicule->getVehicule($arr_vehicules,['reservation_vehicule']));
+            $obj_reservation->setObjVehicule($ctrl_vehicule->getVehicule($arr_vehicules,$reservation['reservation_vehicule']));
             
             $arr_reservation[] = $obj_reservation;
         }
 
 
         
-        
+        return $arr_reservation;
         
     }
 }

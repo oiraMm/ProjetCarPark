@@ -22,7 +22,7 @@ class reservation_viewer
             ->th("Date de debut")
             ->th("Date de fin")
             ->th("Salarié")
-            ->th("Responsable")
+            //->th("Responsable")
             ->th("Vehicule")
             ->th("Action");
         foreach ($arr_reservation as $reservation)
@@ -30,11 +30,11 @@ class reservation_viewer
             //chargemet du détails des reservations
             
             $id=($reservation->getIntId()==null)?'-':$reservation->getIntId();
-            $dateDebut=($reservation->getStrPrenom()==null)?'-':$reservation->getStrPrenom();
-            $dateFin=($reservation->getStrMail()==null)?'-':$reservation->getStrMail();
-            $salarie=($reservation->getDteDateDeNaissance()==null)?'-':$reservation->getDteDateDeNaissance();
-            $responsable=($reservation->getObjResponsable()==null)?'-':$reservation->getObjResponsable()->__toString();
-            $vehicule=($reservation->getObjService()==null)?'-':$reservation->getObjService()->getStrLibelle();
+            $dateDebut=($reservation->getDateDebut()==null)?'-':$reservation->getDateDebut();
+            $dateFin=($reservation->getDateFin()==null)?'-':$reservation->getDateFin();
+            $salarie=($reservation->getObjSalarie()==null)?'-':$reservation->getObjSalarie()->__toString();
+            //$responsable=($reservation->getObjResponsable()==null)?'-':$reservation->getObjResponsable()->__toString();
+            $vehicule=($reservation->getObjVehicule()==null)?'-':$reservation->getObjVehicule()->getStrMarque().' '.$reservation->getObjVehicule()->getStrModel();
             
             
             
@@ -51,7 +51,6 @@ class reservation_viewer
                 ->td($dateDebut)
                 ->td($dateFin)
                 ->td($salarie)
-                ->td($responsable)
                 ->td($vehicule)
                 ->td($formEdit->render().$formDelete->render());
         }

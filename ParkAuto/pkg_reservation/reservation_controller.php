@@ -52,6 +52,8 @@ class reservation_controller
             $current_user = $current_user_model->loadUtilisateurById($int_id_current_user);
             
             $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
+            
+            
             $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation);
             
         }

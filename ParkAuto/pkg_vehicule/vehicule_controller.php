@@ -18,6 +18,17 @@ class vehicule_controller
         $this->obj_vehicule_viewer = new vehicule_viewer();
     }
 
+    
+    public function getVehicule($arr_vehicules,$id){
+        $mdl_vehicule=new vehicule_model();
+        return $mdl_vehicule->getVehicule($arr_vehicules,$id);
+    }
+    
+    public function getAllVehicules() {
+        $mdl_vehicule=new vehicule_model();
+        return $mdl_vehicule->loadAllVehicules();
+        
+    }
     /**
      * @return vehicule_model
      */

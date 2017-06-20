@@ -27,29 +27,31 @@ class vehicule_model
         foreach ($arr_result as $vehicule)
         {
             $obj_vehicule =  new vehicule_entity();
-            $obj_vehicule->setIntId(['vehicule_id']);
-            $obj_vehicule->setIntKm(['vehicule_km']);
-            $obj_vehicule->setStrMarque(['vehicule_marque']);
-            $obj_vehicule->setStrModel(['vehicule_modele']);
-            $obj_vehicule->setStrImmatriculation(['vehicule_immatriculation']);
+            $obj_vehicule->setIntId($vehicule['vehicule_id']);
+            $obj_vehicule->setIntKm($vehicule['vehicule_km']);
+            $obj_vehicule->setStrMarque($vehicule['vehicule_marque']);
+            $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
+            $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
             
             
             //$obj_vehicule->setObjEtat(['']);
             //$obj_vehicule->setObjNiveauCarburant(['']);
             
-            $arr_user[] = $obj_vehicule;
+            $arr_vehicules[] = $obj_vehicule;
         }
 
 
-        return $arr_user;
+        return $arr_vehicules;
         
     }
     
     public function getVehicule($arr_vehicules,$id){
         
         foreach ($arr_vehicules as $vehicule) {
+            
             if($vehicule->getIntId()==$id){
-                return vehicule;
+                print_r($vehicule);
+                return $vehicule;
             }
         }
         return null;
