@@ -16,6 +16,12 @@ class vehicule_entity
     private $obj_etat;
     private $obj_niveau_carburant;
 
+    
+    public function __construct()
+    {
+
+    }
+
     /**
      * @return mixed
      */

@@ -16,8 +16,47 @@ class reservation_controller
     {
         $this->obj_reservation_model = new reservation_model();
         $this->obj_reservation_viewer = new reservation_viewer();
+        
+        
+        if ($str_action == 'connexion') {
+            $this->connexion();
+            return 0;
+        }
     }
+   
+     public function connexion()
+    {
+        //vérifie l'existance des données saisie
+        if (isset($_POST['mail_connect']) && isset($_POST['mdp_connect']))
+        {
+            $_POST['connexion_reussi'] = $this->obj_reservation_model->verifConnexion($_POST['mail_connect'], $_POST['mdp_connect']);
+            if ($_POST['connexion_reussi'] == false) {
+                $this->obj_reservation_viewer->templateConnexion();
+            }
+            else{
+                header('Location: index.php');
+            }
 
+        } else {
+            $this->obj_reservation_viewer->templateConnexion();
+        }
+
+    }
+    public function getTemplateCrudReservation(){
+       
+        if (isset($_SESSION['current_user']))
+    
+        {
+            $int_id_current_user = $_SESSION['current_user'];
+            $current_user_model = new utilisateur_model();
+            $current_user = $current_user_model->loadUtilisateurById($int_id_current_user);
+            
+            $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
+            $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation);
+            
+        }
+        return $str_template;
+    }
     /**
      * @return reservation_model
      */
