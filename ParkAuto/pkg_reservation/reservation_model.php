@@ -18,7 +18,7 @@ class reservation_model
         $obj_bdd = new bdd();
         $champ = '*';
         $table = 'reservation';
-        $condition = 'reservation_salarie = "'.$id_Salarie.'"';
+        $condition = 'reservation_salarie = "'.$salarie->getIntId().'"';
         $arr_result = $obj_bdd->select($champ, $table, $condition);
         
         $obj_reservation = null;
