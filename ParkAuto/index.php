@@ -9,6 +9,8 @@
 include_once 'general_loader.php';
 $page=file_get_contents("pkg_graphique/page.html");
 $str_page_request = retrievePostData();
+//Attention on peu rentrer dans cette boucle en passant un argument!!!
+//Vérification que l'utilisateur est connecté OBLIGATOIRE pour rentrer dans le premier if
 if ($str_page_request != null)
 {
     switch ($str_page_request){
@@ -138,7 +140,8 @@ function reservation($page)
 {
     $obj_menu = new menu_controller();
     $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-    $page=str_replace("%content%",'Mes reservations est un écran à venir',$page);
+    $obj_reservation_controller=new reservation_controller();
+    $page=str_replace("%content%",$obj_reservation_controller->getTemplateCrudReservation(),$page);
     $page=str_replace("%title%",'Mes reservations',$page);
     return $page;
 }
