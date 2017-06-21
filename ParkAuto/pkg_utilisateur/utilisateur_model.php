@@ -120,4 +120,22 @@ class utilisateur_model
 
         return $arr_user;
     }
+    public function aUserIsChefService($idService)
+    {
+        $obj_bdd = new bdd();
+        $champ = 'utilisateur_isChef';
+        $table = 'utilisateur';
+        $condition = 'utilisateur_service = "'.$idService.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        //echo '<br><br><br>Mode : '.$arr_result;
+        //echo '<pre>';var_dump($arr_result);echo'<pre>';die();
+        foreach ($arr_result as $result)
+        {
+            if ($result["utilisateur_isChef"] == true)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

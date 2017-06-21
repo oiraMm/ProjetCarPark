@@ -76,6 +76,12 @@ class utilisateur_controller
         return $str_template;
     }
 
+    public function aUserIsChefService($idService)
+    {
+        $boolTest = $this->getObjUtilisateurModel()->aUserIsChefService($idService);
+        return $boolTest;
+    }
+
     public function getAllUser()
     {
         $arr_user = $this->getObjUtilisateurModel()->loadAllUser();

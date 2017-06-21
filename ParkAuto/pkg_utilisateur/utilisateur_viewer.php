@@ -96,6 +96,7 @@ class utilisateur_viewer
             $valRole = ($user->getObjRole()!=null)?$user->getObjRole()->getIntId():'';
             $valResponsable = ($user->getObjResponsable()!=null)?$user->getObjResponsable()->getIntId():'';
             $valChef = ($user->getBoolIsChefService()!=null)?$user->getBoolIsChefService():'';
+            $checkBoxChefDisabled = ($user->getObjService()!=null)?$user_controller->aUserIsChefService($user->getObjService()->getIntId()):false;
         }
         else
         {
@@ -110,6 +111,7 @@ class utilisateur_viewer
             $valRole='';
             $valResponsable='';
             $valChef='';
+            $checkBoxChefDisabled=false;
         }
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('addUser', 'addUser');
@@ -132,32 +134,18 @@ class utilisateur_viewer
         $formAdd->addSelect('service', "form-control");
         foreach ($arr_service as $oneService)
         {
-            if ($valService == $oneService->getIntId())
-            {
-                $selected = true;
-            }
-            else
-            {
-                $selected = false;
-            }
+            ($valService == $oneService->getIntId())?$selected = true:$selected = false;
             $formAdd->addSelectOption('service', $oneService->getIntId(), $oneService->getStrLibelle(), $selected);
         }
         $formAdd->addFreeText('Est chef de son service : ');
-        $formAdd->addCheckbox('isChefService', "isChefService", $valChef, "form-control col-sm-1");
+        $formAdd->addCheckbox('isChefService', "isChefService", $valChef, "form-control col-sm-1", '', $checkBoxChefDisabled);
         $formAdd->addFreeText('Role : ');
         $obj_role_controller = new role_controller();
         $arr_role = $obj_role_controller->getAllRole();
         $formAdd->addSelect('role', "form-control");
         foreach ($arr_role as $oneRole)
         {
-            if ($valRole == $oneRole->getIntId())
-            {
-                $selected = true;
-            }
-            else
-            {
-                $selected = false;
-            }
+            ($valRole == $oneRole->getIntId())?$selected = true:$selected = false;
             $formAdd->addSelectOption('role', $oneRole->getIntId(), $oneRole->getStrLibelle(), $selected);
         }
 
@@ -166,17 +154,16 @@ class utilisateur_viewer
         $obj_utilisateur_controller = new utilisateur_controller();
         $arr_utilisateur = $obj_utilisateur_controller->getAllUser();
         $formAdd->addSelect('utilisateur', "form-control");
+        if ($valResponsable == '')
+        {
+            $formAdd->addSelectOption('utilisateur', '', '', true);
+        }
         foreach ($arr_utilisateur as $oneUtilisateur)
         {
-            if ($valResponsable == $oneUtilisateur->getIntId())
-            {
-                $selected = true;
+            ($valResponsable == $oneUtilisateur->getIntId())?$selected = true:$selected = false;
+            if ($int_user_id != $oneUtilisateur->getIntId()) {
+                $formAdd->addSelectOption('utilisateur', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString(), $selected);
             }
-            else
-            {
-                $selected = false;
-            }
-            $formAdd->addSelectOption('utilisateur', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString(), $selected);
         }
         $formAdd->addBtSubmit('Valider',"Submit","btn");
         return $formAdd->render();
