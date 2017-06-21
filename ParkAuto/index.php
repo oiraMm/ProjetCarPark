@@ -20,7 +20,10 @@ if ($str_page_request != null)
         case 'Etat du parc':
             $page = etatPark($page);
             break;
-        case 'Mes reservations':
+        case 'Mes reservations':        
+        case 'Editer la reservation':
+        case 'Supprimer la reservation':
+        case 'Nouvelle demande de reservation':
             $page = reservation($page);
             break;
         case 'Signalement':

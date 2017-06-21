@@ -45,7 +45,7 @@ class reservation_viewer
             $formDelete = new htmlForm('index.php', 'POST');
             $formDelete->addHidden('idReservationDelete', $reservation->getIntId());
             $formDelete->addHidden('mode', 'delete');
-            $formDelete->addBtSubmit('Supprimer reservation',"Submit","btn");
+            $formDelete->addBtSubmit('Supprimer la reservation',"Submit","btn");
             $obj_table->tr()
                 ->td($id)
                 ->td($dateDebut)

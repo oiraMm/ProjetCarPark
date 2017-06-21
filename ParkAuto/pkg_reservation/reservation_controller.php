@@ -44,17 +44,37 @@ class reservation_controller
     }
     public function getTemplateCrudReservation(){
        
-        if (isset($_SESSION['current_user']))
-    
+        
+        if (isset($_SESSION['current_user']))    
         {
             $int_id_current_user = $_SESSION['current_user'];
             $current_user_model = new utilisateur_model();
             $current_user = $current_user_model->loadUtilisateurById($int_id_current_user);
             
-            $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
+            if (isset($_POST['mode']))
+            {
+                switch ($_POST['mode']) {
+                    case 'edit' :
+                        //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('edit', $_POST['idReservationEdit']);
+                        break;
+                    case 'add' :
+                        //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('add');
+                        break;
+                    case 'delete' :
+                        //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('delete');
+                        break;
+                }
+            }
+            elseif (isset($_POST['addUser']))
+            {
+                //TODO appel du model pour enregistrement et retour du templateCrudUserDefault avec message de confirmation
+            }
+            else{
+                $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
             
             
-            $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation);
+                $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation);
+            }               
             
         }
         return $str_template;
