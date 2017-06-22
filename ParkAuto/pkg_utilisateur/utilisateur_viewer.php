@@ -73,7 +73,8 @@ class utilisateur_viewer
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('mode', 'add');
         $formAdd->addBtSubmit('Ajouter utilisateur',"Submit","btn");
-        return $obj_table->getTable().$formAdd->render();
+        $str_test = '<h1>Liste des utilisateurs</h1>';
+        return $str_test.$obj_table->getTable().$formAdd->render();
 
         //TODO détection de l'action delete pour afficher un message de confirmation si cette derniere à eu lieux
     }
@@ -131,14 +132,14 @@ class utilisateur_viewer
         $formAdd->addFreeText('Service : ');
         $obj_service_controller = new service_controller();
         $arr_service = $obj_service_controller->getAllService();
-        $formAdd->addSelect('service', "form-control");
+        $formAdd->addSelect('service', "form-control", 'service_list');
         foreach ($arr_service as $oneService)
         {
             ($valService == $oneService->getIntId())?$selected = true:$selected = false;
             $formAdd->addSelectOption('service', $oneService->getIntId(), $oneService->getStrLibelle(), $selected);
         }
         $formAdd->addFreeText('Est chef de son service : ');
-        $formAdd->addCheckbox('isChefService', "isChefService", $valChef, "form-control col-sm-1", '', $checkBoxChefDisabled);
+        $formAdd->addCheckbox('isChefService', "isChefService", $valChef, "form-control col-sm-1",'isChefService',  '', $checkBoxChefDisabled);
         $formAdd->addFreeText('Role : ');
         $obj_role_controller = new role_controller();
         $arr_role = $obj_role_controller->getAllRole();

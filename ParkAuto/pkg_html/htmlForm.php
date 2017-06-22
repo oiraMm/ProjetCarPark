@@ -82,13 +82,14 @@ class htmlForm
     // input type CHECKBOXES
     //---------------------------------------------------------------------------------------------------------
 
-    public function addCheckbox($name,$val,$isChecked,$class='',$rules='', $disabled = false)
+    public function addCheckbox($name,$val,$isChecked,$class='', $id='',$rules='', $disabled = false)
     {
         $this->_items[$name]['type']='checkbox';
         $this->_items[$name]['name']=$name;
         $this->_items[$name]['val']=$val;
         $this->_items[$name]['checked']=$isChecked;
         $this->_items[$name]['class']=$class;
+        $this->_items[$name]['id']=$id;
         $this->_items[$name]['rules']=$rules;
         $this->_items[$name]['disabled']=$disabled;
     }
@@ -100,6 +101,7 @@ class htmlForm
         $r.='<input type="checkbox" name="'.$carac['name'].'"';
         if(isset($carac['val'])) {$r.=' value="'.$carac['val'].'"';}
         if(!empty($carac['class'])) {$r.=' class="'.$carac['class'].'"';}
+        if(!empty($carac['id'])) {$r.=' id="'.$carac['id'].'"';}
         if($carac['checked']) {$r.=' checked';}
         if($carac['disabled'] == true) {$r.=' disabled';}
         $r.='>'.PHP_EOL;
@@ -209,11 +211,12 @@ class htmlForm
     // SELECT
     //---------------------------------------------------------------------------------------------------------
 
-    public function addSelect($name,$class='',$rules='')
+    public function addSelect($name,$class='', $id = '',$rules='')
     {
         $this->_items[$name]['type']='select';
         $this->_items[$name]['name']=$name;
         $this->_items[$name]['class']=$class;
+        $this->_items[$name]['id']=$id;
         $this->_items[$name]['rules']=$rules;
         $this->_items[$name]['options']=array();
     }
@@ -238,6 +241,7 @@ class htmlForm
     {
         $r='<select name="'.$carac['name'].'"';
         if(!empty($carac['class'])) {$r.=' class="'.$carac['class'].'"';}
+        if(!empty($carac['id'])) {$r.=' id="'.$carac['id'].'"';}
         $r.='>'.PHP_EOL;
 
         while (list($key, $value) = each($carac))
