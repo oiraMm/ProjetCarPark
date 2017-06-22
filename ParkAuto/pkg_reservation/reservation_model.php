@@ -13,6 +13,14 @@ class reservation_model
     {
     }
     
+    public function deleteReservation($id){
+        $obj_bdd = new bdd();
+        //$champ = '*';
+        $table = 'reservation';
+        $condition = 'reservation_salarie = "'.$id->getIntId().'"';
+        $arr_result = $obj_bdd->delete($table, $condition);
+    }
+    
     public function loadReservations($salarie){
         
         $obj_bdd = new bdd();

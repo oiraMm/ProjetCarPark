@@ -10,11 +10,21 @@ class reservation_viewer
 {
 
     
-    public function templateCrudReservationDefault($arr_reservation)
+    public function templateCrudReservationDefault($arr_reservation,$message=null)
     {
         //echo'<pre>';var_dump($arr_user);echo'</pre>';
-        //TODO tableau contenant tout les utilisateur ainsi qu'une colonne action (edit, update, delete)
         //la trasmission d'info se fera via formulaire et champ caché (un formulaire pour le tableau, le click sur un bouton transmettra l'action et l'id de l'utilisateur concerné
+        
+        $page='';
+        switch ($message) {
+            case 'delete':
+                $page+='<div class="alert alert-danger">
+                            <strong>Supression de la réservation éffectuée avec succès!</strong> Indicates a dangerous or potentially negative action.
+                        </div>';
+                break;
+
+        }
+        
         $obj_table = new STable();
         $obj_table->border = 1;
         $obj_table->thead()
@@ -57,8 +67,10 @@ class reservation_viewer
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('mode', 'add');        
         $formAdd->addBtSubmit('Nouvelle demande de reservation',"Submit","btn");
-        return $obj_table->getTable().$formAdd->render();
+        
 
-        //TODO détection de l'action delete pour afficher un message de confirmation si cette derniere à eu lieux
+        
+        $page+=$obj_table->getTable().$formAdd->render();
+        return $page;
     }
 }
