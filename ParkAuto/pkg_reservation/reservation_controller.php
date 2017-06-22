@@ -60,14 +60,21 @@ class reservation_controller
                     case 'add' :
                         //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('add');
                         break;
-                    case 'delete' :
-                        //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('delete');
+                    case 'delete':
+                        $resReq=$this->obj_reservation_model->deleteReservation($_POST['idReservationDelete']);
+                        
+                        $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
+                        $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation,'delete');
                         break;
+                    
                 }
             }
             elseif (isset($_POST['addUser']))
             {
-                //TODO appel du model pour enregistrement et retour du templateCrudUserDefault avec message de confirmation
+                switch ($_POST['addUser']) {
+                    
+                    
+                }
             }
             else{
                 $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
