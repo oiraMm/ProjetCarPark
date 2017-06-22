@@ -82,7 +82,7 @@ class htmlForm
     // input type CHECKBOXES
     //---------------------------------------------------------------------------------------------------------
 
-    public function addCheckbox($name,$val,$isChecked,$class='',$rules='')
+    public function addCheckbox($name,$val,$isChecked,$class='',$rules='', $disabled = false)
     {
         $this->_items[$name]['type']='checkbox';
         $this->_items[$name]['name']=$name;
@@ -90,6 +90,7 @@ class htmlForm
         $this->_items[$name]['checked']=$isChecked;
         $this->_items[$name]['class']=$class;
         $this->_items[$name]['rules']=$rules;
+        $this->_items[$name]['disabled']=$disabled;
     }
 
     // return the HTML code for a input type text with given caracteristics
@@ -100,6 +101,7 @@ class htmlForm
         if(isset($carac['val'])) {$r.=' value="'.$carac['val'].'"';}
         if(!empty($carac['class'])) {$r.=' class="'.$carac['class'].'"';}
         if($carac['checked']) {$r.=' checked';}
+        if($carac['disabled'] == true) {$r.=' disabled';}
         $r.='>'.PHP_EOL;
         return $r;
     }
