@@ -12,7 +12,7 @@ class vehicule_controller
     //controller et model de la classe
     private $obj_vehicule_model;
     private $obj_vehicule_viewer;
-    public function __construct($str_action = "", $roleId)
+    public function __construct($str_action = "")
     {
         $this->obj_vehicule_model = new vehicule_model();
         $this->obj_vehicule_viewer = new vehicule_viewer();

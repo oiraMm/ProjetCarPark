@@ -50,7 +50,6 @@ class vehicule_model
         foreach ($arr_vehicules as $vehicule) {
             
             if($vehicule->getIntId()==$id){
-                print_r($vehicule);
                 return $vehicule;
             }
         }

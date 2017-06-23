@@ -12,7 +12,7 @@ class reservation_controller
     //controller et model de la classe
     private $obj_reservation_model;
     private $obj_reservation_viewer;
-    public function __construct($str_action = "", $roleId)
+    public function __construct($str_action = "")
     {
         $this->obj_reservation_model = new reservation_model();
         $this->obj_reservation_viewer = new reservation_viewer();
@@ -61,7 +61,7 @@ class reservation_controller
                         //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('add');
                         break;
                     case 'delete':
-                        echo 'test';
+                        echo '<br><br><br>test'.$_POST['idReservationDelete'];
                         $resReq=$this->obj_reservation_model->deleteReservation($_POST['idReservationDelete']);
                         print_r($resReq);
                         echo 'okok';

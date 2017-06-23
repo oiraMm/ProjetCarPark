@@ -1,4 +1,4 @@
-xœxœ<?php
+<?php
 
 /**
  * Created by PhpStorm.
