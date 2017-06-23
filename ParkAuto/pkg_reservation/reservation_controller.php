@@ -61,10 +61,14 @@ class reservation_controller
                         //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('add');
                         break;
                     case 'delete':
+                        echo 'test';
                         $resReq=$this->obj_reservation_model->deleteReservation($_POST['idReservationDelete']);
-                        
+                        print_r($resReq);
+                        echo 'okok';
                         $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
-                        $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation,'delete');
+                        $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation);
+                        print_r($str_template);
+                        echo 'okokokokokokokok';
                         break;
                     
                 }

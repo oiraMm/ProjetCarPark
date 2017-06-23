@@ -19,6 +19,7 @@ class reservation_model
         $table = 'reservation';
         $condition = 'reservation_salarie = "'.$id->getIntId().'"';
         $arr_result = $obj_bdd->delete($table, $condition);
+        return $arr_result;
     }
     
     public function loadReservations($salarie){

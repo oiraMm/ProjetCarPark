@@ -18,7 +18,7 @@ class reservation_viewer
         $page='';
         switch ($message) {
             case 'delete':
-                $page+='<div class="alert alert-danger">
+                $page.='<div class="alert alert-danger">
                             <strong>Supression de la réservation éffectuée avec succès!</strong> Indicates a dangerous or potentially negative action.
                         </div>';
                 break;
@@ -70,7 +70,7 @@ class reservation_viewer
         
 
         
-        $page+=$obj_table->getTable().$formAdd->render();
+        $page.=$obj_table->getTable().$formAdd->render();
         return $page;
     }
 }
