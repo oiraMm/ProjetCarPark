@@ -60,6 +60,11 @@ class vehicule_controller
     {
         $this->obj_vehicule_viewer = $obj_vehicule_viewer;
     }
+    
+    //Get un véhicule via son id
+    public function getVehiculeById($id){
+        return $this->obj_vehicule_model->getVehiculeById($id);
+    }
 
 
 }

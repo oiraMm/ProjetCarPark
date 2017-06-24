@@ -55,20 +55,15 @@ class reservation_controller
             {
                 switch ($_POST['mode']) {
                     case 'edit' :
-                        //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('edit', $_POST['idReservationEdit']);
+                        $str_template = $this->obj_reservation_viewer->templateCrudReservation('edit', $_POST['idReservationEdit']);
                         break;
                     case 'add' :
-                        //$str_template = $this->obj_utilisateur_viewer->templateCrudReservation('add');
+                        $str_template = $this->obj_reservation_viewer->templateCrudReservation('add');
                         break;
                     case 'delete':
-                        echo '<br><br><br>test'.$_POST['idReservationDelete'];
                         $resReq=$this->obj_reservation_model->deleteReservation($_POST['idReservationDelete']);
-                        print_r($resReq);
-                        echo 'okok';
                         $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
-                        $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation);
-                        print_r($str_template);
-                        echo 'okokokokokokokok';
+                        $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation,'delete');
                         break;
                     
                 }
@@ -89,6 +84,13 @@ class reservation_controller
             
         }
         return $str_template;
+    }
+    
+    //Permet de récupérer une réservation via son ID
+    public function getReservationById($id){
+        
+        return $this->obj_reservation_model->loadReservationById($id);
+        
     }
     /**
      * @return reservation_model

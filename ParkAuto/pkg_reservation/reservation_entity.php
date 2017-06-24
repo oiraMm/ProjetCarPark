@@ -14,6 +14,7 @@ class reservation_entity
     private $obj_salarie;
     private $obj_vehicule;
     private $obj_status;
+    private $str_raison;
 
     /**
      * @return mixed
@@ -111,5 +112,20 @@ class reservation_entity
         $this->obj_status = $obj_status;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getStrRaison()
+    {
+        return $this->str_raison;
+    }
+
+    /**
+     * @param mixed $str_raison
+     */
+    public function setStrRaison($str_raison)
+    {
+        $this->str_raison = $str_raison;
+    }
 
 }

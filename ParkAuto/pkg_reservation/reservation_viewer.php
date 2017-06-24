@@ -34,6 +34,7 @@ class reservation_viewer
             ->th("Salarié")
             //->th("Responsable")
             ->th("Vehicule")
+            ->th("Raison")
             ->th("Action");
         foreach ($arr_reservation as $reservation)
         {
@@ -45,6 +46,7 @@ class reservation_viewer
             $salarie=($reservation->getObjSalarie()==null)?'-':$reservation->getObjSalarie()->__toString();
             //$responsable=($reservation->getObjResponsable()==null)?'-':$reservation->getObjResponsable()->__toString();
             $vehicule=($reservation->getObjVehicule()==null)?'-':$reservation->getObjVehicule()->getStrMarque().' '.$reservation->getObjVehicule()->getStrModel();
+            $raison=($reservation->getStrRaison()==null)?'-':$reservation->getStrRaison();
             
             
             
@@ -62,6 +64,7 @@ class reservation_viewer
                 ->td($dateFin)
                 ->td($salarie)
                 ->td($vehicule)
+                ->td($raison)
                 ->td($formEdit->render().$formDelete->render());
         }
         $formAdd = new htmlForm('index.php', 'POST');
@@ -72,5 +75,59 @@ class reservation_viewer
         
         $page.=$obj_table->getTable().$formAdd->render();
         return $page;
+    }
+    
+     public function templateCrudReservation($str_mode = 'add', $int_reservation_id = null)
+    {
+        //TODO Formulaire d'ajout d'utilisateur, pré-remplie grace à l'id si action édit sinon vide
+        //echo '<br><br><br>Mode : '.$str_mode;
+        if ($int_reservation_id != null)
+        {
+            
+            $reservation_controller = new reservation_controller();
+            $reservation = $reservation_controller->getReservationById($int_reservation_id);
+            $valId = $int_reservation_id;
+            $valDateDebut = ($reservation->getDateDebut()!=null)?$reservation->getDateDebut():'';
+            $valDateFin = ($reservation->getDateFin()!=null)?$reservation->getDateFin():'';
+            $valSalarie = ($reservation->getObjSalarie()!=null)?$reservation->getObjSalarie()->getIntId():'';
+            $valVehicule = ($reservation->getObjVehicule()!=null)?$reservation->getObjVehicule()->getIntId():'';
+            //$valStatus = ($reservation->getObjStatus()!=null)?$reservation->getObjStatus()->getIntId():'';
+            $valRaison = ($reservation->getStrRaison()!=null)?$reservation->getStrRaison():'';
+        }
+        else
+        {
+            $valId = '';
+            $valDateDebut = '';
+            $valDateFin = '';
+            $valSalarie = '';
+            $valVehicule = '';
+            //$valStatus = '';
+            $valRaison = '';
+            
+        }
+        $formAdd = new htmlForm('index.php', 'POST');
+        $formAdd->addHidden('addUser', 'addUser');
+        $formAdd->addHidden('idUser', $valId);
+        $formAdd->addFreeText('Date de Debut : ');
+        $formAdd->addText('dateDebutSaisi',$valDateDebut, '', '', '',"form-control");
+        $formAdd->addFreeText('Date de Fin : ');
+        $formAdd->addText('dateFinSaisi',$valDateFin, '', '', '',"form-control");
+        $formAdd->addHidden('idSalarie', $valSalarie);
+        
+        $obj_vehicule_controller = new vehicule_controller();
+        $arr_vehicule = $obj_vehicule_controller->getAllVehicules();
+        $formAdd->addSelect('vehicule', "form-control", 'vehicule_list');
+        foreach ($arr_vehicule as $vehicule)
+        {
+            ($valVehicule == $vehicule->getIntId())?$selected = true:$selected = false;
+            $formAdd->addSelectOption('vehicule', $vehicule->getIntId(), $vehicule->getStrMarque().' '.$vehicule->getStrModel(), $selected);
+        }
+        
+        //$formAdd->addHidden('idStatus', $valStatus);
+        $formAdd->addFreeText('Raison deplacement : ');
+        $formAdd->addText('raisonSaisi', $valRaison, '', '',"form-control");
+        
+        $formAdd->addBtSubmit('Valider',"Submit","btn");
+        return $formAdd->render();
     }
 }

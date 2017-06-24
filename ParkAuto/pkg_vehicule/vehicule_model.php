@@ -45,6 +45,28 @@ class vehicule_model
         
     }
     
+    public function getVehiculeById($id){
+        
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'vehicule';
+        $condition='vehicule_id = "'.$id.'"';
+        $arr_result = $obj_bdd->select($champ, $table,$condition);
+        
+        foreach ($arr_result as $vehicule)
+        {
+            $obj_vehicule =  new vehicule_entity();
+            $obj_vehicule->setIntId($vehicule['vehicule_id']);
+            $obj_vehicule->setIntKm($vehicule['vehicule_km']);
+            $obj_vehicule->setStrMarque($vehicule['vehicule_marque']);
+            $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
+            $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
+        }
+        return $obj_vehicule;
+        
+        
+    }
+    
     public function getVehicule($arr_vehicules,$id){
         
         foreach ($arr_vehicules as $vehicule) {
