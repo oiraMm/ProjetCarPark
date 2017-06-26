@@ -109,9 +109,9 @@ class reservation_viewer
         $formAdd->addHidden('addUser', 'addUser');
         $formAdd->addHidden('idUser', $valId);
         $formAdd->addFreeText('Date de Debut : ');
-        $formAdd->addText('dateDebutSaisi',$valDateDebut, '', '', '',"form-control");
+        $formAdd->addDate('dateDebutSaisi',$valDateDebut, '', '', '',"form_datetime");
         $formAdd->addFreeText('Date de Fin : ');
-        $formAdd->addText('dateFinSaisi',$valDateFin, '', '', '',"form-control");
+        $formAdd->addDate('dateFinSaisi',$valDateFin, '', '', '',"form_datetime");
         $formAdd->addHidden('idSalarie', $valSalarie);
         
         $obj_vehicule_controller = new vehicule_controller();

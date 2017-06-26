@@ -77,6 +77,31 @@ class htmlForm
         $r.='>'.PHP_EOL;
         return $r;
     }
+    
+     public function addDate($name,$val, $id='',$size,$maxlength,$class='',$rules='')
+    {
+        $this->_items[$name]['type']='date';
+        $this->_items[$name]['name']=$name;
+        $this->_items[$name]['val']=$val;
+        $this->_items[$name]['id']=$id;
+        $this->_items[$name]['size']=$size;
+        $this->_items[$name]['maxlength']=$maxlength;
+        $this->_items[$name]['class']=$class;
+        $this->_items[$name]['rules']=$rules;
+    }
+    
+    private static function getHTMLdate($carac)
+    {
+        $r='';
+        $r.='<div class="input-append date form_datetime"><input type="text" readonly name="'.$carac['name'].'"';
+        if(!empty($carac['size'])) {$r.=' size="'.$carac['size'].'"';}
+        if(isset($carac['val'])) {$r.=' value="'.$carac['val'].'"';}
+        if(!empty($carac['id'])) {$r.=' id="'.$carac['id'].'"';}
+        if(!empty($carac['class'])) {$r.=' class="'.$carac['class'].'"';}
+        if(!empty($carac['maxlength'])) {$r.=' maxlength="'.$carac['maxlength'].'"';}
+        $r.='><span class="add-on"><i class="icon-calendar"></i></span></div><script type="text/javascript"> $(".form_datetime").datetimepicker({ format: "dd MM yyyy - hh:ii"    });</script>'.PHP_EOL;
+        return $r;
+    }
 
     //---------------------------------------------------------------------------------------------------------
     // input type CHECKBOXES
