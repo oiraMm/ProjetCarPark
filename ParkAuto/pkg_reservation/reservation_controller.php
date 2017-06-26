@@ -42,9 +42,43 @@ class reservation_controller
         }
 
     }
+
+    //TODO A optimiser dans switch case MODE
+    //Ajouter menu déroulant sélection
+    public function getTemplateValidation()
+    {
+        $str_template='';
+        if (isset($_SESSION['current_user'])) {
+            $int_id_current_user = $_SESSION['current_user'];
+            $current_user_model = new utilisateur_model();
+            $current_user = $current_user_model->loadUtilisateurById($int_id_current_user);
+            if (isset($_POST['mode']))
+            {
+                switch ($_POST['mode']) {
+                    case 'accept':
+                        $res_req=$this->obj_reservation_model->changeReservationStatus($_POST['idReservationAccept'],'1');
+                        $arr_reservation= $this->obj_reservation_model->loadReservations();
+                        $str_template = $this->obj_reservation_viewer->templateValidation($arr_reservation);
+                        break;
+                    case 'refuse':
+                        $res_req=$this->obj_reservation_model->changeReservationStatus($_POST['idReservationRefuse'],'2');
+                        $arr_reservation= $this->obj_reservation_model->loadReservations();
+                        $str_template = $this->obj_reservation_viewer->templateValidation($arr_reservation);
+                        break;
+
+                }
+            }elseif($current_user->getObjRole()->getIntId()=='1' || $current_user->getObjRole()->getIntId()=='2'){
+                $arr_reservation= $this->obj_reservation_model->loadReservations();
+                $str_template = $this->obj_reservation_viewer->templateValidation($arr_reservation);
+            }
+
+        }
+        return $str_template;
+    }
+
     public function getTemplateCrudReservation(){
        
-        
+        //TODO Verification des requetes en base
         if (isset($_SESSION['current_user']))    
         {
             $int_id_current_user = $_SESSION['current_user'];
@@ -63,16 +97,21 @@ class reservation_controller
                     case 'delete':
                         $resReq=$this->obj_reservation_model->deleteReservation($_POST['idReservationDelete']);
                         $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
-                        $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation,'delete');
+                        $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation,$resReq);
                         break;
                     
                 }
             }
-            elseif (isset($_POST['addUser']))
+            elseif (isset($_POST['reservationMode']))
             {
-                switch ($_POST['addUser']) {
-                    
-                    
+                switch ($_POST['reservationMode']) {
+                    case 'saveReservation':
+
+                        $obj_reservation = $this->retrievePostData();
+                        $save = $this->obj_reservation_model->saveReservation($obj_reservation);
+                        $arr_reservation = $this->obj_reservation_model->loadReservations($current_user,$save);
+                        $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation,$save);
+                        break;
                 }
             }
             else{
@@ -122,6 +161,20 @@ class reservation_controller
     public function setObjReservationViewer(reservation_viewer $obj_reservation_viewer)
     {
         $this->obj_reservation_viewer = $obj_reservation_viewer;
+    }
+
+    public function retrievePostData(){
+
+        $obj_reservation=new reservation_entity();
+        $obj_reservation->setIntId($_POST['idReservation']);
+        $obj_reservation->setDateDebut($_POST['dateDebutSaisi']);
+        $obj_reservation->setDateFin($_POST['dateFinSaisi']);
+        $obj_reservation->setObjSalarie($_POST['idSalarie']);
+        //$obj_reservation->setObjStatus($_POST['']);
+        $obj_reservation->setObjVehicule($_POST['vehicule']);
+        $obj_reservation->setStrRaison($_POST['raisonSaisi']);
+
+        return $obj_reservation;
     }
 
 }

@@ -16,6 +16,9 @@ class reservation_entity
     private $obj_status;
     private $str_raison;
 
+
+
+
     /**
      * @return mixed
      */

@@ -24,6 +24,7 @@ if ($str_page_request != null)
         case 'Editer la reservation':
         case 'Supprimer la reservation':
         case 'Nouvelle demande de reservation':
+        case 'saveReservation':
             $page = reservation($page);
             break;
         case 'Signalement':
@@ -43,8 +44,10 @@ if ($str_page_request != null)
             $page = gestionVehicules($page);
             break;
         case 'Validation':
-        $page = validation($page);
-        break;
+        case 'Accepter la demande de reservation' :
+        case 'Refuser la demande de reservation' :
+            $page = validation($page);
+            break;
         case'Deconnexion':
             session_destroy();
             header('Location: index.php');
@@ -89,7 +92,10 @@ echo $page;
 
 function retrievePostData()
 {
-    if (isset($_POST['userMode']))
+    if (isset($_POST['reservationMode'])){
+        $str_page_request = $_POST['reservationMode'];
+    }
+    elseif (isset($_POST['userMode']))
     {
         $str_page_request = $_POST['userMode'];
     }
@@ -172,7 +178,8 @@ function validation($page)
 {
     $obj_menu = new menu_controller();
     $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-    $page=str_replace("%content%",'Validation est un écran à venir',$page);
+    $obj_reservation_controller=new reservation_controller();
+    $page=str_replace("%content%",$obj_reservation_controller->getTemplateValidation(),$page);
     $page=str_replace("%title%",'Validation',$page);
     return $page;
 }

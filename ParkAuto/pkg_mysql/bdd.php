@@ -65,6 +65,7 @@ class bdd
         $str_champ .= ')';
         $str_query.=$str_champ.' VALUES '. $str_value;
 
+        print_r($str_query);
         $insert = $db->prepare($str_query);
         $result = $insert->execute();
 
