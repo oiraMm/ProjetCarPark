@@ -36,7 +36,7 @@ if ($str_page_request != null)
         case 'Editer utilisateur':
         case 'Supprimer utilisateur':
         case 'Ajouter utilisateur':
-        case 'addUser':
+        case 'saveUser':
             $page = gestionUtilisateur($page);
             break;
         case 'Gestion des vehicules':
@@ -89,6 +89,10 @@ echo $page;
 
 function retrievePostData()
 {
+    if (isset($_POST['userMode']))
+    {
+        $str_page_request = $_POST['userMode'];
+    }
     if (isset($_POST['addUser']))
     {
         $str_page_request = $_POST['addUser'];

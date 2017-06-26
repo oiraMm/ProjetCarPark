@@ -46,4 +46,24 @@ class service_model
         return $arr_service;
     }
 
+    public function loadOneService ($id)
+    {
+        //charge les donné de la news dont l'id est passez en paramètre
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'service';
+        $condition = 'service_id = "'.$id.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        $obj_service =  new service_entity();
+        if (isset($arr_result[0]))
+        {
+            if ($arr_result[0] != null)
+            {
+                $obj_service->setIntId($arr_result[0]['service_id']);
+                $obj_service->setStrLibelle($arr_result[0]['service_libelle']);
+            }
+        }
+        return $obj_service;
+
+    }
 }

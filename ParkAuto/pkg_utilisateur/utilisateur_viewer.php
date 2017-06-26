@@ -115,7 +115,6 @@ class utilisateur_viewer
             $checkBoxChefDisabled=false;
         }
         $formAdd = new htmlForm('index.php', 'POST');
-        $formAdd->addHidden('addUser', 'addUser');
         $formAdd->addHidden('idUser', $valId);
         $formAdd->addFreeText('Prénom : ');
         $formAdd->addText('prenomSaisi',$valPrenom, '', '', '',"form-control");
@@ -154,18 +153,19 @@ class utilisateur_viewer
         $formAdd->addFreeText('Responsable : ');
         $obj_utilisateur_controller = new utilisateur_controller();
         $arr_utilisateur = $obj_utilisateur_controller->getAllUser();
-        $formAdd->addSelect('utilisateur', "form-control");
+        $formAdd->addSelect('utilisateurResp', "form-control");
         if ($valResponsable == '')
         {
-            $formAdd->addSelectOption('utilisateur', '', '', true);
+            $formAdd->addSelectOption('utilisateurResp', '', '', true);
         }
         foreach ($arr_utilisateur as $oneUtilisateur)
         {
             ($valResponsable == $oneUtilisateur->getIntId())?$selected = true:$selected = false;
             if ($int_user_id != $oneUtilisateur->getIntId()) {
-                $formAdd->addSelectOption('utilisateur', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString(), $selected);
+                $formAdd->addSelectOption('utilisateurResp', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString(), $selected);
             }
         }
+        $formAdd->addHidden('userMode', 'saveUser');
         $formAdd->addBtSubmit('Valider',"Submit","btn");
         return $formAdd->render();
     }

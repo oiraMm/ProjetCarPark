@@ -64,9 +64,13 @@ class utilisateur_controller
                     break;
             }
         }
-        elseif (isset($_POST['addUser']))
+        elseif (isset($_POST['saveUser']))
         {
             //TODO appel du model pour enregistrement et retour du templateCrudUserDefault avec message de confirmation
+            $obj_user = $this->retrievePostData();
+            $save = $this->getObjUtilisateurModel()->saveUser($obj_user);
+            $arr_user = $this->obj_utilisateur_model->loadAllUser();
+            $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
         }
         else
         {
@@ -74,6 +78,28 @@ class utilisateur_controller
             $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
         }
         return $str_template;
+    }
+
+    public function retrievePostData()
+    {
+        $obj_user = new utilisateur_entity();
+        $obj_user->setIntId($_POST['idUser']);
+        $obj_user->setStrNom($_POST['nomSaisi']);
+        $obj_user->setStrPrenom($_POST['prenomSaisi']);
+        $obj_user->setStrMail($_POST['mailSaisi']);
+        $dateNaissance = date( "Y-m-d", strtotime( $_POST['dateSaisi'] ));
+        $obj_user->setDteDateDeNaissance($dateNaissance);
+        $obj_user->setStrTelephone($_POST['telSaisi']);
+        $obj_bdd = new bdd();
+        $mdp = $obj_bdd->HashData($_POST['mdpSaisi']);
+        $obj_user->setStrMotDePasse($mdp);
+        $obj_service_controller = new service_controller();
+        $obj_user->setObjService($obj_service_controller->getServiceById($_POST['service']));
+        $obj_role_controller = new role_controller();
+        $obj_user->setObjRole($obj_role_controller->roleOf($_POST['role']));
+        $obj_user_controller = new utilisateur_controller();
+        $obj_user->setObjResponsable($obj_user_controller->getUserById($_POST['utilisateurResp']));
+        return $obj_user;
     }
 
     public function aUserIsChefService($idService)

@@ -42,7 +42,7 @@ class utilisateur_model
                 //instancie le modele de l'objet utilisateur
                 $obj_role_controller = new role_controller();
                 //utilise le model charger pour charger l'objet role de l'utilisateur
-                $obj_role = $obj_role_controller->getObjRoleModel()->roleOf($arr_result[0]['utilisateur_role']);
+                $obj_role = $obj_role_controller->roleOf($arr_result[0]['utilisateur_role']);
                 $obj_utilisateur->setObjRole($obj_role);
                 if ($arr_result[0]['utilisateur_responsable'] != null){
                     //instancie le modele de l'objet utilisateur
@@ -137,5 +137,10 @@ class utilisateur_model
             }
         }
         return false;
+    }
+
+    public function saveUser($obj_user)
+    {
+        //TODO update si l'id n'est pas null ou insert si il est null
     }
 }

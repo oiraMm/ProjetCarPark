@@ -28,6 +28,12 @@ class role_controller
         return $arr_role;
     }
 
+    public function roleOf($id)
+    {
+        $obj_role = $this->getObjRoleModel()->roleOf($id);
+        return $obj_role;
+    }
+
     /**
      * @return role_model
      */

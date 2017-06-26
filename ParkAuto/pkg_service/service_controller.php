@@ -19,6 +19,12 @@ class service_controller
         $this->obj_service_viewer = new service_viewer();
     }
 
+    public function getServiceById($id)
+    {
+        $obj_service = $this->getObjServiceModel()->loadOneService ($id);
+        return $obj_service;
+    }
+
     public function getAllService ()
     {
         $arr_service = $this->getObjServiceModel()->loadAllService();
