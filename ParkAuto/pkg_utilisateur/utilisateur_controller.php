@@ -90,8 +90,7 @@ class utilisateur_controller
         $obj_user->setDteDateDeNaissance($dateNaissance);
         $obj_user->setStrTelephone($_POST['telSaisi']);
         $obj_bdd = new bdd();
-        $mdp = $obj_bdd->HashData($_POST['mdpSaisi']);
-        $obj_user->setStrMotDePasse($mdp);
+        $obj_user->setStrMotDePasse($_POST['mdpSaisi']);
         $obj_service_controller = new service_controller();
         $obj_user->setObjService($obj_service_controller->getServiceById($_POST['service']));
         $obj_role_controller = new role_controller();

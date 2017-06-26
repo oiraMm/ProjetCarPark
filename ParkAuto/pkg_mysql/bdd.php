@@ -88,7 +88,6 @@ class bdd
             $compteurChamp++;
         }
         $str_query.=' WHERE '. $condition;
-
         $update = $db->prepare($str_query);
         $result = $update->execute();
 

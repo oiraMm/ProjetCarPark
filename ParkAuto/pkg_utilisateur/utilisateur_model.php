@@ -90,8 +90,8 @@ class utilisateur_model
             $obj_utilisateur->setIntId($user['utilisateur_id']);
             $obj_utilisateur->setStrNom($user['utilisateur_nom']);
             $obj_utilisateur->setStrPrenom($user['utilisateur_prenom']);
-            $obj_utilisateur->setStrMail($user['utilisateur_id']);
-            $obj_utilisateur->setDteDateDeNaissance($user['utilisateur_mail']);
+            $obj_utilisateur->setStrMail($user['utilisateur_mail']);
+            $obj_utilisateur->setDteDateDeNaissance($user['utilisateur_dateDeNaissance']);
             $obj_utilisateur->setStrTelephone($user['utilisateur_telephone']);
             $obj_utilisateur->setStrMotDePasse($user['utilisateur_motDePasse']);
             if ($user['utilisateur_service'] != null) {
@@ -155,14 +155,52 @@ class utilisateur_model
 
     public function saveUser($obj_user)
     {
-        echo'<pre><br/> <br /> <br /><br/> <br /> <br />';var_dump($obj_user);echo'</pre>';
+        $obj_bd = new bdd();
+        $table = 'utilisateur';
+        $arra_champ_value['utilisateur_nom'] = '\''.$obj_user->getStrNom().'\'';
+        $arra_champ_value['utilisateur_prenom'] = '\''.$obj_user->getStrPrenom().'\'';
+        $arra_champ_value['utilisateur_mail'] = '\''.$obj_user->getStrMail().'\'';
+        $arra_champ_value['utilisateur_dateDeNaissance'] = '\''.$obj_user->getDteDateDeNaissance().'\'';
+        $arra_champ_value['utilisateur_telephone'] = '\''.$obj_user->getStrTelephone().'\'';
+        if ($this->testMdp($obj_user->getIntId(),$obj_user->getStrMotDePasse())== true){
+            $obj_bdd = new bdd();
+            $arra_champ_value['utilisateur_motDePasse'] = '\''.$obj_bdd->HashData($obj_user->getStrMotDePasse()).'\'';}
+        if ($obj_user->getObjService() != null){
+            if ($obj_user->getObjService()->getIntId() != null){
+                $arra_champ_value['utilisateur_service'] = $obj_user->getObjService()->getIntId();}
+        }
+        if ($obj_user->getObjRole() != null){
+            if ($obj_user->getObjRole()->getIntId() != null){
+                $arra_champ_value['utilisateur_role'] = $obj_user->getObjRole()->getIntId();}
+        }
+        if ($obj_user->getObjResponsable() != null){
+            if ($obj_user->getObjResponsable()->getIntId() != null){
+                $arra_champ_value['utilisateur_responsable'] = $obj_user->getObjResponsable()->getIntId();}
+        }
+        $arra_champ_value['utilisateur_isChef'] = ($obj_user->getBoolIsChefService()==true)?1:0;
         if ($obj_user->getIntId() != null )
         {
-            //TODO update
+            $condition = 'utilisateur_id = "'.$obj_user->getIntId().'"';
+            $arra_champ_value['utilisateur_id'] = $obj_user->getIntId();
+            $obj_bd->update($table, $arra_champ_value, $condition);
         }
         else
         {
-            //TODO insert
+            $obj_bd->insert($table, $arra_champ_value);
         }
+    }
+    //verifie si le Hash passez en parametre est le meme que celui stocker en base
+    public function testMdp ($idUser, $mdp)
+    {
+        $obj_bdd = new bdd();
+        $champ = 'utilisateur_motDePasse';
+        $table = 'utilisateur';
+        $condition = 'utilisateur_id = "'.$idUser.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        if ($arr_result[0]['utilisateur_motDePasse'] == $mdp)
+        {
+            return false;
+        }
+        return true;
     }
 }
