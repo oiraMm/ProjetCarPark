@@ -12,6 +12,7 @@ class bdd
     {
         // Connexion à la base de données
         $db = new PDO('mysql:host=163.172.59.3;port=2206;dbname=beta', 'beta', 'PvlQ6TpblgkbPziP');
+        //$db = new PDO('mysql:host=127.0.0.1;port=3306;dbname=beta', 'root', '');
         return $db;
     }
 

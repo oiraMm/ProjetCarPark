@@ -115,7 +115,7 @@ class utilisateur_viewer
             $checkBoxChefDisabled=false;
         }
         $formAdd = new htmlForm('index.php', 'POST');
-        $formAdd->addHidden('idUser', $valId);
+        $formAdd->addHidden('idUser', $valId, 'idUser');
         $formAdd->addFreeText('Prénom : ');
         $formAdd->addText('prenomSaisi',$valPrenom, '', '', '',"form-control");
         $formAdd->addFreeText('Nom : ');

@@ -12,12 +12,31 @@ $(document).ready(function(){
             },
             function(data){
                 if(data == 'true'){
-                    $("#isChefService").prop("checked", false);
                     $("#isChefService").prop( "disabled", true );
                 }
                 else
                 {
                     $("#isChefService").prop( "disabled", false );
+                }
+            },
+
+            'text'
+        );
+        $.post(
+            'pkg_utilisateur/script/script_utilisateur.php',
+            {
+                id_user : $("#idUser").val(),
+                id_service : $("#service_list").val(),
+                ajaxVerifChefIsMe : 'ajaxVerifChefIsMe'
+            },
+            function(data){
+                if(data == 'true')
+                {
+                    $("#isChefService").prop("checked", true);
+                }
+                else
+                {
+                    $("#isChefService").prop("checked", false);
                 }
             },
 

@@ -139,8 +139,30 @@ class utilisateur_model
         return false;
     }
 
+    public function whoIsChefService($idService)
+    {
+
+        $obj_bdd = new bdd();
+        $champ = 'utilisateur_id';
+        $table = 'utilisateur';
+        $condition = 'utilisateur_service = "'.$idService.'" AND utilisateur_isChef = 1';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        //echo '<br><br><br>Mode : '.$arr_result;
+        //echo '<pre>';var_dump($arr_result[0]['utilisateur_id']);echo'<pre>';die();
+        $id = (isset($arr_result[0]['utilisateur_id']))?$arr_result[0]['utilisateur_id']:'-1';
+        return $id;
+    }
+
     public function saveUser($obj_user)
     {
-        //TODO update si l'id n'est pas null ou insert si il est null
+        echo'<pre><br/> <br /> <br /><br/> <br /> <br />';var_dump($obj_user);echo'</pre>';
+        if ($obj_user->getIntId() != null )
+        {
+            //TODO update
+        }
+        else
+        {
+            //TODO insert
+        }
     }
 }

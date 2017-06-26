@@ -17,6 +17,18 @@ if (isset($_POST['ajaxVerifChef']))
     }
     else
     {
-        echo 'fasle';
+        echo 'false';
+    }
+}
+if (isset($_POST['ajaxVerifChefIsMe']))
+{
+    $obj_model = new utilisateur_model();
+    if ($_POST['id_user'] == $obj_model->whoIsChefService($_POST['id_service']))
+    {
+        echo 'true';
+    }
+    else
+    {
+        echo 'false';
     }
 }

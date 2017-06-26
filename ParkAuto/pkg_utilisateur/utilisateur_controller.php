@@ -64,9 +64,8 @@ class utilisateur_controller
                     break;
             }
         }
-        elseif (isset($_POST['saveUser']))
+        elseif (isset($_POST['userMode']))
         {
-            //TODO appel du model pour enregistrement et retour du templateCrudUserDefault avec message de confirmation
             $obj_user = $this->retrievePostData();
             $save = $this->getObjUtilisateurModel()->saveUser($obj_user);
             $arr_user = $this->obj_utilisateur_model->loadAllUser();

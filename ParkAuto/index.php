@@ -93,7 +93,7 @@ function retrievePostData()
     {
         $str_page_request = $_POST['userMode'];
     }
-    if (isset($_POST['addUser']))
+    elseif (isset($_POST['addUser']))
     {
         $str_page_request = $_POST['addUser'];
     }
