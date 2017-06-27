@@ -189,6 +189,21 @@ class utilisateur_model
             $obj_bd->insert($table, $arra_champ_value);
         }
     }
+    public function deleteUser ($id)
+    {
+
+        $obj_bdd = new bdd();
+        //$champ = '*';
+        $table = 'utilisateur';
+        $condition = 'utilisateur_id = "'.$id.'"';
+        $res_req = $obj_bdd->delete($table, $condition);
+        if($res_req){
+            return 'delete';
+        }else{
+            return 'delete-fail';
+        }
+        return $res_req;
+    }
     //verifie si le Hash passez en parametre est le meme que celui stocker en base
     public function testMdp ($idUser, $mdp)
     {
