@@ -11,25 +11,32 @@ class menu_viewer
     public function templateMenuUser()
     {
 
+        //liste des titres principaux
+        $listeAction=array('Accueil' =>'Simple' ,'Mes reservations'=>'Simple','Signalement'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Simple');
 
-        $listeAction=array('Accueil','Mes reservations','Signalement','Profil','Deconnexion');
+        //liste des titres dropdown menu
+        $listeActionDropDown=null;
 
-        foreach ($listeAction as $item){
-            $collection[]=$this->addItem($item);
-        }
+        //Genere chaque formulaire en tenant compte des drop down menu...
+        $collection=$this->generateMenu($listeAction,$listeActionDropDown);
 
+        //retourne le code html de la navbar
         return $this->afficherMenu($collection);
 
     }
     public function templateMenuValidateur()
     {
 
-        $listeAction=array('Accueil','Mes reservations','Validation','Signalement','Profil','Deconnexion');
+        //liste des titres principaux
+        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Signalement'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Simple');
 
-        foreach ($listeAction as $item){
-            $collection[]=$this->addItem($item);
-        }
+        //liste des titres dropdown menu
+        $listeActionDropDown=null;
 
+        //Genere chaque formulaire en tenant compte des drop down menu...
+        $collection=$this->generateMenu($listeAction,$listeActionDropDown);
+
+        //retourne le code html de la navbar
         return $this->afficherMenu($collection);
     }
     public function templateMenuAdmin()
