@@ -62,6 +62,11 @@ class utilisateur_controller
                 case 'add' :
                     $str_template = $this->obj_utilisateur_viewer->templateCrudUser('add');
                     break;
+                case 'delete' :
+                    $delete = $this->getObjUtilisateurModel()->deleteUser($_POST['idUserDelete']);
+                    $arr_user = $this->obj_utilisateur_model->loadAllUser();
+                    $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
+                    break;
             }
         }
         elseif (isset($_POST['userMode']))
@@ -97,6 +102,7 @@ class utilisateur_controller
         $obj_user->setObjRole($obj_role_controller->roleOf($_POST['role']));
         $obj_user_controller = new utilisateur_controller();
         $obj_user->setObjResponsable($obj_user_controller->getUserById($_POST['utilisateurResp']));
+        $obj_user->setBoolIsChefService($_POST['isChefServiceHidden']);
         return $obj_user;
     }
 

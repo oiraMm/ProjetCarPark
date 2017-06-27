@@ -58,7 +58,7 @@ class utilisateur_viewer
             $formDelete = new htmlForm('index.php', 'POST');
             $formDelete->addHidden('idUserDelete', $user->getIntId());
             $formDelete->addHidden('mode', 'delete');
-            $formDelete->addBtSubmit('Supprimer utilisateur',"Submit","btn");
+            $formDelete->addBtSubmit('Supprimer utilisateur',"Submit","btn", "deleteUser");
             $obj_table->tr()
                 ->td($nom)
                 ->td($prenom)
@@ -117,21 +117,21 @@ class utilisateur_viewer
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('idUser', $valId, 'idUser');
         $formAdd->addFreeText('Prénom : ');
-        $formAdd->addText('prenomSaisi',$valPrenom, '', '', '',"form-control");
+        $formAdd->addText('prenomSaisi',$valPrenom, '', '', '',"form-control", 'required');
         $formAdd->addFreeText('Nom : ');
-        $formAdd->addText('nomSaisi',$valNom, '', '', '',"form-control");
+        $formAdd->addText('nomSaisi',$valNom, '', '', '',"form-control", 'required');
         $formAdd->addFreeText('Adresse email : ');
-        $formAdd->addText('mailSaisi',$valMail, '', '', '',"form-control");
+        $formAdd->addText('mailSaisi',$valMail, '', '', '',"form-control", 'required');
         $formAdd->addFreeText('Date de naissance : ');
-        $formAdd->addText('dateSaisi',$valDate, '', '', '',"form-control");
+        $formAdd->addDate('dateSaisi',$valDate, '', '', '',"form-control", 'required');
         $formAdd->addFreeText('Téléphone : ');
-        $formAdd->addText('telSaisi',$valTel, '', '', '',"form-control");
+        $formAdd->addText('telSaisi',$valTel, '', '', '',"form-control", 'required');
         $formAdd->addFreeText('Mot de passe : ');
-        $formAdd->addPassword('mdpSaisi', $valMdp, '', '',"form-control");
+        $formAdd->addPassword('mdpSaisi', $valMdp, '', '',"form-control", 'required');
         $formAdd->addFreeText('Service : ');
         $obj_service_controller = new service_controller();
         $arr_service = $obj_service_controller->getAllService();
-        $formAdd->addSelect('service', "form-control", 'service_list');
+        $formAdd->addSelect('service', "form-control", 'service_list', 'required');
         foreach ($arr_service as $oneService)
         {
             ($valService == $oneService->getIntId())?$selected = true:$selected = false;
@@ -139,10 +139,11 @@ class utilisateur_viewer
         }
         $formAdd->addFreeText('Est chef de son service : ');
         $formAdd->addCheckbox('isChefService', "isChefService", $valChef, "form-control col-sm-1",'isChefService',  '', $checkBoxChefDisabled);
+        $formAdd->addHidden('isChefServiceHidden', $valChef, 'isChefServiceHidden');
         $formAdd->addFreeText('Role : ');
         $obj_role_controller = new role_controller();
         $arr_role = $obj_role_controller->getAllRole();
-        $formAdd->addSelect('role', "form-control");
+        $formAdd->addSelect('role', "form-control", '', 'required');
         foreach ($arr_role as $oneRole)
         {
             ($valRole == $oneRole->getIntId())?$selected = true:$selected = false;
