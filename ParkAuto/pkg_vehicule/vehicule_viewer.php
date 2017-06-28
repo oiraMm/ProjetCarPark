@@ -20,6 +20,7 @@ class vehicule_viewer
             ->th("Modele")
             ->th("Immatriculation")
             ->th("Km")
+            ->th("Carburant")
             ->th("Niveau d'essence")
             ->th("Etat")
             ->th("Action");
@@ -29,6 +30,7 @@ class vehicule_viewer
             $modele=($vehicule->getStrModel()==null)?'-':$vehicule->getStrModel();
             $immatriculation=($vehicule->getStrImmatriculation()==null)?'-':$vehicule->getStrImmatriculation();
             $km=($vehicule->getIntKm()==null)?'-':$vehicule->getIntKm();
+            $carburant=($vehicule->getObjTypeCarburant()==null)?'-':$vehicule->getObjTypeCarburant()->getStrLibelle();
             $niveauEssence=($vehicule->getObjNiveauCarburant()==null)?'-':$vehicule->getObjNiveauCarburant()->getStrLibelle();
             $etat=($vehicule->getObjEtat()==null)?'-':$vehicule->getObjEtat()->getStrLibelle();
             $formEdit = new htmlForm('index.php', 'POST');
@@ -44,6 +46,7 @@ class vehicule_viewer
                 ->td($modele)
                 ->td($immatriculation)
                 ->td($km)
+                ->td($carburant)
                 ->td($niveauEssence)
                 ->td($etat)
                 ->td($formEdit->render().$formDelete->render());

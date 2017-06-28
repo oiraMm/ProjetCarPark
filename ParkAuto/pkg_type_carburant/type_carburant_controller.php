@@ -18,6 +18,12 @@ class type_carburant_controller
         $this->obj_type_carburant_viewer = new type_carburant_viewer();
     }
 
+    public function loadTypeCarburantById($id)
+    {
+        $obj_type_carburant = $this->getObjTypeCarburantModel()->loadTypeCarburantById($id) ;
+        return $obj_type_carburant;
+    }
+
     /**
      * @return type_carburant_model
      */
