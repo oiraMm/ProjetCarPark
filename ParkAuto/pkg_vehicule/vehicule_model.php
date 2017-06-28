@@ -43,7 +43,7 @@ class vehicule_model
                 $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_id']);
                 $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
             }
-            
+            //TODO vahicule type carburant
             $arr_vehicules[] = $obj_vehicule;
         }
 
@@ -68,6 +68,7 @@ class vehicule_model
             $obj_vehicule->setStrMarque($vehicule['vehicule_marque']);
             $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
             $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
+            //TODO vehicule essence, etat, typeCarburant
         }
         return $obj_vehicule;
         

@@ -15,11 +15,28 @@ class vehicule_entity
     private $str_immatriculation;
     private $obj_etat;
     private $obj_niveau_carburant;
+    private $obj_type_carburant;
 
     
     public function __construct()
     {
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getObjTypeCarburant()
+    {
+        return $this->obj_type_carburant;
+    }
+
+    /**
+     * @param mixed $obj_type_carburant
+     */
+    public function setObjTypeCarburant($obj_type_carburant)
+    {
+        $this->obj_type_carburant = $obj_type_carburant;
     }
 
     /**
