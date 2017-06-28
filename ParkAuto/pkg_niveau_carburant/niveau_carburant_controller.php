@@ -12,10 +12,16 @@ class niveau_carburant_controller
     //controller et model de la classe
     private $obj_niveau_carburant_model;
     private $obj_niveau_carburant_viewer;
-    public function __construct($str_action = "", $roleId)
+    public function __construct($str_action = "")
     {
         $this->obj_niveau_carburant_model = new niveau_carburant_model();
         $this->obj_niveau_carburant_viewer = new niveau_carburant_viewer();
+    }
+
+    public function loadNiveauById($id)
+    {
+        $obj_niveau = $this->getObjNiveauCarburantModel()->loadNiveauById($id);
+        return $obj_niveau;
     }
 
     /**

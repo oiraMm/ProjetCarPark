@@ -1,7 +1,6 @@
 /**
  * Created by berne on 22/06/2017.
  */
-
 $(document).ready(function(){
     $.post(
         'pkg_utilisateur/script/script_utilisateur.php',

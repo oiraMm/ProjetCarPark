@@ -12,10 +12,16 @@ class etat_vehicule_controller
     //controller et model de la classe
     private $obj_etat_vehicule_model;
     private $obj_etat_vehicule_viewer;
-    public function __construct($str_action = "", $roleId)
+    public function __construct($str_action = "")
     {
         $this->obj_etat_vehicule_model = new etat_vehicule_model();
         $this->obj_etat_vehicule_viewer = new etat_vehicule_viewer();
+    }
+
+    public function loadEtatById($id)
+    {
+        $obj_etat = $this->getObjEtatVehiculeModel()->loadEtatById($id);
+        return $obj_etat;
     }
 
     /**
