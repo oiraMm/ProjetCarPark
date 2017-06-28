@@ -32,10 +32,17 @@ class vehicule_model
             $obj_vehicule->setStrMarque($vehicule['vehicule_marque']);
             $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
             $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
-            
-            
-            //$obj_vehicule->setObjEtat(['']);
-            //$obj_vehicule->setObjNiveauCarburant(['']);
+
+            if ($vehicule['vehicule_etat'] != null){
+                $obj_etat_controller = new etat_vehicule_controller();
+                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_id']);
+                $obj_vehicule->setObjEtat($obj_etat);
+            }
+            if ($vehicule['vehicule_essence'] != null){
+                $obj_niveau_carburant_controller = new niveau_carburant_controller();
+                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_id']);
+                $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+            }
             
             $arr_vehicules[] = $obj_vehicule;
         }

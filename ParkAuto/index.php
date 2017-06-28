@@ -129,7 +129,8 @@ function gestionVehicules($page)
 {
     $obj_menu = new menu_controller();
     $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-    $page=str_replace("%content%",'Gestion vehicule est un écran à venir',$page);
+    $obj_vehicule_controller = new vehicule_controller();
+    $page=str_replace("%content%",$obj_vehicule_controller->getTemplateCrudVehicule(),$page);
     $page=str_replace("%title%",'Gestion vehicule',$page);
     return $page;
 }

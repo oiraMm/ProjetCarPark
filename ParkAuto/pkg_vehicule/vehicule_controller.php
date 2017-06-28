@@ -18,7 +18,39 @@ class vehicule_controller
         $this->obj_vehicule_viewer = new vehicule_viewer();
     }
 
-    
+    public function getTemplateCrudVehicule()
+    {
+        if (isset($_POST['mode']))
+        {
+            switch ($_POST['mode']) {
+                case 'edit' :
+                    $str_template = $this->obj_vehicule_viewer->templateCrudVehicule('edit', $_POST['idVehiculeEdit']);
+                    break;
+                case 'add' :
+                    $str_template = $this->obj_vehicule_viewer->templateCrudVehicule('add');
+                    break;
+                case 'delete' :
+                    $delete = $this->getObjVehiculeModel()->deleteVehicule($_POST['idVehiculeDelete']);
+                    $arr_vehicule = $this->obj_vehicule_model->loadAllVehicules();
+                    $str_template = $this->obj_vehicule_viewer->templateCrudVehiculeDefault($arr_vehicule);
+                    break;
+            }
+        }
+        elseif (isset($_POST['userMode']))
+        {
+            $obj_vehicule = $this->retrievePostData();
+            $save = $this->getObjVehiculeModel()->saveUser($obj_vehicule);
+            $arr_vehicule = $this->obj_vehicule_model->loadAllVehicules();
+            $str_template = $this->obj_vehicule_viewer->templateCrudVehiculeDefault($arr_vehicule);
+        }
+        else
+        {
+            $arr_vehicule = $this->obj_vehicule_model->loadAllVehicules();
+            $str_template = $this->obj_vehicule_viewer->templateCrudVehiculeDefault($arr_vehicule);
+        }
+        return $str_template;
+    }
+
     public function getVehicule($arr_vehicules,$id){
         $mdl_vehicule=new vehicule_model();
         return $mdl_vehicule->getVehicule($arr_vehicules,$id);
