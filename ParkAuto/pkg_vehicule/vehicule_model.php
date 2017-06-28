@@ -43,7 +43,11 @@ class vehicule_model
                 $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_id']);
                 $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
             }
-            //TODO vahicule type carburant
+            if ($vehicule['vehicule_type_carburant'] != null){
+                $obj_vehicule_type_carburant_controller = new type_carburant_controller();
+                $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_id']);
+                $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+            }
             $arr_vehicules[] = $obj_vehicule;
         }
 
@@ -68,7 +72,22 @@ class vehicule_model
             $obj_vehicule->setStrMarque($vehicule['vehicule_marque']);
             $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
             $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
-            //TODO vehicule essence, etat, typeCarburant
+
+            if ($vehicule['vehicule_etat'] != null){
+                $obj_etat_controller = new etat_vehicule_controller();
+                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_id']);
+                $obj_vehicule->setObjEtat($obj_etat);
+            }
+            if ($vehicule['vehicule_essence'] != null){
+                $obj_niveau_carburant_controller = new niveau_carburant_controller();
+                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_id']);
+                $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+            }
+            if ($vehicule['vehicule_type_carburant'] != null){
+                $obj_vehicule_type_carburant_controller = new type_carburant_controller();
+                $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_id']);
+                $obj_vehicule->setObjNiveauCarburant($obj_type_carburant);
+            }
         }
         return $obj_vehicule;
         
