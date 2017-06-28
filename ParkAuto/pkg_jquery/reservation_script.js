@@ -43,11 +43,26 @@ $(document).ready(function(){
                 }else{
                     $("#dateFinSaisi").val(data);
                 }
+            },
 
+            'text'
+        );
+        $.post(
+            'pkg_reservation/script/script_reservation.php',
+            {
+                idReservation : $("#idReservation").val(),
+                dateDebut : $("#dateDebutSaisi").val(),
+                dateFin : $("#dateFinSaisi").val(),
+                modifField : $("#dateFinSaisi").val(),
+                ajaxSetVehiculeList : 'ajaxSetVehiculeList'
+            },
+            function(data){
+                alert(data);
 
             },
 
             'text'
         );
+
     });
 });

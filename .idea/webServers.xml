@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="fff8884e-def7-44cc-8784-ec00f5e63110" name="ftp://192.168.1.17" url="http://192.168.1.17/">
-        <fileTransfer host="192.168.1.17" port="21" rootFolder="/var/www/html/project">
+      <webServer id="fff8884e-def7-44cc-8784-ec00f5e63110" name="ftp://192.168.1.17" url="http://192.168.1.25/">
+        <fileTransfer host="192.168.1.25" port="21" rootFolder="/var/www/html/project">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

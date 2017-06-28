@@ -12,7 +12,24 @@ class vehicule_model
     public function __construct()
     {
     }
-    
+
+    public function  loadAllVehiculesExcept($arr_vehicules){
+        $strVehicule='(';
+        foreach ($arr_vehicules as $idVehicule){
+            $strVehicule.=$idVehicule.',';
+        }
+        $strVehicule=str_replace(',',')',$strVehicule);
+
+        $obj_bdd=new bdd();
+        $champ = '*';
+        $table = 'vehicule';
+        $condition = 'vehicule_id NOT IN '.$strVehicule;
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+
+        return $this->createVehicules($arr_result);
+    }
+
+
     public function loadAllVehicules(){
         
         $obj_bdd = new bdd();
@@ -51,7 +68,37 @@ class vehicule_model
         return $arr_vehicules;
         
     }
-    
+
+    public function createVehicules($arr_vehicules){
+
+        foreach ($arr_vehicules as $vehicule)
+        {
+            $obj_vehicule =  new vehicule_entity();
+            $obj_vehicule->setIntId($vehicule['vehicule_id']);
+            $obj_vehicule->setIntKm($vehicule['vehicule_km']);
+            $obj_vehicule->setStrMarque($vehicule['vehicule_marque']);
+            $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
+            $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
+
+            if ($vehicule['vehicule_etat'] != null){
+                $obj_etat_controller = new etat_vehicule_controller();
+                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_id']);
+                $obj_vehicule->setObjEtat($obj_etat);
+            }
+            if ($vehicule['vehicule_essence'] != null){
+                $obj_niveau_carburant_controller = new niveau_carburant_controller();
+                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_id']);
+                $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+            }
+            //TODO vahicule type carburant
+            $arr_vehicules[] = $obj_vehicule;
+        }
+
+
+        return $arr_vehicules;
+    }
+
+
     public function getVehiculeById($id){
         
         $obj_bdd = new bdd();

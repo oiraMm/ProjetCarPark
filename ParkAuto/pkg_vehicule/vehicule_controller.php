@@ -61,6 +61,12 @@ class vehicule_controller
         return $mdl_vehicule->loadAllVehicules();
         
     }
+
+    //Permet de récupérer tous les véhicules excepté ceux présents dans le tableau d'identifiants $arr_vehicules
+    public function getAllVehiculeExcept($arr_vehicules){
+        $mdl_vehicule=new vehicule_model();
+        return $mdl_vehicule->loadAllVehiculesExcept($arr_vehicules);
+    }
     /**
      * @return vehicule_model
      */

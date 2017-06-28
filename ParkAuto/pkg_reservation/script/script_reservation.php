@@ -26,15 +26,10 @@ if (isset($_POST['ajaxSetCalendar'])) {
         echo $_POST['dateDebut'];
     }
 }
-if (isset($_POST['ajaxVerifChefIsMe']))
+if (isset($_POST['ajaxSetVehiculeList']))
 {
-    $obj_model = new utilisateur_model();
-    if ($_POST['id_user'] == $obj_model->whoIsChefService($_POST['id_service']))
-    {
-        echo 'true';
-    }
-    else
-    {
-        echo 'false';
-    }
+    $mdl_reservation=new reservation_model();
+    echo $mdl_reservation->getListVehiculesDispo($_POST['dateDebut'],$_POST['dateFin']);
+
+
 }

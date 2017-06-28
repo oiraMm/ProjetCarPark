@@ -12,7 +12,28 @@ class reservation_model
     public function __construct()
     {
     }
-    
+
+
+    public function getListVehiculesDispo($dateDebut,$dateFin,$idReservation=null){
+
+        $ctrl_vehicule=new vehicule_controller();
+        $obj_bdd = new bdd();
+        $champ = 'reservation_vehicule';
+        $table = 'reservation';
+        $condition =    'reservation_dateDebut > '.$dateDebut.' AND reservation_dateDebut < '.$dateFin.
+                        ' OR reservation_dateFin > '.$dateDebut.'reservation_dateFin < '.$dateFin.
+                        ' OR reservation_dateDebut < '.$dateDebut.' AND reservation_dateFin > '.$dateFin;
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+
+
+        foreach ($arr_result as $vehicule){
+            $vehicules[]=$vehicule['reservation_vehicule'].',';
+        }
+
+        return $ctrl_vehicule->getAllVehiculeExcept($vehicules);
+
+    }
+
     public function changeReservationStatus($idReservation,$idStatus){
         $obj_bdd = new bdd();
         //$champ = '*';
