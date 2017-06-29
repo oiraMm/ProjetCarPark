@@ -16,21 +16,34 @@ class reservation_model
 
     public function getListVehiculesDispo($dateDebut,$dateFin,$idReservation=null){
 
-        $ctrl_vehicule=new vehicule_controller();
+
+        //$ctrl_vehicule=new vehicule_controller();
         $obj_bdd = new bdd();
-        $champ = 'reservation_vehicule';
+        $champ = 'distinct reservation_vehicule';
         $table = 'reservation';
-        $condition =    'reservation_dateDebut > '.$dateDebut.' AND reservation_dateDebut < '.$dateFin.
-                        ' OR reservation_dateFin > '.$dateDebut.'reservation_dateFin < '.$dateFin.
-                        ' OR reservation_dateDebut < '.$dateDebut.' AND reservation_dateFin > '.$dateFin;
+        $condition =    'reservation_dateDebut > \''.$dateDebut.'\' AND reservation_dateDebut < \''.$dateFin.
+                        '\' OR reservation_dateFin > \''.$dateDebut.'\' AND reservation_dateFin < \''.$dateFin.
+                        '\' OR reservation_dateDebut < \''.$dateDebut.'\' AND reservation_dateFin > \''.$dateFin.'\'';
         $arr_result = $obj_bdd->select($champ, $table, $condition);
 
 
-        foreach ($arr_result as $vehicule){
-            $vehicules[]=$vehicule['reservation_vehicule'].',';
-        }
+        if($arr_result!=null){
 
-        return $ctrl_vehicule->getAllVehiculeExcept($vehicules);
+
+            $vehicules[]='';
+            foreach ($arr_result as $vehicule){
+                $vehicules[]=$vehicule['reservation_vehicule'].',';
+            }
+
+            $ctrl_vehicule=new vehicule_controller();
+
+
+            return $ctrl_vehicule->getAllVehiculeExcept($vehicules);
+           // $res=$ctrl_vehicule->getAllVehicules();
+
+        }
+        return $condition;
+
 
     }
 

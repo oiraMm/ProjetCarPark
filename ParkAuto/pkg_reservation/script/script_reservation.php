@@ -31,5 +31,4 @@ if (isset($_POST['ajaxSetVehiculeList']))
     $mdl_reservation=new reservation_model();
     echo $mdl_reservation->getListVehiculesDispo($_POST['dateDebut'],$_POST['dateFin']);
 
-
 }
