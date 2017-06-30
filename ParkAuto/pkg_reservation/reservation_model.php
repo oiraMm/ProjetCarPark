@@ -27,21 +27,23 @@ class reservation_model
         $arr_result = $obj_bdd->select($champ, $table, $condition);
 
 
-        if($arr_result!=null){
+        if($arr_result!=null) {
 
 
-            $vehicules[]='';
-            foreach ($arr_result as $vehicule){
-                $vehicules[]=$vehicule['reservation_vehicule'].',';
+            $vehicules[] = '';
+            foreach ($arr_result as $vehicule) {
+                $vehicules[] = $vehicule['reservation_vehicule'] . ',';
             }
 
-            $ctrl_vehicule=new vehicule_controller();
-
+            $ctrl_vehicule = new vehicule_controller();
 
             return $ctrl_vehicule->getAllVehiculeExcept($vehicules);
-           // $res=$ctrl_vehicule->getAllVehicules();
+            // $res=$ctrl_vehicule->getAllVehicules();
 
         }
+        $ctrl_vehicule = new vehicule_controller();
+
+
         return $condition;
 
 

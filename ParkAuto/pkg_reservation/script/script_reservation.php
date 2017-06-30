@@ -6,6 +6,9 @@
  * Time: 23:19
  */
 
+include_once  '../../pkg_vehicule/vehicule_viewer.php.php';
+include_once  '../../pkg_vehicule/vehicule_controller.php';
+include_once  '../../pkg_vehicule/vehicule_model.php';
 include_once  '../reservation_model.php';
 include_once  '../../pkg_mysql/bdd.php';
 if (isset($_POST['ajaxSetCalendar'])) {
