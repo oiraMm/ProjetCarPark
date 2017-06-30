@@ -32,12 +32,12 @@ class reservation_model
 
             $vehicules[] = '';
             foreach ($arr_result as $vehicule) {
-                $vehicules[] = $vehicule['reservation_vehicule'] . ',';
+                $vehicules[] = $vehicule['reservation_vehicule'];
             }
 
             $ctrl_vehicule = new vehicule_controller();
-
-            return $ctrl_vehicule->getAllVehiculeExcept($vehicules);
+            $listeExcept = $ctrl_vehicule->getAllVehiculeExcept($vehicules);
+            return $listeExcept;
             // $res=$ctrl_vehicule->getAllVehicules();
 
         }

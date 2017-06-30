@@ -145,7 +145,7 @@ class reservation_viewer
         foreach ($arr_vehicule as $vehicule)
         {
             ($valVehicule == $vehicule->getIntId())?$selected = true:$selected = false;
-            $formAdd->addSelectOption('vehicule', $vehicule->getIntId(), $vehicule->getStrMarque().' '.$vehicule->getStrModel(), $selected);
+            $formAdd->addSelectOption('vehicule', $vehicule->getIntId(), $vehicule->__toString(), $selected);
         }
         
         $formAdd->addHidden('idStatus', $valStatus);

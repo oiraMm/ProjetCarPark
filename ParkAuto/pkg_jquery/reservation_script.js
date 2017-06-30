@@ -57,12 +57,12 @@ $(document).ready(function(){
                 ajaxSetVehiculeList : 'ajaxSetVehiculeList'
             },
             function(data){
-                alert(data);
+                alert('passe');
+                alert(JSON.parse(data));
 
             },
-
-            'text'
+            ///http://www.journaldunet.com/developpeur/tutoriel/dht/040421-javascript-remplir-dynamiquement-liste.shtml
+            'json'
         );
-
     });
 });

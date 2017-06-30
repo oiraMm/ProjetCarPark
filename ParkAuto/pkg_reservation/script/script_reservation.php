@@ -6,11 +6,7 @@
  * Time: 23:19
  */
 
-include_once  '../../pkg_vehicule/vehicule_viewer.php.php';
-include_once  '../../pkg_vehicule/vehicule_controller.php';
-include_once  '../../pkg_vehicule/vehicule_model.php';
-include_once  '../reservation_model.php';
-include_once  '../../pkg_mysql/bdd.php';
+include_once  '../../script_loader.php';
 if (isset($_POST['ajaxSetCalendar'])) {
     if (isset($_POST['dateDebut'])) {
         if (isset($_POST['dateFin'])) {
@@ -32,6 +28,10 @@ if (isset($_POST['ajaxSetCalendar'])) {
 if (isset($_POST['ajaxSetVehiculeList']))
 {
     $mdl_reservation=new reservation_model();
-    echo $mdl_reservation->getListVehiculesDispo($_POST['dateDebut'],$_POST['dateFin']);
+    $vehicule_ctrl = new vehicule_controller();
+    $arra_vehicule = $mdl_reservation->getListVehiculesDispo($_POST['dateDebut'],$_POST['dateFin']);
+    $tabLD[$arra_vehicule[0]['vehicule_id']] = $arra_vehicule[0]['vehicule_marque'].' '.$arra_vehicule[0]['vehicule_modele'];
+    echo json_encode($tabLD);
+
 
 }

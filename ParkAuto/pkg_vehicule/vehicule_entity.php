@@ -23,6 +23,11 @@ class vehicule_entity
 
     }
 
+    public function __toString()
+    {
+        return $this->getStrMarque().' '.$this->getStrModel();
+    }
+
     /**
      * @return mixed
      */
@@ -150,6 +155,5 @@ class vehicule_entity
     {
         $this->obj_niveau_carburant = $obj_niveau_carburant;
     }
-
 
 }

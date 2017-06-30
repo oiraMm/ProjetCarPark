@@ -15,10 +15,18 @@ class vehicule_model
 
     public function  loadAllVehiculesExcept($arr_vehicules){
         $strVehicule='(';
+        $count = 1;
         foreach ($arr_vehicules as $idVehicule){
-            $strVehicule.=$idVehicule.',';
+            if ($idVehicule != "") {
+                if ($count == 1) {
+                    $strVehicule .= $idVehicule;
+                } else {
+                    $strVehicule .= ',' . $idVehicule;
+                }
+                $count++;
+            }
         }
-        $strVehicule=str_replace(',',')',$strVehicule);
+        $strVehicule.=')';
 
         $obj_bdd=new bdd();
         $champ = '*';
