@@ -36,15 +36,14 @@ class reservation_model
             }
 
             $ctrl_vehicule = new vehicule_controller();
-            $listeExcept = $ctrl_vehicule->getAllVehiculeExcept($vehicules);
-            return $listeExcept;
+            return $ctrl_vehicule->getAllVehiculeExcept($vehicules);
+
             // $res=$ctrl_vehicule->getAllVehicules();
 
         }
         $ctrl_vehicule = new vehicule_controller();
+        return $ctrl_vehicule->getAllVehicules();
 
-
-        return $condition;
 
 
     }

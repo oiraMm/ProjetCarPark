@@ -58,7 +58,17 @@ $(document).ready(function(){
             },
             function(data){
                 alert('passe');
-                alert(JSON.parse(data));
+                var $list = $("#vehicule_list");
+                $list.empty(); //vide la liste
+                //Ca dessous ca marche pour récup Key, Value
+                $.each(data, function (key, val) {
+                        alert(key);
+                        alert(val);
+                    $list.append($("<option></option>")
+                        .attr("value", key).text(val));
+
+                    });
+
 
             },
             ///http://www.journaldunet.com/developpeur/tutoriel/dht/040421-javascript-remplir-dynamiquement-liste.shtml

@@ -81,9 +81,9 @@ class vehicule_model
         
     }
 
-    public function createVehicules($arr_vehicules){
+    public function createVehicules($vehicules){
 
-        foreach ($arr_vehicules as $vehicule)
+        foreach ($vehicules as $vehicule)
         {
             $obj_vehicule =  new vehicule_entity();
             $obj_vehicule->setIntId($vehicule['vehicule_id']);
