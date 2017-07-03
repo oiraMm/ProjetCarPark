@@ -57,13 +57,10 @@ $(document).ready(function(){
                 ajaxSetVehiculeList : 'ajaxSetVehiculeList'
             },
             function(data){
-                alert('passe');
                 var $list = $("#vehicule_list");
                 $list.empty(); //vide la liste
                 //Ca dessous ca marche pour récup Key, Value
                 $.each(data, function (key, val) {
-                        alert(key);
-                        alert(val);
                     $list.append($("<option></option>")
                         .attr("value", key).text(val));
 

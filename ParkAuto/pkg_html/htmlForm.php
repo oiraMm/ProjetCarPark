@@ -108,7 +108,7 @@ class htmlForm
         if(!empty($carac['id'])) {$r.=' id="'.$carac['id'].'"';}
         //if(!empty($carac['class'])) {$r.=' class="'.$carac['class'].'"';}
         if(!empty($carac['maxlength'])) {$r.=' maxlength="'.$carac['maxlength'].'"';}
-        $r.='><span class="add-on"><i class="icon-calendar"></i></span>'.$js.'</div>'.PHP_EOL;
+        $r.='><span class="add-on"><i class="icon-th"></i></span></div>'.$js.PHP_EOL;
 
         return $r;
     }

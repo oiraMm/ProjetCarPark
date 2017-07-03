@@ -146,7 +146,9 @@ class reservation_model
 
         $ctrl_status=new status_reservation_controller();
         $arr_status=$ctrl_status->getAllStatus();
-        
+
+        $ctrl_utilisateur=new utilisateur_controller();
+
         foreach ($arr_result as $reservation)
         {
 
@@ -156,7 +158,7 @@ class reservation_model
             $obj_reservation->setDateDebut($reservation['reservation_dateDebut']);
             $obj_reservation->setDateFin($reservation['reservation_dateFin']);
             $obj_reservation->setObjStatus($ctrl_status->getStatusWithID($arr_status,$reservation['reservation_status']));
-            $obj_reservation->setObjSalarie($salarie);
+            $obj_reservation->setObjSalarie($ctrl_utilisateur->getUserById($reservation['reservation_salarie']));
             $obj_reservation->setObjVehicule($ctrl_vehicule->getVehicule($arr_vehicules,$reservation['reservation_vehicule']));
             $obj_reservation->setStrRaison($reservation['reservation_raison']);
             
