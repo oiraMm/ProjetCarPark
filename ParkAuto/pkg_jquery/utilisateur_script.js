@@ -23,6 +23,24 @@ $(document).ready(function(){
 
         'text'
     );
+    $.post(
+        'pkg_utilisateur/script/script_utilisateur.php',
+        {
+            id_service : $("#service_list").val(),
+            ajaxVerifChef : 'ajaxVerifChef'
+        },
+        function(data){
+            if(data == 'true'){
+                $("#isChefService").prop( "disabled", true );
+            }
+            else
+            {
+                $("#isChefService").prop( "disabled", false );
+            }
+        },
+
+        'text'
+    );
     $("#isChefServiceHidden").val($("#isChefService").prop('checked'));
     $("#service_list").on('change', function (){
         $.post(
