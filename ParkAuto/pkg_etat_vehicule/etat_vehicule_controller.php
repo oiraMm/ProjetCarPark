@@ -24,6 +24,13 @@ class etat_vehicule_controller
         return $obj_etat;
     }
 
+
+    public function loadAllEtat()
+    {
+        $arr_obj_etat = $this->getObjEtatVehiculeModel()->loadAllEtat();
+        return $arr_obj_etat;
+    }
+
     /**
      * @return etat_vehicule_model
      */

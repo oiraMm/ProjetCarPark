@@ -41,6 +41,10 @@ if ($str_page_request != null)
             $page = gestionUtilisateur($page);
             break;
         case 'Gestion des vehicules':
+        case 'Editer vehicule':
+        case 'Supprimer vehicule':
+        case 'Ajouter vehicule':
+        case 'saveVehicule':
             $page = gestionVehicules($page);
             break;
         case 'Validation':
@@ -104,6 +108,10 @@ function retrievePostData()
     elseif (isset($_POST['addUser']))
     {
         $str_page_request = $_POST['addUser'];
+    }
+    elseif (isset($_POST['vehiculeMode']))
+    {
+        $str_page_request = $_POST['vehiculeMode'];
     }
     else if (isset($_POST['Submit']) && isset($_SESSION['current_user']))
     {

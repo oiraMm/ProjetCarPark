@@ -28,4 +28,22 @@ class etat_vehicule_model
         }
         return $obj_etat;
     }
+
+    public function loadAllEtat()
+    {
+        //charge les donné de la news dont l'id est passez en paramètre
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'etat_vehicule';
+        $arr_result = $obj_bdd->select($champ, $table);
+        $arr_etat = null;
+        foreach ($arr_result as $oneEtat)
+        {
+            $obj_etat =  new type_carburant_entity();
+            $obj_etat->setIntId($oneEtat['etat_vehicule_id']);
+            $obj_etat->setStrLibelle($oneEtat['etat_vehicule_libelle']);
+            $arr_etat[] = $obj_etat;
+        }
+        return $arr_etat;
+    }
 }

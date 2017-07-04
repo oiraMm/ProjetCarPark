@@ -24,6 +24,14 @@ class niveau_carburant_controller
         return $obj_niveau;
     }
 
+
+    public function getAllNiveauCarburant()
+    {
+        $arra_obj_niveau = $this->getObjNiveauCarburantModel()->getAllNiveauCarburant();
+        return $arra_obj_niveau;
+    }
+
+
     /**
      * @return niveau_carburant_model
      */

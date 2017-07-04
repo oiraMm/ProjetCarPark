@@ -47,8 +47,6 @@ class vehicule_model
         $obj_vehicule = null;
                
         $arr_vehicules=null;
-        
-        
         foreach ($arr_result as $vehicule)
         {
             $obj_vehicule =  new vehicule_entity();
@@ -60,17 +58,17 @@ class vehicule_model
 
             if ($vehicule['vehicule_etat'] != null){
                 $obj_etat_controller = new etat_vehicule_controller();
-                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_id']);
+                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
                 $obj_vehicule->setObjEtat($obj_etat);
             }
             if ($vehicule['vehicule_essence'] != null){
                 $obj_niveau_carburant_controller = new niveau_carburant_controller();
-                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_id']);
+                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
                 $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
             }
             if ($vehicule['vehicule_type_carburant'] != null){
                 $obj_vehicule_type_carburant_controller = new type_carburant_controller();
-                $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_id']);
+                $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
                 $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
             }
             $arr_vehicules[] = $obj_vehicule;
@@ -94,15 +92,20 @@ class vehicule_model
 
             if ($vehicule['vehicule_etat'] != null){
                 $obj_etat_controller = new etat_vehicule_controller();
-                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_id']);
+                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
                 $obj_vehicule->setObjEtat($obj_etat);
             }
             if ($vehicule['vehicule_essence'] != null){
                 $obj_niveau_carburant_controller = new niveau_carburant_controller();
-                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_id']);
+                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
                 $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
             }
-            //TODO vahicule type carburant
+
+            if ($vehicule['vehicule_carburant'] != null){
+                $obj_type_carburant_controller = new type_carburant_controller();
+                $obj_type_carburant = $obj_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
+                $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+            }
             $arr_vehicules[] = $obj_vehicule;
         }
 
@@ -130,18 +133,18 @@ class vehicule_model
 
             if ($vehicule['vehicule_etat'] != null){
                 $obj_etat_controller = new etat_vehicule_controller();
-                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_id']);
+                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
                 $obj_vehicule->setObjEtat($obj_etat);
             }
             if ($vehicule['vehicule_essence'] != null){
                 $obj_niveau_carburant_controller = new niveau_carburant_controller();
-                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_id']);
+                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
                 $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
             }
             if ($vehicule['vehicule_type_carburant'] != null){
                 $obj_vehicule_type_carburant_controller = new type_carburant_controller();
-                $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_id']);
-                $obj_vehicule->setObjNiveauCarburant($obj_type_carburant);
+                $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
+                $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
             }
         }
         return $obj_vehicule;
@@ -158,6 +161,59 @@ class vehicule_model
             }
         }
         return null;
+    }
+
+
+
+
+    public function saveVehicule($obj_vehicule)
+    {//echo'<br><br><br><pre>';var_dump($obj_vehicule);echo'</pre>';
+        $obj_bd = new bdd();
+        $table = 'vehicule';
+        $km = str_replace(' ', '', $obj_vehicule->getIntKm());
+        $arra_champ_value['vehicule_km'] = $km;
+        $arra_champ_value['vehicule_marque'] = '\''.$obj_vehicule->getStrMarque().'\'';
+        $arra_champ_value['vehicule_modele'] = '\''.$obj_vehicule->getStrModel().'\'';
+        $arra_champ_value['vehicule_immatriculation'] = '\''.$obj_vehicule->getStrImmatriculation().'\'';
+
+        if ($obj_vehicule->getObjEtat() != null){
+            if ($obj_vehicule->getObjEtat()->getIntId() != 0){
+                $arra_champ_value['vehicule_etat'] = $obj_vehicule->getObjEtat()->getIntId();}
+        }
+        if ($obj_vehicule->getObjTypeCarburant() != null){
+            if ($obj_vehicule->getObjTypeCarburant()->getIntId() != 0){
+                $arra_champ_value['vehicule_type_carburant'] = $obj_vehicule->getObjTypeCarburant()->getIntId();}
+        }
+        if ($obj_vehicule->getObjNiveauCarburant() != null){
+            if ($obj_vehicule->getObjNiveauCarburant()->getIntId() != 0){
+                $arra_champ_value['vehicule_essence'] = $obj_vehicule->getObjNiveauCarburant()->getIntId();}
+        }
+
+        if ($obj_vehicule->getIntId() != null )
+        {
+            $condition = 'vehicule_id = "'.$obj_vehicule->getIntId().'"';
+            $arra_champ_value['vehicule_id'] = $obj_vehicule->getIntId();
+            $obj_bd->update($table, $arra_champ_value, $condition);
+        }
+        else
+        {
+            $obj_bd->insert($table, $arra_champ_value);
+        }
+    }
+    public function deleteVehicule ($id)
+    {
+
+        $obj_bdd = new bdd();
+        //$champ = '*';
+        $table = 'vehicule';
+        $condition = 'vehicule_id = "'.$id.'"';
+        $res_req = $obj_bdd->delete($table, $condition);
+        if($res_req){
+            return 'delete';
+        }else{
+            return 'delete-fail';
+        }
+        return $res_req;
     }
     
 }

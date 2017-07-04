@@ -36,10 +36,10 @@ class vehicule_controller
                     break;
             }
         }
-        elseif (isset($_POST['userMode']))
+        elseif (isset($_POST['vehiculeMode']))
         {
             $obj_vehicule = $this->retrievePostData();
-            $save = $this->getObjVehiculeModel()->saveUser($obj_vehicule);
+            $save = $this->getObjVehiculeModel()->saveVehicule($obj_vehicule);
             $arr_vehicule = $this->obj_vehicule_model->loadAllVehicules();
             $str_template = $this->obj_vehicule_viewer->templateCrudVehiculeDefault($arr_vehicule);
         }
@@ -49,6 +49,24 @@ class vehicule_controller
             $str_template = $this->obj_vehicule_viewer->templateCrudVehiculeDefault($arr_vehicule);
         }
         return $str_template;
+    }
+
+
+    public function retrievePostData()
+    {
+        $obj_vehicule = new vehicule_entity();
+        $obj_vehicule->setIntId($_POST['idVehicule']);
+        $obj_vehicule->setStrMarque($_POST['marqueSaisi']);
+        $obj_vehicule->setStrModel($_POST['modeleSaisi']);
+        $obj_vehicule->setStrImmatriculation($_POST['immatriculationSaisi']);
+        $obj_vehicule->setIntKm($_POST['kilometrageSaisi']);
+        $obj_type_carburant_controller = new type_carburant_controller();
+        $obj_vehicule->setObjTypeCarburant($obj_type_carburant_controller->loadTypeCarburantById($_POST['type']));
+        $obj_niveau_essence = new niveau_carburant_controller();
+        $obj_vehicule->setObjNiveauCarburant($obj_niveau_essence->loadNiveauById($_POST['niveau']));
+        $obj_etat_controller = new etat_vehicule_controller();
+        $obj_vehicule->setObjEtat($obj_etat_controller->loadEtatById($_POST['etat']));
+        return $obj_vehicule;
     }
 
     public function getVehicule($arr_vehicules,$id){

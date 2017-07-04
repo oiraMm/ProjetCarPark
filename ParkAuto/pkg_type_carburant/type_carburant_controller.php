@@ -24,6 +24,12 @@ class type_carburant_controller
         return $obj_type_carburant;
     }
 
+    public function getAllTypeCarburant ()
+    {
+        $arra_type_carburant = $this->getObjTypeCarburantModel()->loadAllTypeCarburant();
+        return $arra_type_carburant;
+    }
+
     /**
      * @return type_carburant_model
      */
