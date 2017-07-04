@@ -131,6 +131,10 @@ class utilisateur_viewer
         $obj_service_controller = new service_controller();
         $arr_service = $obj_service_controller->getAllService();
         $formAdd->addSelect('service', "form-control", 'service_list', 'required');
+        if ($valService == '')
+        {
+            $formAdd->addSelectOption('service', '', '', true);
+        }
         foreach ($arr_service as $oneService)
         {
             ($valService == $oneService->getIntId())?$selected = true:$selected = false;
