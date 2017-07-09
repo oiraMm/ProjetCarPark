@@ -9,20 +9,22 @@
 class vehicule_viewer
 {
 
-    public function templateCrudVehiculeDefault($arr_vehicule)
+    public function templateCrudVehiculeDefault($arr_vehicule, $mode = "")
     {
         //la trasmission d'info se fera via formulaire et champ caché (un formulaire pour le tableau, le click sur un bouton transmettra l'action et l'id de l'utilisateur concerné
         $obj_table = new STable();
         $obj_table->border = 1;
-        $obj_table->thead()
+        $thead = $obj_table->thead()
             ->th("Marque")
             ->th("Modele")
             ->th("Immatriculation")
             ->th("Km")
             ->th("Carburant")
             ->th("Niveau d'essence")
-            ->th("Etat")
-            ->th("Action");
+            ->th("Etat");
+        if ($mode == "") {
+            $thead->th("Action");
+        }
         foreach ($arr_vehicule as $vehicule)
         {
             $marque=($vehicule->getStrMarque()==null)?'-':$vehicule->getStrMarque();
@@ -32,29 +34,39 @@ class vehicule_viewer
             $carburant=($vehicule->getObjTypeCarburant()==null)?'-':$vehicule->getObjTypeCarburant()->getStrLibelle();
             $niveauEssence=($vehicule->getObjNiveauCarburant()==null)?'-':$vehicule->getObjNiveauCarburant()->getStrLibelle();
             $etat=($vehicule->getObjEtat()==null)?'-':$vehicule->getObjEtat()->getStrLibelle();
-            $formEdit = new htmlForm('index.php', 'POST');
-            $formEdit->addHidden('idVehiculeEdit', $vehicule->getIntId());
-            $formEdit->addHidden('mode', 'edit');
-            $formEdit->addBtSubmit('Editer vehicule',"Submit","btn");
-            $formDelete = new htmlForm('index.php', 'POST');
-            $formDelete->addHidden('idVehiculeDelete', $vehicule->getIntId());
-            $formDelete->addHidden('mode', 'delete');
-            $formDelete->addBtSubmit('Supprimer vehicule',"Submit","btn", "deleteVehicule");
-            $obj_table->tr()
+            if ($mode == "") {
+                $formEdit = new htmlForm('index.php', 'POST');
+                $formEdit->addHidden('idVehiculeEdit', $vehicule->getIntId());
+                $formEdit->addHidden('mode', 'edit');
+                $formEdit->addBtSubmit('Editer vehicule', "Submit", "btn");
+                $formDelete = new htmlForm('index.php', 'POST');
+                $formDelete->addHidden('idVehiculeDelete', $vehicule->getIntId());
+                $formDelete->addHidden('mode', 'delete');
+                $formDelete->addBtSubmit('Supprimer vehicule', "Submit", "btn", "deleteVehicule");
+            }
+            $tr = $obj_table->tr()
                 ->td($marque)
                 ->td($modele)
                 ->td($immatriculation)
                 ->td($km)
                 ->td($carburant)
                 ->td($niveauEssence)
-                ->td($etat)
-                ->td($formEdit->render().$formDelete->render());
+                ->td($etat);
+            if ($mode == "") {
+                $tr->td($formEdit->render() . $formDelete->render());
+            }
         }
-        $formAdd = new htmlForm('index.php', 'POST');
-        $formAdd->addHidden('mode', 'add');
-        $formAdd->addBtSubmit('Ajouter vehicule',"Submit","btn");
         $str_test = '<h1>Liste des vehicules</h1>';
-        return $str_test.$obj_table->getTable().$formAdd->render();
+        if ($mode == "") {
+        $formAdd = new htmlForm('index.php', 'POST');
+            $formAdd->addHidden('mode', 'add');
+            $formAdd->addBtSubmit('Ajouter vehicule', "Submit", "btn");
+            $str_return = $str_test.$obj_table->getTable().$formAdd->render();
+        }
+        else{
+            $str_return = $str_test.$obj_table->getTable();
+        }
+        return $str_return;
     }
 
 

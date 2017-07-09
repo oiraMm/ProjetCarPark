@@ -154,9 +154,11 @@ function acceuil($page)
 
 function etatPark($page)
 {
+    $_POST['mode'] = "visu";
     $obj_menu = new menu_controller();
     $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-    $page=str_replace("%content%",'Etat du parc est un écran à venir',$page);
+    $obj_vehicule_controller = new vehicule_controller();
+    $page=str_replace("%content%",$obj_vehicule_controller->getTemplateCrudVehicule(),$page);
     $page=str_replace("%title%",'Etat du parc',$page);
     return $page;
 }

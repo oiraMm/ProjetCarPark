@@ -29,6 +29,10 @@ class vehicule_controller
                 case 'add' :
                     $str_template = $this->obj_vehicule_viewer->templateCrudVehicule('add');
                     break;
+                case 'visu' :
+                    $arr_vehicule = $this->obj_vehicule_model->loadAllVehicules();
+                    $str_template = $this->obj_vehicule_viewer->templateCrudVehiculeDefault($arr_vehicule,'visu');
+                    break;
                 case 'delete' :
                     $delete = $this->getObjVehiculeModel()->deleteVehicule($_POST['idVehiculeDelete']);
                     $arr_vehicule = $this->obj_vehicule_model->loadAllVehicules();
