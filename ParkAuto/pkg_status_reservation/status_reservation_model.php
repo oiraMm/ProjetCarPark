@@ -40,4 +40,20 @@ class status_reservation_model
         return null;
     }
 
+    public function getStatusByID($id){
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'status_reservation';
+        $condition = 'status_reservation_id = '. $id;
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+
+
+        foreach ($arr_result as $status)
+        {
+            $obj_status =  new status_reservation_entity();
+            $obj_status->setIntId($status['status_reservation_id']);
+            $obj_status->setStrLibelle($status['status_reservation_libelle']);
+        }
+        return $obj_status;
+    }
 }

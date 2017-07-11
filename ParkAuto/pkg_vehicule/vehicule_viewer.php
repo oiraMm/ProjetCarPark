@@ -25,6 +25,10 @@ class vehicule_viewer
         if ($mode == "") {
             $thead->th("Action");
         }
+        elseif ($mode == "visu")
+        {
+            $thead->th("Status");
+        }
         foreach ($arr_vehicule as $vehicule)
         {
             $marque=($vehicule->getStrMarque()==null)?'-':$vehicule->getStrMarque();
@@ -44,6 +48,35 @@ class vehicule_viewer
                 $formDelete->addHidden('mode', 'delete');
                 $formDelete->addBtSubmit('Supprimer vehicule', "Submit", "btn", "deleteVehicule");
             }
+            elseif ($mode == "visu")
+            {
+                $obj_reservation_controller = new reservation_controller();
+                $obj_reservation = $obj_reservation_controller->reservationByVehiculeId($vehicule->getIntId());
+                if ($obj_reservation==null)
+                {
+                    $status='-';
+                }
+                elseif ($obj_reservation->getObjStatus() != null) {
+                    $today = date("Y/m/d");
+                    if(strtotime($obj_reservation->getDateDebut()) <= strtotime($today) && strtotime($obj_reservation->getDateFin()) >= strtotime($today)) {
+                        if ($obj_reservation->getObjStatus()->getIntId() == 1) {
+                            $status = 'Reservation en cours du ' . $obj_reservation->getDateDebut() . ' au ' . $obj_reservation->getDateFin();
+                        } elseif
+                        ($obj_reservation->getObjStatus()->getIntId() == 3
+                        ) {
+                            $status = 'Demande de reservation en attente pour la periode du ' . $obj_reservation->getDateDebut() . ' au ' . $obj_reservation->getDateFin();
+                        }
+                    }
+                    else
+                    {
+                        $status='-';
+                    }
+                }
+                else
+                {
+                    $status='-';
+                }
+            }
             $tr = $obj_table->tr()
                 ->td($marque)
                 ->td($modele)
@@ -55,8 +88,19 @@ class vehicule_viewer
             if ($mode == "") {
                 $tr->td($formEdit->render() . $formDelete->render());
             }
+            elseif ($mode == "visu")
+            {
+                $tr->td($status);
+            }
         }
-        $str_test = '<h1>Liste des vehicules</h1>';
+        if ($mode == "visu")
+        {
+            $str_test = '<h1>Etat du parc</h1>';
+        }
+        else
+        {
+            $str_test = '<h1>Liste des vehicules</h1>';
+        }
         if ($mode == "") {
         $formAdd = new htmlForm('index.php', 'POST');
             $formAdd->addHidden('mode', 'add');

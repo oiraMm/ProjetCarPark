@@ -124,11 +124,17 @@ class reservation_controller
         }
         return $str_template;
     }
-    
-    //Permet de récupérer une réservation via son ID
+
+    //Permet de récupérer les reservation en cours pour un véhicule
     public function getReservationById($id){
-        
+
         return $this->obj_reservation_model->loadReservationById($id);
+
+    }
+    //Permet de récupérer une réservation via son ID
+    public function reservationByVehiculeId($id){
+        
+        return $this->obj_reservation_model->reservationByVehiculeId($id);
         
     }
     /**

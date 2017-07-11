@@ -58,5 +58,8 @@ class status_reservation_controller
     public function getStatusWithID($arr_status,$id){
         return $this->obj_status_reservation_model->getStatus($arr_status,$id);
     }
+    public function getStatusByID($id){
+        return $this->obj_status_reservation_model->getStatusByID($id);
+    }
 
 }

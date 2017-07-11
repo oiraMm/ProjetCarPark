@@ -197,4 +197,31 @@ class reservation_model
         
         return $obj_reservation;
     }
+
+    public function reservationByVehiculeId($id)
+    {
+        $ctrl_user= new utilisateur_controller();
+        $ctrl_vehicule= new vehicule_controller();
+        $ctrl_statusReservation= new status_reservation_controller();
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'reservation';
+        $condition = 'reservation_vehicule = "'.$id.'" ';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+
+        $obj_reservation = null;
+
+        foreach ($arr_result as $reservation)
+        {
+            $obj_reservation =  new reservation_entity();
+            $obj_reservation->setIntId($reservation['reservation_id']);
+            $obj_reservation->setDateDebut($reservation['reservation_dateDebut']);
+            $obj_reservation->setDateFin($reservation['reservation_dateFin']);
+            $obj_reservation->setObjSalarie($ctrl_user->getUserById($reservation['reservation_salarie']));
+            $obj_reservation->setObjVehicule($ctrl_vehicule->getVehiculeById($reservation['reservation_vehicule']));
+            $obj_reservation->setObjStatus($ctrl_statusReservation->getStatusByID($reservation['reservation_status']));
+            $obj_reservation->setStrRaison($reservation['reservation_raison']);
+        }
+        return $obj_reservation;
+    }
 }
