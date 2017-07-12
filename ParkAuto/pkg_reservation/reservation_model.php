@@ -214,6 +214,7 @@ class reservation_model
         $arr_result = $obj_bdd->select($champ, $table, $condition);
 
         $obj_reservation = null;
+        $tabObjReservation = null;
 
         foreach ($arr_result as $reservation)
         {
@@ -225,7 +226,8 @@ class reservation_model
             $obj_reservation->setObjVehicule($ctrl_vehicule->getVehiculeById($reservation['reservation_vehicule']));
             $obj_reservation->setObjStatus($ctrl_statusReservation->getStatusByID($reservation['reservation_status']));
             $obj_reservation->setStrRaison($reservation['reservation_raison']);
+            $tabObjReservation[] = $obj_reservation;
         }
-        return $obj_reservation;
+        return $tabObjReservation;
     }
 }

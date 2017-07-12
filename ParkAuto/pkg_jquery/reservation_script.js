@@ -64,10 +64,7 @@ $(document).ready(function(){
                 $.each(data, function (key, val) {
                     $list.append($("<option></option>")
                         .attr("value", key).text(val));
-
                     });
-
-
             },
             ///http://www.journaldunet.com/developpeur/tutoriel/dht/040421-javascript-remplir-dynamiquement-liste.shtml
             'json'
