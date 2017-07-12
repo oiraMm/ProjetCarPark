@@ -56,20 +56,27 @@ class vehicule_model
             $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
             $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
 
-            if ($vehicule['vehicule_etat'] != null){
-                $obj_etat_controller = new etat_vehicule_controller();
-                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
-                $obj_vehicule->setObjEtat($obj_etat);
+            if (isset($vehicule['vehicule_etat'])) {
+                if ($vehicule['vehicule_etat'] != null) {
+                    $obj_etat_controller = new etat_vehicule_controller();
+                    $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
+                    $obj_vehicule->setObjEtat($obj_etat);
+                }
             }
-            if ($vehicule['vehicule_essence'] != null){
-                $obj_niveau_carburant_controller = new niveau_carburant_controller();
-                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
-                $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+            if (isset($vehicule['vehicule_essence'])) {
+                if ($vehicule['vehicule_essence'] != null) {
+                    $obj_niveau_carburant_controller = new niveau_carburant_controller();
+                    $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
+                    $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+                }
             }
-            if ($vehicule['vehicule_type_carburant'] != null){
-                $obj_vehicule_type_carburant_controller = new type_carburant_controller();
-                $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
-                $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+
+            if (isset($vehicule['vehicule_type_carburant'])) {
+                if ($vehicule['vehicule_type_carburant'] != null) {
+                    $obj_vehicule_type_carburant_controller = new type_carburant_controller();
+                    $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
+                    $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+                }
             }
             $arr_vehicules[] = $obj_vehicule;
         }
@@ -90,21 +97,26 @@ class vehicule_model
             $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
             $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
 
-            if ($vehicule['vehicule_etat'] != null){
-                $obj_etat_controller = new etat_vehicule_controller();
-                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
-                $obj_vehicule->setObjEtat($obj_etat);
+            if (isset($vehicule['vehicule_etat'])) {
+                if ($vehicule['vehicule_etat'] != null) {
+                    $obj_etat_controller = new etat_vehicule_controller();
+                    $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
+                    $obj_vehicule->setObjEtat($obj_etat);
+                }
             }
-            if ($vehicule['vehicule_essence'] != null){
-                $obj_niveau_carburant_controller = new niveau_carburant_controller();
-                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
-                $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+            if (isset($vehicule['vehicule_essence'])) {
+                if ($vehicule['vehicule_essence'] != null) {
+                    $obj_niveau_carburant_controller = new niveau_carburant_controller();
+                    $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
+                    $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+                }
             }
-
-            if ($vehicule['vehicule_carburant'] != null){
-                $obj_type_carburant_controller = new type_carburant_controller();
-                $obj_type_carburant = $obj_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
-                $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+            if (isset($vehicule['vehicule_carburant'])) {
+                if ($vehicule['vehicule_carburant'] != null) {
+                    $obj_type_carburant_controller = new type_carburant_controller();
+                    $obj_type_carburant = $obj_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
+                    $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+                }
             }
             $arr_vehicules[] = $obj_vehicule;
         }
@@ -131,20 +143,27 @@ class vehicule_model
             $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
             $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
 
-            if ($vehicule['vehicule_etat'] != null){
-                $obj_etat_controller = new etat_vehicule_controller();
-                $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
-                $obj_vehicule->setObjEtat($obj_etat);
+            if (isset($vehicule['vehicule_etat'])) {
+                if ($vehicule['vehicule_etat'] != null) {
+                    $obj_etat_controller = new etat_vehicule_controller();
+                    $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
+                    $obj_vehicule->setObjEtat($obj_etat);
+                }
             }
-            if ($vehicule['vehicule_essence'] != null){
-                $obj_niveau_carburant_controller = new niveau_carburant_controller();
-                $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
-                $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+
+            if (isset($vehicule['vehicule_essence'])) {
+                if ($vehicule['vehicule_essence'] != null) {
+                    $obj_niveau_carburant_controller = new niveau_carburant_controller();
+                    $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
+                    $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+                }
             }
-            if ($vehicule['vehicule_type_carburant'] != null){
-                $obj_vehicule_type_carburant_controller = new type_carburant_controller();
-                $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
-                $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+            if (isset($vehicule['vehicule_type_carburant'])) {
+                if ($vehicule['vehicule_type_carburant'] != null) {
+                    $obj_vehicule_type_carburant_controller = new type_carburant_controller();
+                    $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
+                    $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+                }
             }
         }
         return $obj_vehicule;

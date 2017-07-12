@@ -33,13 +33,10 @@ if (isset($_POST['ajaxSetVehiculeList']))
     $vehicule_ctrl = new vehicule_controller();
     $arra_vehicule = $mdl_reservation->getListVehiculesDispo($_POST['dateDebut'],$_POST['dateFin']);
 
-
     foreach ($arra_vehicule as $value)
     {
         $tabLD[$value->getIntId()] = $value->getStrMarque().' '.$value->getStrModel();
     }
-
-
 
 
     echo json_encode($tabLD);
