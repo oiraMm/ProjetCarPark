@@ -31,6 +31,7 @@ class vehicule_viewer
         }
         foreach ($arr_vehicule as $vehicule)
         {
+            $status = "";
             $marque=($vehicule->getStrMarque()==null)?'-':$vehicule->getStrMarque();
             $modele=($vehicule->getStrModel()==null)?'-':$vehicule->getStrModel();
             $immatriculation=($vehicule->getStrImmatriculation()==null)?'-':$vehicule->getStrImmatriculation();
@@ -56,13 +57,36 @@ class vehicule_viewer
                 {
                     $status='-';
                 }
+                elseif (is_array($obj_reservation))
+                {
+                    foreach ($obj_reservation as $one_objReservation) {
+                        if ($one_objReservation->getObjStatus() != null) {
+                            $today = date("Y/m/d H:m:s");
+
+                            if (strtotime($one_objReservation->getDateDebut()) <= strtotime($today) && strtotime($one_objReservation->getDateFin()) >= strtotime($today)) {
+                                if ($one_objReservation->getObjStatus()->getIntId() == 1) {
+                                    if ($status != "")
+                                    {
+                                        $status .= '<br>';
+                                    }
+                                    $status .= 'Reservation en cours du ' . $one_objReservation->getDateDebut() . ' au ' . $one_objReservation->getDateFin();
+                                } elseif($one_objReservation->getObjStatus()->getIntId() == 3) {
+                                    if ($status != "")
+                                    {
+                                        $status .= '<br>';
+                                    }
+                                    $status .= 'Demande de reservation en attente pour la periode du ' . $one_objReservation->getDateDebut() . ' au ' . $one_objReservation->getDateFin();
+                                }
+                            }
+                        }
+                    }
+                }/*
                 elseif ($obj_reservation->getObjStatus() != null) {
                     $today = date("Y/m/d");
                     if(strtotime($obj_reservation->getDateDebut()) <= strtotime($today) && strtotime($obj_reservation->getDateFin()) >= strtotime($today)) {
                         if ($obj_reservation->getObjStatus()->getIntId() == 1) {
                             $status = 'Reservation en cours du ' . $obj_reservation->getDateDebut() . ' au ' . $obj_reservation->getDateFin();
-                        } elseif
-                        ($obj_reservation->getObjStatus()->getIntId() == 3
+                        } elseif($obj_reservation->getObjStatus()->getIntId() == 3
                         ) {
                             $status = 'Demande de reservation en attente pour la periode du ' . $obj_reservation->getDateDebut() . ' au ' . $obj_reservation->getDateFin();
                         }
@@ -71,12 +95,17 @@ class vehicule_viewer
                     {
                         $status='-';
                     }
-                }
+                }*/
                 else
                 {
                     $status='-';
                 }
+                if ($status=='')
+                {
+                    $status='-';
+                }
             }
+
             $tr = $obj_table->tr()
                 ->td($marque)
                 ->td($modele)
