@@ -59,6 +59,7 @@ $(document).ready(function(){
             function(data){
                 var $list = $("#vehicule_list");
                 $list.empty(); //vide la liste
+
                 //Ca dessous ca marche pour récup Key, Value
                 $.each(data, function (key, val) {
                     $list.append($("<option></option>")

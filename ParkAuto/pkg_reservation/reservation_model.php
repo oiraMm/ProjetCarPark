@@ -70,7 +70,11 @@ class reservation_model
         //Attention ici l'attribut OBJ salarie n'a pas été instancié (inutile) ==> la variable contient donc seulement l'id du salarié
         $arra_champ_value['reservation_salarie']=$obj_reservation->getObjSalarie();
         //Même remarque pour le véhicule
-        $arra_champ_value['reservation_vehicule']=$obj_reservation->getObjVehicule();
+        if($obj_reservation!=''){
+            $arra_champ_value['reservation_vehicule']=$obj_reservation->getObjVehicule();
+        }else{
+            return 'mod-fail';
+        }
         //Même remarque pour le status
 
         if ($obj_reservation->getObjStatus()!=null){

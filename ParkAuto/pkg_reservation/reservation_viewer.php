@@ -142,11 +142,19 @@ class reservation_viewer
         $obj_vehicule_controller = new vehicule_controller();
         $arr_vehicule = $obj_vehicule_controller->getAllVehicules();
         $formAdd->addSelect('vehicule', "form-control", 'vehicule_list');
-        foreach ($arr_vehicule as $vehicule)
-        {
-            ($valVehicule == $vehicule->getIntId())?$selected = true:$selected = false;
-            $formAdd->addSelectOption('vehicule', $vehicule->getIntId(), $vehicule->__toString(), $selected);
+        if($valVehicule == '') {
+            $formAdd->addSelectOption('vehicule', '', '- Selectionnez un véhicule -', true);
+        }else{
+            $formAdd->addSelectOption('vehicule', '', '- Selectionnez un véhicule -', false);
+            foreach ($arr_vehicule as $vehicule)
+            {
+                ($valVehicule == $vehicule->getIntId())?$selected = true:$selected = false;
+                if($selected){
+                    $formAdd->addSelectOption('vehicule', $vehicule->getIntId(), $vehicule->__toString(), $selected);
+                }
+            }
         }
+
         
         $formAdd->addHidden('idStatus', $valStatus);
         $formAdd->addFreeText('Raison deplacement : ');
