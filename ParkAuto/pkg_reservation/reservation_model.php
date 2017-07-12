@@ -21,9 +21,9 @@ class reservation_model
         $obj_bdd = new bdd();
         $champ = 'distinct reservation_vehicule';
         $table = 'reservation';
-        $condition =    'reservation_dateDebut > \''.$dateDebut.'\' AND reservation_dateDebut < \''.$dateFin.
+        $condition =    '( reservation_dateDebut > \''.$dateDebut.'\' AND reservation_dateDebut < \''.$dateFin.
                         '\' OR reservation_dateFin > \''.$dateDebut.'\' AND reservation_dateFin < \''.$dateFin.
-                        '\' OR reservation_dateDebut < \''.$dateDebut.'\' AND reservation_dateFin > \''.$dateFin.'\'';
+                        '\' OR reservation_dateDebut < \''.$dateDebut.'\' AND reservation_dateFin > \''.$dateFin.'\') AND reservation_status = "1"';
         $arr_result = $obj_bdd->select($champ, $table, $condition);
 
 

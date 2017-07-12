@@ -72,13 +72,17 @@ class reservation_viewer
             $status=($reservation->getObjStatus()==null)?'-':$reservation->getObjStatus()->getStrLibelle();
             $vehicule=($reservation->getObjVehicule()==null)?'-':$reservation->getObjVehicule()->getStrMarque().' '.$reservation->getObjVehicule()->getStrModel();
             $raison=($reservation->getStrRaison()==null)?'-':$reservation->getStrRaison();
-            
-            
-            
-            $formEdit = new htmlForm('index.php', 'POST');
-            $formEdit->addHidden('idReservationEdit', $reservation->getIntId());
-            $formEdit->addHidden('mode', 'edit');
-            $formEdit->addBtSubmit('Editer la reservation',"Submit","btn");
+
+
+            if ($reservation->getObjStatus()->getIntId()!=1){
+                $formEdit = new htmlForm('index.php', 'POST');
+                $formEdit->addHidden('idReservationEdit', $reservation->getIntId());
+                $formEdit->addHidden('mode', 'edit');
+                $formEdit->addBtSubmit('Editer la reservation',"Submit","btn");
+                $editForm=$formEdit->render();
+            }else{
+                $editForm='';
+            }
             $formDelete = new htmlForm('index.php', 'POST');
             $formDelete->addHidden('idReservationDelete', $reservation->getIntId());
             $formDelete->addHidden('mode', 'delete');
@@ -91,7 +95,7 @@ class reservation_viewer
                 ->td($vehicule)
                 ->td($raison)
                 ->td($status)
-                ->td($formEdit->render().$formDelete->render());
+                ->td($editForm.$formDelete->render());
         }
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('mode', 'add');        
