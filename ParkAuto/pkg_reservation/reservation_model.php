@@ -49,13 +49,27 @@ class reservation_model
     }
 
     public function changeReservationStatus($idReservation,$idStatus){
+        $objreservation=$this->loadReservationById($idReservation);
         $obj_bdd = new bdd();
         //$champ = '*';
         $table = 'reservation';
         $condition = 'reservation_id = "'.$idReservation.'"';
-        $arra_champ_value['reservation_status']=$idStatus;
-        $res_Req=$obj_bdd->update($table,$arra_champ_value,$condition);
-        return $res_Req;
+
+        $arr_vehicules=$this->getListVehiculesDispo($objreservation->getDateDebut(),$objreservation->getDateFin());
+        $is_reserv=true;
+        foreach ($arr_vehicules as $vehicule){
+            if($objreservation->getObjVehicule()->getIntId() == $vehicule->getIntId()){
+                $is_reserv=false;
+            }
+        }
+        if(! $is_reserv){
+            $arra_champ_value['reservation_status']=$idStatus;
+            $res_Req=$obj_bdd->update($table,$arra_champ_value,$condition);
+            return $res_Req;
+        }
+
+        return false;
+
     }
 
     public function saveReservation($obj_reservation){
