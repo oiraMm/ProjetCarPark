@@ -26,7 +26,7 @@ class htmlForm
         if(!($method=="POST" || $method=="GET")) {echo 'htmlForm() : Method must be POST or GET'; return;}
         $this->_method=$method;
         $this->_sha1=sha1($action.$method.$name);
-        $this->_html='<form class="form-horizontal" action="'.$action.'" method="'.$method.'" name="'.$name.'">'.PHP_EOL;
+        $this->_html='<form class="form-horizontal" action="'.$action.'" method="'.$method.'" name="'.$name.'"  enctype="multipart/form-data">'.PHP_EOL;
         $this->_html.='<input type="hidden" name="htmlFormCheck" value="'.$this->_sha1.'">'.PHP_EOL;
         $this->_errors="";
     }
@@ -47,7 +47,32 @@ class htmlForm
     {
         return $carac['val'].PHP_EOL;
     }
+    //---------------------------------------------------------------------------------------------------------
+    // input type FILE
+    //---------------------------------------------------------------------------------------------------------
 
+    public function addFile($name,$size , $id='', $class='',$rules='')
+    {
+        $this->_items[$name]['type']='file';
+        $this->_items[$name]['name']=$name;
+        $this->_items[$name]['size']=$size;
+        $this->_items[$name]['id']=$id;
+        $this->_items[$name]['class']=$class;
+        $this->_items[$name]['rules']=$rules;
+    }
+
+    // return the HTML code for a input type text with given caracteristics
+    private static function getHTMLfile($carac)
+    {
+        $r='';
+        $r.='<input type="file" name="'.$carac['name'].'"';
+        if(!empty($carac['id'])) {$r.=' id="'.$carac['id'].'"';}
+        if(!empty($carac['class'])) {$r.=' class="'.$carac['class'].'"';}
+        if(!empty($carac['maxlength'])) {$r.=' maxlength="'.$carac['maxlength'].'"';}
+        $r.='>'.PHP_EOL;
+        $r.='<input type="hidden" name="MAX_FILE_SIZE" value="'.$carac['size'].'">'.PHP_EOL;
+        return $r;
+    }
     //---------------------------------------------------------------------------------------------------------
     // input type TEXT
     //---------------------------------------------------------------------------------------------------------

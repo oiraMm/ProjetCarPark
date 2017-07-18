@@ -169,6 +169,7 @@ class utilisateur_viewer
                 $formAdd->addSelectOption('utilisateurResp', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString(), $selected);
             }
         }
+        //$formAdd->addFile('permis', '10000', 'permis', "form-control");
         $formAdd->addHidden('userMode', 'saveUser');
         $formAdd->addBtSubmit('Valider',"Submit","btn");
         return $formAdd->render();
