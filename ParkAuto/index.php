@@ -147,7 +147,10 @@ function acceuil($page)
     $obj_menu = new menu_controller();
     $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
     $obj_news_controller = new news_controller();
-    $page=str_replace("%content%",$obj_news_controller->getTemplateNews(),$page);
+    $obj_reservation_controller = new reservation_controller();
+    $content=$obj_news_controller->getTemplateNews().$obj_reservation_controller->getTodayReservations();
+
+    $page=str_replace("%content%",$content,$page);
     $page=str_replace("%title%",'Accueil',$page);
     return $page;
 }

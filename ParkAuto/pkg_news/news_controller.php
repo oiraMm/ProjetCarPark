@@ -24,7 +24,7 @@ class news_controller
         $arr_news = $this->obj_news_model->loadAllNews();
         if ($arr_news !=null) {
             $arr_news_template = $this->obj_news_viewer->templateNewsMasse($arr_news);
-            $str_news_template = '<ul class="list-group">';
+            $str_news_template = '<h1>Actus</h1></br><ul class="list-group">';
             $bool_alterne = true;
             foreach ($arr_news_template as $news_template)
             {

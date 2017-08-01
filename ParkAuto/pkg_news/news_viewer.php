@@ -19,7 +19,8 @@ class news_viewer
 
     public function templateNewsUnitaire($obj_news)
     {
-        $str_template = '<div class = "news" id="news_'. $obj_news->getIntId() .'"> <p>';
+
+        $str_template = '</br><div class = "news" id="news_'. $obj_news->getIntId() .'"> <p>';
         $str_template .= $obj_news->getStrContenu();
         $str_template .= '</p><p>By ';
         $str_template .= $obj_news->getObjAuteur()->getStrNom() .' '.$obj_news->getObjAuteur()->getStrPrenom();

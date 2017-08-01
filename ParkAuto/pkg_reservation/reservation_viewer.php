@@ -9,7 +9,45 @@
 class reservation_viewer
 {
 
-    
+
+    public function templateNoResa(){
+
+        $str_template = '<h1>Réservations du jour</h1></br><div class = "news"> <p>Aucune réservation pour aujourd\'hui</p></div>';
+        return $str_template;
+
+    }
+    public function templateTodayReservation($arr_reservation){
+
+        $str_resa_template = '</br><h1>Réservations du jour</h1></br><ul class="list-group">';
+
+        foreach ($arr_reservation as $resa)
+        {
+
+            if ($resa->getObjStatus()->getIntId() == 1) {
+                $str_resa_template .= '<li class="list-group-item list-group-item-success">';
+                $formAdd = new htmlForm('index.php', 'POST');
+                $formAdd->addHidden('mode', 'add');
+                $formAdd->addBtSubmit('Effectuer la récupération du véhicule',"Submit","btn");
+                $btn=$formAdd->render();
+
+            }
+            else{
+                $str_resa_template .= '<li class="list-group-item list-group-item-danger">';
+                $btn='';
+
+            }
+            $str_resa_template .= '<div class = "news" id='.$resa->getIntId().' <p>Raison : ';
+            $str_resa_template .= $resa->getStrRaison();
+            $str_resa_template .= '</p><p>Déplacement effectué avec: ';
+            $str_resa_template .= $resa->getObjVehicule()->getStrMarque() .' '.$resa->getObjVehicule()->getStrModel().' jusqu\'au '. substr($resa->getDateFin(),0,10).' à '.substr($resa->getDateFin(),11,5);
+            $str_resa_template .= '</p><p>Status : '.$resa->getObjStatus()->getStrLibelle() .'</p>'.$btn;
+            $str_resa_template .= '</div>';
+            $str_resa_template .= '</li>';
+        }
+        $str_resa_template .= '</ul>';
+        return $str_resa_template;
+    }
+
     public function templateCrudReservationDefault($arr_reservation,$message=null)
     {
         //echo'<pre>';var_dump($arr_user);echo'</pre>';

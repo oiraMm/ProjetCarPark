@@ -76,6 +76,26 @@ class reservation_controller
         return $str_template;
     }
 
+    public function getTodayReservations(){
+        $int_id_current_user = $_SESSION['current_user'];
+        $current_user_model = new utilisateur_model();
+        $current_user = $current_user_model->loadUtilisateurById($int_id_current_user);
+        $date=date("Y-m-d");
+        $arr_reservation=$this->obj_reservation_model->loadReservations($current_user,$date);
+        if ($arr_reservation !=null) {
+            $str_reservation_template= $this->obj_reservation_viewer->templateTodayReservation($arr_reservation);
+
+            return $str_reservation_template;
+        }
+        else
+        {
+            return $this->obj_reservation_viewer->templateNoResa();
+        }
+
+
+        return $str_template;
+    }
+
     public function getTemplateCrudReservation(){
        
         //TODO Verification des requetes en base

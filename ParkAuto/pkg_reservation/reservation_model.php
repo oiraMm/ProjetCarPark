@@ -14,6 +14,7 @@ class reservation_model
     }
 
 
+
     public function getListVehiculesDispo($dateDebut,$dateFin,$idReservation=null){
 
 
@@ -141,15 +142,20 @@ class reservation_model
 
     //Permet de chargé les réservations d'un salarié
     //Si aucun paramètre n'est passé, il renvoie la liste de toutes les reservations
-    public function loadReservations($salarie=null){
+    public function loadReservations($salarie=null,$date=null){
         
         $obj_bdd = new bdd();
         $champ = '*';
         $table = 'reservation';
 
         if($salarie!=null){
-        $condition = 'reservation_salarie = "'.$salarie->getIntId().'"';
-        $arr_result = $obj_bdd->select($champ, $table, $condition);
+            if($date == null) {
+                $condition = 'reservation_salarie = "' . $salarie->getIntId() . '"';
+                $arr_result = $obj_bdd->select($champ, $table, $condition);
+            }else {
+                $condition = 'reservation_salarie = "' . $salarie->getIntId() . '" AND reservation_dateDebut BETWEEN "'.$date.' 00:00:00" AND "'.$date.' 23:59:59"';
+                $arr_result = $obj_bdd->select($champ, $table, $condition);
+            }
         }else{
             $arr_result = $obj_bdd->select($champ, $table);
         }
