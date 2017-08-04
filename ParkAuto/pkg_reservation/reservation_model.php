@@ -93,7 +93,7 @@ class reservation_model
         //Même remarque pour le status
 
         if ($obj_reservation->getObjStatus()!=null){
-            $arra_champ_value['reservation_status'] = $obj_reservation->getObjStatus();
+            $arra_champ_value['reservation_status'] = $obj_reservation->getObjStatus()->getIntId();
         }else{
             $arra_champ_value['reservation_status'] = '3';
         }

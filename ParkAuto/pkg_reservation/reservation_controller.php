@@ -96,6 +96,35 @@ class reservation_controller
         return $str_template;
     }
 
+    public function recuperationVehicule($idResa)
+    {
+        //TODO déléguer une partie au model
+
+        if ($_POST['reservationMode'] == 'saveRecuperation') {
+            $ctrl_niveau_carburant=new niveau_carburant_controller();
+            $ctr_statuts=new status_reservation_controller();
+            $ctrl_vehicule=new vehicule_controller();
+
+            $obj_resa=$this->getObjReservationModel()->loadReservationById($idResa);
+            $obj_niveau_carburant=$ctrl_niveau_carburant->loadNiveauById($_POST['plein']);
+            $obj_resa->getObjVehicule()->setObjNiveauCarburant($obj_niveau_carburant);
+            $obj_resa->getObjVehicule()->setIntKm($_POST['kilometrage']);
+            $obj_resa->setObjStatus($ctr_statuts->getStatusByID(5));
+            print_r($obj_resa);
+
+            $ctrl_vehicule->saveVehicule($obj_resa->getObjVehicule());
+            $this->getObjReservationModel()->saveReservation($obj_resa);
+            
+            $str_template='inserted';
+
+        } else{
+
+            $obj_resa = $this->getReservationById($idResa);
+            $str_template = $this->obj_reservation_viewer->templateRecuperationVehicule($obj_resa);
+        }
+        return $str_template;
+    }
+
     public function getTemplateCrudReservation(){
        
         //TODO Verification des requetes en base
@@ -145,13 +174,14 @@ class reservation_controller
         return $str_template;
     }
 
-    //Permet de récupérer les reservation en cours pour un véhicule
+    //Permet de récupérer une réservation via son ID
     public function getReservationById($id){
 
         return $this->obj_reservation_model->loadReservationById($id);
 
     }
-    //Permet de récupérer une réservation via son ID
+
+    //Permet de récupérer les reservation en cours pour un véhicule
     public function reservationByVehiculeId($id){
         
         return $this->obj_reservation_model->reservationByVehiculeId($id);

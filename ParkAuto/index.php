@@ -52,6 +52,10 @@ if ($str_page_request != null)
         case 'Refuser la demande de reservation' :
             $page = validation($page);
             break;
+        case 'Récupération du véhicule':
+        case 'saveRecuperation':
+            $page = gestionResa($page);
+            break;
         case'Deconnexion':
             session_destroy();
             header('Location: index.php');
@@ -199,3 +203,18 @@ function validation($page)
     $page=str_replace("%title%",'Validation',$page);
     return $page;
 }
+
+function gestionResa($page)
+{
+    $obj_menu = new menu_controller();
+    $obj_reservation_controller=new reservation_controller();
+    $content=$obj_reservation_controller->recuperationVehicule($_POST['idResa']);
+    if($content=='inserted'){
+        return acceuil($page);
+    }
+    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
+    $page=str_replace("%content%",$content,$page);
+    $page=str_replace("%title%",'Récupération véhicule',$page);
+    return $page;
+}
+

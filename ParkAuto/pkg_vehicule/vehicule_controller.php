@@ -18,6 +18,10 @@ class vehicule_controller
         $this->obj_vehicule_viewer = new vehicule_viewer();
     }
 
+    public function saveVehicule($obj_vehicule){
+        $this->getObjVehiculeModel()->saveVehicule($obj_vehicule);
+    }
+
     public function getTemplateCrudVehicule()
     {
         if (isset($_POST['mode']))

@@ -38,7 +38,7 @@ class niveau_carburant_model
         $arr_niveauCarburant[] = null;
         foreach ($arr_result as $niveauCarburant)
         {
-            $obj_niveau_carburant =  new type_carburant_entity();
+            $obj_niveau_carburant =  new niveau_carburant_entity();
             $obj_niveau_carburant->setIntId($niveauCarburant['niveau_carburant_id']);
             $obj_niveau_carburant->setStrLibelle($niveauCarburant['niveau_carburant_libelle']);
             $arr_niveauCarburant[] = $obj_niveau_carburant;
