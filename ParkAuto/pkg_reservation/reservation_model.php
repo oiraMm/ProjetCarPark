@@ -82,15 +82,16 @@ class reservation_model
         $table= 'reservation';
         $arra_champ_value['reservation_dateDebut']='\''.$obj_reservation->getDateDebut().'\'';
         $arra_champ_value['reservation_dateFin']='\''.$obj_reservation->getDateFin().'\'';
-        //Attention ici l'attribut OBJ salarie n'a pas été instancié (inutile) ==> la variable contient donc seulement l'id du salarié
-        $arra_champ_value['reservation_salarie']=$obj_reservation->getObjSalarie();
-        //Même remarque pour le véhicule
+
+        $arra_champ_value['reservation_salarie']=$obj_reservation->getObjSalarie()->getIntId();
+
         if($obj_reservation!=''){
-            $arra_champ_value['reservation_vehicule']=$obj_reservation->getObjVehicule();
+            $arra_champ_value['reservation_vehicule']=$obj_reservation->getObjVehicule()->getIntId();
         }else{
             return 'mod-fail';
         }
-        //Même remarque pour le status
+
+
 
         if ($obj_reservation->getObjStatus()!=null){
             $arra_champ_value['reservation_status'] = $obj_reservation->getObjStatus()->getIntId();
@@ -103,6 +104,7 @@ class reservation_model
         }else{
             $arra_champ_value['reservation_raison']='Raison non spécifié';
         }
+
 
         if ($obj_reservation->getIntId() != null )
         {

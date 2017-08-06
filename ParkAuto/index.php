@@ -20,7 +20,7 @@ if ($str_page_request != null)
         case 'Etat du parc':
             $page = etatPark($page);
             break;
-        case 'Mes reservations':        
+        case 'Mes reservations':
         case 'Editer la reservation':
         case 'Supprimer la reservation':
         case 'Nouvelle demande de reservation':
@@ -54,6 +54,8 @@ if ($str_page_request != null)
             break;
         case 'Récupération du véhicule':
         case 'saveRecuperation':
+        case 'rendreVehicule':
+        case 'saveRendreVehicule':
             $page = gestionResa($page);
             break;
         case'Deconnexion':
@@ -87,7 +89,7 @@ else
 
         }
     }
-else
+    else
     {
         $obj_utilisateur_controller = new utilisateur_controller();
         $form=str_replace("%form%",$obj_utilisateur_controller->getTemplateConnexion(),file_get_contents("pkg_graphique/sign-in.html"));
@@ -206,6 +208,7 @@ function validation($page)
 
 function gestionResa($page)
 {
+    echo 'okokokokokokoko';
     $obj_menu = new menu_controller();
     $obj_reservation_controller=new reservation_controller();
     $content=$obj_reservation_controller->recuperationVehicule($_POST['idResa']);

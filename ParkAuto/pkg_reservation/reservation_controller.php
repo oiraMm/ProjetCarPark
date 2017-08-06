@@ -96,6 +96,28 @@ class reservation_controller
         return $str_template;
     }
 
+    public function rendreVehicule($idResa){
+
+        $ctrl_niveau_carburant=new niveau_carburant_controller();
+        $ctr_statuts=new status_reservation_controller();
+        $ctrl_vehicule=new vehicule_controller();
+        $ctrl_etat_vehicule=new etat_vehicule_controller();
+
+        $obj_resa=$this->getObjReservationModel()->loadReservationById($idResa);
+        $obj_niveau_carburant=$ctrl_niveau_carburant->loadNiveauById($_POST['plein']);
+        $obj_resa->getObjVehicule()->setObjNiveauCarburant($obj_niveau_carburant);
+        $obj_etat_vehicule=$ctrl_etat_vehicule->loadEtatById($_POST['etatVehicule']);
+        $obj_resa->getObjVehicule()->setObjEtat($obj_etat_vehicule);
+        $obj_resa->getObjVehicule()->setIntKm($_POST['kilometrage']);
+        $obj_resa->setObjStatus($ctr_statuts->getStatusByID(6));
+
+
+        $ctrl_vehicule->saveVehicule($obj_resa->getObjVehicule());
+        $this->getObjReservationModel()->saveReservation($obj_resa);
+
+
+    }
+
     public function recuperationVehicule($idResa)
     {
         //TODO déléguer une partie au model
@@ -110,14 +132,22 @@ class reservation_controller
             $obj_resa->getObjVehicule()->setObjNiveauCarburant($obj_niveau_carburant);
             $obj_resa->getObjVehicule()->setIntKm($_POST['kilometrage']);
             $obj_resa->setObjStatus($ctr_statuts->getStatusByID(5));
-            print_r($obj_resa);
+
 
             $ctrl_vehicule->saveVehicule($obj_resa->getObjVehicule());
             $this->getObjReservationModel()->saveReservation($obj_resa);
             
             $str_template='inserted';
 
-        } else{
+        } elseif($_POST['reservationMode'] == 'rendreVehicule') {
+            $obj_resa = $this->getReservationById($idResa);
+            $str_template = $this->obj_reservation_viewer->templateRendreVehicule($obj_resa);
+        }
+        elseif($_POST['reservationMode'] == 'saveRendreVehicule'){
+            $this->rendreVehicule($idResa);
+            $str_template = 'inserted';
+
+        }else{
 
             $obj_resa = $this->getReservationById($idResa);
             $str_template = $this->obj_reservation_viewer->templateRecuperationVehicule($obj_resa);
@@ -221,13 +251,16 @@ class reservation_controller
 
     public function retrievePostData(){
 
+        $ctrl_vehicule=new vehicule_controller();
+        $ctrl_salarie=new utilisateur_controller();
+
         $obj_reservation=new reservation_entity();
         $obj_reservation->setIntId($_POST['idReservation']);
         $obj_reservation->setDateDebut($_POST['dateDebutSaisi']);
         $obj_reservation->setDateFin($_POST['dateFinSaisi']);
-        $obj_reservation->setObjSalarie($_POST['idSalarie']);
+        $obj_reservation->setObjSalarie($ctrl_salarie->getUserById($_POST['idSalarie']));
         //$obj_reservation->setObjStatus($_POST['']);
-        $obj_reservation->setObjVehicule($_POST['vehicule']);
+        $obj_reservation->setObjVehicule($ctrl_vehicule->getVehiculeById($_POST['vehicule']));
         $obj_reservation->setStrRaison($_POST['raisonSaisi']);
 
         return $obj_reservation;

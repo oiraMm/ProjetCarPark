@@ -8,6 +8,63 @@
  */
 class reservation_viewer
 {
+    public function templateRendreVehicule($obj_resa){
+
+        $ctrl_carburant=new niveau_carburant_controller();
+        $arr_plein=$ctrl_carburant->getAllNiveauCarburant();
+
+        $ctrl_etat=new etat_vehicule_controller();
+        $arr_etat=$ctrl_etat->loadAllEtat();
+
+        $str_template= '<h2>Restitution du véhicule '.$obj_resa->getObjVehicule()->getStrMarque().' '.$obj_resa->getObjVehicule()->getStrModel().' </h1>';
+        $formAdd = new htmlForm('index.php', 'POST');
+        $formAdd->addHidden('idResa', $obj_resa->getIntId());
+
+        $formAdd->addFreeText('Kilometrage :</br> ');
+        $formAdd->addText('kilometrage', '', '', '',"form-control");
+        $formAdd->addFreeText('Km ');
+
+        $formAdd->addFreeText('</br></br>Etat du plein :');
+        $formAdd->addSelect('plein', "form-control", 'plein_list');
+
+
+        foreach ($arr_plein as $niveau)
+        {
+
+            if($niveau!=null){
+                ($niveau->getIntId() == '1')?$selected = true:$selected = false;
+                $formAdd->addSelectOption('plein', $niveau->getIntId(), $niveau->getStrLibelle(), $selected);
+
+            }
+
+        }
+
+        $formAdd->addFreeText('</br>Etat du Vehicule :');
+        $formAdd->addSelect('etatVehicule', "form-control", 'etat_list');
+
+
+        foreach ($arr_etat as $etat)
+        {
+
+            if($etat!=null){
+                ($etat->getIntId() == '1')?$selected = true:$selected = false;
+                $formAdd->addSelectOption('etatVehicule', $etat->getIntId(), $etat->getStrLibelle(), $selected);
+            }
+
+        }
+
+
+
+        $formAdd->addFreeText('</br>Commentaires :');
+        $formAdd->addTextarea('commentaire','',2,50);
+        $formAdd->addHidden('reservationMode', 'saveRendreVehicule');
+        $formAdd->addBtSubmit('Valider',"Submit","btn");
+
+        $str_template .= $formAdd->render();
+
+        return $str_template;
+
+    }
 
     public function templateRecuperationVehicule($obj_resa){
 
@@ -70,6 +127,13 @@ class reservation_viewer
                 $formAdd->addBtSubmit('Récupération du véhicule',"Submit","btn");
                 $btn=$formAdd->render();
 
+            }elseif ($resa->getObjStatus()->getIntId() == 5){
+                $str_resa_template .= '<li class="list-group-item list-group-item-warning">';
+                $formAdd = new htmlForm('index.php', 'POST');
+                $formAdd->addHidden('reservationMode','rendreVehicule');
+                $formAdd->addHidden('idResa', $resa->getIntId());
+                $formAdd->addBtSubmit('Rendre le véhicule',"Submit","btn");
+                $btn=$formAdd->render();
             }
             else{
                 $str_resa_template .= '<li class="list-group-item list-group-item-danger">';
@@ -152,7 +216,7 @@ class reservation_viewer
             $raison=($reservation->getStrRaison()==null)?'-':$reservation->getStrRaison();
 
 
-            if ($reservation->getObjStatus()->getIntId()!=1){
+            if ($reservation->getObjStatus()->getIntId()==3){
                 $formEdit = new htmlForm('index.php', 'POST');
                 $formEdit->addHidden('idReservationEdit', $reservation->getIntId());
                 $formEdit->addHidden('mode', 'edit');
