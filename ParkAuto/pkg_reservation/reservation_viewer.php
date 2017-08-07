@@ -77,7 +77,7 @@ class reservation_viewer
         $formAdd->addHidden('idResa', $obj_resa->getIntId());
 
         $formAdd->addFreeText('Kilometrage :</br> ');
-        $formAdd->addText('kilometrage', '', '', '',"form-control");
+        $formAdd->addText('kilometrage', $obj_resa->getObjVehicule()->getIntKm(), '', '',"form-control");
         $formAdd->addFreeText('Km ');
 
         $formAdd->addFreeText('</br>Etat du plein :');
@@ -120,14 +120,15 @@ class reservation_viewer
         foreach ($arr_reservation as $resa)
         {
 
-            if ($resa->getObjStatus()->getIntId() == 1) {
+            $status=$resa->getObjStatus()->getIntId();
+            if ($status == 1) {
                 $str_resa_template .= '<li class="list-group-item list-group-item-success">';
                 $formAdd = new htmlForm('index.php', 'POST');
                 $formAdd->addHidden('idResa', $resa->getIntId());
                 $formAdd->addBtSubmit('Récupération du véhicule',"Submit","btn");
                 $btn=$formAdd->render();
 
-            }elseif ($resa->getObjStatus()->getIntId() == 5){
+            }elseif ($status == 5){
                 $str_resa_template .= '<li class="list-group-item list-group-item-warning">';
                 $formAdd = new htmlForm('index.php', 'POST');
                 $formAdd->addHidden('reservationMode','rendreVehicule');
@@ -135,7 +136,10 @@ class reservation_viewer
                 $formAdd->addBtSubmit('Rendre le véhicule',"Submit","btn");
                 $btn=$formAdd->render();
             }
-            else{
+            elseif ($status == 6){
+                $str_resa_template .= '<li class="list-group-item list-group-item-info">';
+                $btn='';
+            }else{
                 $str_resa_template .= '<li class="list-group-item list-group-item-danger">';
                 $btn='';
 
@@ -152,7 +156,7 @@ class reservation_viewer
         return $str_resa_template;
     }
 
-    public function templateCrudReservationDefault($arr_reservation,$message=null)
+    public function templateCrudReservationDefault($arr_reservation,$message=null,$withNewBtn=true)
     {
         //echo'<pre>';var_dump($arr_user);echo'</pre>';
         //la trasmission d'info se fera via formulaire et champ caché (un formulaire pour le tableau, le click sur un bouton transmettra l'action et l'id de l'utilisateur concerné
@@ -191,9 +195,12 @@ class reservation_viewer
                 break;
 
         }
-        
+
+
+
         $obj_table = new STable();
         $obj_table->border = 1;
+        $obj_table->id='Reservations';
         $obj_table->thead()
             ->th("ID")
             ->th("Date de debut")
@@ -239,13 +246,18 @@ class reservation_viewer
                 ->td($status)
                 ->td($editForm.$formDelete->render());
         }
-        $formAdd = new htmlForm('index.php', 'POST');
-        $formAdd->addHidden('mode', 'add');        
-        $formAdd->addBtSubmit('Nouvelle demande de reservation',"Submit","btn");
+
+        $form='';
+        if($withNewBtn){
+            $formAdd = new htmlForm('index.php', 'POST');
+            $formAdd->addHidden('mode', 'add');
+            $formAdd->addBtSubmit('Nouvelle demande de reservation',"Submit","btn");
+            $form=$formAdd->render();
+        }
         
 
         
-        $page.=$obj_table->getTable().$formAdd->render();
+        $page.=$obj_table->getTable().$form;
         return $page;
     }
     
@@ -365,5 +377,65 @@ class reservation_viewer
         $page.=$obj_table->getTable();
         return $page;
 
+    }
+
+
+
+    public function templateVehiculeFilter($arr_vehicules){
+        $str_template='<div class="col">';
+        $formAdd=new htmlForm('index.php', 'POST');
+        $formAdd->addFreeText('Vehicule');
+        $formAdd->addSelect('vehicule', "form-control", 'resa_vehicule_list');
+        $formAdd->addSelectOption('vehicule', '*', 'Tous', true);
+        foreach ($arr_vehicules as $vehicule){
+            $formAdd->addSelectOption('vehicule', $vehicule->getIntId(), $vehicule->__toString(), false);
+        }
+
+        $str_template.=$formAdd->render().'</div>';
+
+        return $str_template;
+
+
+    }
+
+    public function templateUserFilter($arr_users){
+        $str_template='<div class="col">';
+        $formAdd=new htmlForm('index.php', 'POST');
+        $formAdd->addFreeText('Salarié : ');
+        $formAdd->addSelect('user', "form-control", 'resa_user_list');
+        $formAdd->addSelectOption('user', '*', 'Tous', true);
+        foreach ($arr_users as $user){
+            $formAdd->addSelectOption('user', $user->getIntId(), $user->__toString(), false);
+
+        }
+
+        $str_template.=$formAdd->render().'</div>';
+        return $str_template;
+    }
+    
+    public  function templateStatusFilter($arr_status){
+        $str_template='<div class="col">';
+        $formAdd=new htmlForm('index.php', 'POST');
+        $formAdd->addFreeText('Status : ');
+        $formAdd->addSelect('status', "form-control", 'resa_status_list');
+        $formAdd->addSelectOption('status', '*', 'Tous', true);
+        foreach ($arr_status as $status){
+            $formAdd->addSelectOption('status', $status->getIntId(), $status->getStrLibelle(), false);
+        }
+
+        $str_template.=$formAdd->render().'</div>';
+        return $str_template;
+        
+    }
+
+    //periode= Fin ou Debut
+    public function templateDateFilter($periode){
+
+        $str_template='<div class="col">';
+        $formAdd=new htmlForm('index.php', 'POST');
+        $formAdd->addFreeText('Date de '.$periode);
+        $formAdd->addDate('resa_date'.$periode,'','resa_date'.$periode, '', '',"form_datetime");
+        $str_template.=$formAdd->render().'</div>';
+        return $str_template;
     }
 }

@@ -144,21 +144,28 @@ class reservation_model
 
     //Permet de chargé les réservations d'un salarié
     //Si aucun paramètre n'est passé, il renvoie la liste de toutes les reservations
-    public function loadReservations($salarie=null,$date=null){
+    public function loadReservations($salarie=null,$date=null,$idVehicule=null,$idStatus=null,$idUtilisateur=null){
         
         $obj_bdd = new bdd();
         $champ = '*';
         $table = 'reservation';
-
+        $condition='';
         if($salarie!=null){
+            $condition.='reservation_salarie = "' . $salarie->getIntId() . '"';
+            if($idVehicule!=null and $idVehicule!=0){
+                $condition.=' AND reservation_vehicule = "'.$idVehicule.'"';
+            }
+            if($idStatus!=null and $idStatus!=0){
+                $condition.=' AND reservation_idStatus = "'.$idStatus.'"';
+            }
             if($date == null) {
-                $condition = 'reservation_salarie = "' . $salarie->getIntId() . '"';
+                //$condition.=' AND reservation_dateDebut > "'.date("Y-m-d").' 00:00:00"';
                 $arr_result = $obj_bdd->select($champ, $table, $condition);
             }else {
-                $condition = 'reservation_salarie = "' . $salarie->getIntId() . '" AND reservation_dateDebut BETWEEN "'.$date.' 00:00:00" AND "'.$date.' 23:59:59"';
+                $condition = 'reservation_salarie = "' . $salarie->getIntId() . '" AND reservation_dateDebut < "'.$date.' 23:59:59" AND reservation_dateFin > "'.$date.' 23:59:59"';
                 $arr_result = $obj_bdd->select($champ, $table, $condition);
             }
-        }else{
+        }else {
             $arr_result = $obj_bdd->select($champ, $table);
         }
 

@@ -43,3 +43,25 @@ if (isset($_POST['ajaxSetVehiculeList']))
 
 
 }
+if (isset($_POST['ajaxResaList'])){
+
+    $ctrl_reservation=new reservation_controller();
+
+    if($_POST['dateDebut']==''){
+        $dateDebut=null;
+    }else{
+        $dateDebut=$_POST['dateDebut'];
+    }
+    if($_POST['idVehicule']!=0){
+        $idVehicule=$_POST['idVehicule'];
+    }else{
+        $idVehicule=null;
+    }
+    if($_POST['idStatus']!=0){
+        $idStatus=$_POST['idStatus'];
+    }else{
+        $idStatus=null;
+    }
+    echo $ctrl_reservation->getTemplateCrudReservation(false,$dateDebut,$idVehicule,$idStatus);
+
+}

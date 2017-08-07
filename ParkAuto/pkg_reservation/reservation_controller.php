@@ -139,6 +139,9 @@ class reservation_controller
             
             $str_template='inserted';
 
+        }elseif (!isset($_POST['reservationMode'])){
+            $obj_resa = $this->getReservationById($idResa);
+            $str_template = $this->obj_reservation_viewer->templateRecuperationVehicule($obj_resa);
         } elseif($_POST['reservationMode'] == 'rendreVehicule') {
             $obj_resa = $this->getReservationById($idResa);
             $str_template = $this->obj_reservation_viewer->templateRendreVehicule($obj_resa);
@@ -147,15 +150,11 @@ class reservation_controller
             $this->rendreVehicule($idResa);
             $str_template = 'inserted';
 
-        }else{
-
-            $obj_resa = $this->getReservationById($idResa);
-            $str_template = $this->obj_reservation_viewer->templateRecuperationVehicule($obj_resa);
         }
         return $str_template;
     }
 
-    public function getTemplateCrudReservation(){
+    public function getTemplateCrudReservation($withFilters=true,$dateDebut=null, $idVehicule=null, $idStatus=null, $idUser=null){
        
         //TODO Verification des requetes en base
         if (isset($_SESSION['current_user']))    
@@ -194,14 +193,77 @@ class reservation_controller
                 }
             }
             else{
-                $arr_reservation= $this->obj_reservation_model->loadReservations($current_user);
-            
-            
-                $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation);
+                if($dateDebut!=null){
+                    $dateDebut=substr($dateDebut,0,10);
+
+                }
+                $arr_reservation= $this->obj_reservation_model->loadReservations($current_user,$dateDebut,$idVehicule,$idStatus,$idUser);
+
+                $str_template='';
+                if($withFilters){
+                    $arr_filters=array('dateDebut','vehicule','status');
+                    $str_template .= $this->getFilters($arr_filters);
+
+
+                }
+                $str_template .= $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation,null,$withFilters);
             }               
             
         }
         return $str_template;
+    }
+
+    public function getFilters($arr_filters){
+        $str_template ='<div class="container" id="wrapper"><div class="row">';
+        foreach ($arr_filters as $filter){
+            switch ($filter){
+                case 'vehicule':
+                    $str_template.=$this->getVehiculeFilter();
+                    break;
+                case 'user':
+                    $str_template.=$this->userFilter();
+                    break;
+                case 'status':
+                    $str_template.=$this->statusFilter();
+                    break;
+                case 'dateDebut':
+                    $str_template.=$this->dateFilter('Debut');
+                    break;
+                case 'dateFin':
+                    $str_template.=$this->dateFilter('Fin');
+                    break;
+            }
+        }
+
+        $str_template .= '</div></div>';
+        return $str_template;
+
+    }
+
+    public function getVehiculeFilter(){
+        $ctrl_vehicule=new vehicule_controller();
+        $arr_vehicules=$ctrl_vehicule->getAllVehicules();
+        return $this->obj_reservation_viewer->templateVehiculeFilter($arr_vehicules);
+
+    }
+
+    public function userFilter(){
+        $ctrl_user=new utilisateur_controller();
+        $arr_users=$ctrl_user->getAllUser();
+        return $this->obj_reservation_viewer->templateUserFilter($arr_users);
+    }
+
+    public function statusFilter(){
+        $ctrl_status=new status_reservation_controller();
+        $arr_status=$ctrl_status->getAllStatus();
+        return $this->obj_reservation_viewer->templateStatusFilter($arr_status);
+
+    }
+
+    //Periode = Fin ou Debut Obligatoire!
+    public function dateFilter($periode){
+        return $this->obj_reservation_viewer->templateDateFilter($periode);
+
     }
 
     //Permet de récupérer une réservation via son ID
