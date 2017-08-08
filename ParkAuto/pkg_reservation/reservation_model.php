@@ -151,18 +151,25 @@ class reservation_model
         $table = 'reservation';
         $condition='';
         if($salarie!=null){
-            $condition.='reservation_salarie = "' . $salarie->getIntId() . '"';
+            if($idUtilisateur==null){
+                $condition.='reservation_salarie = "' .$salarie->getIntId(). '"';
+            }elseif($idUtilisateur==0){
+                $condition.='reservation_salarie = *';
+            }else{
+                $condition.='reservation_salarie = "'.$idUtilisateur.'"';
+            }
+
             if($idVehicule!=null and $idVehicule!=0){
                 $condition.=' AND reservation_vehicule = "'.$idVehicule.'"';
             }
             if($idStatus!=null and $idStatus!=0){
-                $condition.=' AND reservation_idStatus = "'.$idStatus.'"';
+                $condition.=' AND reservation_status = "'.$idStatus.'"';
             }
             if($date == null) {
                 //$condition.=' AND reservation_dateDebut > "'.date("Y-m-d").' 00:00:00"';
                 $arr_result = $obj_bdd->select($champ, $table, $condition);
             }else {
-                $condition = 'reservation_salarie = "' . $salarie->getIntId() . '" AND reservation_dateDebut < "'.$date.' 23:59:59" AND reservation_dateFin > "'.$date.' 23:59:59"';
+                $condition = 'reservation_salarie = "' . $salarie->getIntId() . '" AND reservation_dateDebut < "'.$date.' 23:59:59" AND reservation_dateFin > "'.$date.' 00:00:00"';
                 $arr_result = $obj_bdd->select($champ, $table, $condition);
             }
         }else {

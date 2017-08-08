@@ -45,7 +45,7 @@ class reservation_controller
 
     //TODO A optimiser dans switch case MODE
     //Ajouter menu déroulant sélection
-    public function getTemplateValidation()
+    public function getTemplateValidation($withFilters=true,$dateDebut=null,$idVehicule=null,$idStatus=null,$idUser=0)
     {
         $str_template='';
         if (isset($_SESSION['current_user'])) {
@@ -68,8 +68,15 @@ class reservation_controller
 
                 }
             }elseif($current_user->getObjRole()->getIntId()=='1' || $current_user->getObjRole()->getIntId()=='2'){
-                $arr_reservation= $this->obj_reservation_model->loadReservations();
-                $str_template = $this->obj_reservation_viewer->templateValidation($arr_reservation);
+                $str_template='';
+                if($withFilters){
+                    $arr_filters=array('dateDebut','vehicule','user','status');
+                    $str_template .= $this->getFilters($arr_filters,'valid');
+
+                }
+
+                $arr_reservation= $this->obj_reservation_model->loadReservations($current_user,$dateDebut,$idVehicule,$idStatus,$idUser);
+                $str_template .= $this->obj_reservation_viewer->templateValidation($arr_reservation);
             }
 
         }
@@ -213,8 +220,8 @@ class reservation_controller
         return $str_template;
     }
 
-    public function getFilters($arr_filters){
-        $str_template ='<div class="container" id="wrapper"><div class="row">';
+    public function getFilters($arr_filters,$arg=''){
+        $str_template ='<div class="container" id="wrapper'.$arg.'"><div class="row">';
         foreach ($arr_filters as $filter){
             switch ($filter){
                 case 'vehicule':

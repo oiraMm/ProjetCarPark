@@ -210,41 +210,44 @@ class reservation_viewer
             ->th("Raison")
             ->th("Status")
             ->th("Action");
-        foreach ($arr_reservation as $reservation)
-        {
-            //chargemet du détails des reservations
-            
-            $id=($reservation->getIntId()==null)?'-':$reservation->getIntId();
-            $dateDebut=($reservation->getDateDebut()==null)?'-':$reservation->getDateDebut();
-            $dateFin=($reservation->getDateFin()==null)?'-':$reservation->getDateFin();
-            $salarie=($reservation->getObjSalarie()==null)?'-':$reservation->getObjSalarie()->__toString();
-            $status=($reservation->getObjStatus()==null)?'-':$reservation->getObjStatus()->getStrLibelle();
-            $vehicule=($reservation->getObjVehicule()==null)?'-':$reservation->getObjVehicule()->getStrMarque().' '.$reservation->getObjVehicule()->getStrModel();
-            $raison=($reservation->getStrRaison()==null)?'-':$reservation->getStrRaison();
+        if($arr_reservation!=null) {
 
 
-            if ($reservation->getObjStatus()->getIntId()==3){
-                $formEdit = new htmlForm('index.php', 'POST');
-                $formEdit->addHidden('idReservationEdit', $reservation->getIntId());
-                $formEdit->addHidden('mode', 'edit');
-                $formEdit->addBtSubmit('Editer la reservation',"Submit","btn");
-                $editForm=$formEdit->render();
-            }else{
-                $editForm='';
+            foreach ($arr_reservation as $reservation) {
+                //chargemet du détails des reservations
+
+                $id = ($reservation->getIntId() == null) ? '-' : $reservation->getIntId();
+                $dateDebut = ($reservation->getDateDebut() == null) ? '-' : $reservation->getDateDebut();
+                $dateFin = ($reservation->getDateFin() == null) ? '-' : $reservation->getDateFin();
+                $salarie = ($reservation->getObjSalarie() == null) ? '-' : $reservation->getObjSalarie()->__toString();
+                $status = ($reservation->getObjStatus() == null) ? '-' : $reservation->getObjStatus()->getStrLibelle();
+                $vehicule = ($reservation->getObjVehicule() == null) ? '-' : $reservation->getObjVehicule()->getStrMarque() . ' ' . $reservation->getObjVehicule()->getStrModel();
+                $raison = ($reservation->getStrRaison() == null) ? '-' : $reservation->getStrRaison();
+
+
+                if ($reservation->getObjStatus()->getIntId() == 3) {
+                    $formEdit = new htmlForm('index.php', 'POST');
+                    $formEdit->addHidden('idReservationEdit', $reservation->getIntId());
+                    $formEdit->addHidden('mode', 'edit');
+                    $formEdit->addBtSubmit('Editer la reservation', "Submit", "btn");
+                    $editForm = $formEdit->render();
+                } else {
+                    $editForm = '';
+                }
+                $formDelete = new htmlForm('index.php', 'POST');
+                $formDelete->addHidden('idReservationDelete', $reservation->getIntId());
+                $formDelete->addHidden('mode', 'delete');
+                $formDelete->addBtSubmit('Supprimer la reservation', "Submit", "btn");
+                $obj_table->tr()
+                    ->td($id)
+                    ->td($dateDebut)
+                    ->td($dateFin)
+                    ->td($salarie)
+                    ->td($vehicule)
+                    ->td($raison)
+                    ->td($status)
+                    ->td($editForm . $formDelete->render());
             }
-            $formDelete = new htmlForm('index.php', 'POST');
-            $formDelete->addHidden('idReservationDelete', $reservation->getIntId());
-            $formDelete->addHidden('mode', 'delete');
-            $formDelete->addBtSubmit('Supprimer la reservation',"Submit","btn");
-            $obj_table->tr()
-                ->td($id)
-                ->td($dateDebut)
-                ->td($dateFin)
-                ->td($salarie)
-                ->td($vehicule)
-                ->td($raison)
-                ->td($status)
-                ->td($editForm.$formDelete->render());
         }
 
         $form='';
@@ -329,6 +332,7 @@ class reservation_viewer
         $page='';
         $obj_table = new STable();
         $obj_table->border = 1;
+        $obj_table->id='Reservations';
         $obj_table->thead()
             ->th("ID")
             ->th("Date de debut")
@@ -338,37 +342,39 @@ class reservation_viewer
             ->th("Raison")
             ->th("Status")
             ->th("Action");
-        foreach ($arr_reservation as $reservation)
-        {
-            //chargemet du détails des reservations
-
-            $id=($reservation->getIntId()==null)?'-':$reservation->getIntId();
-            $dateDebut=($reservation->getDateDebut()==null)?'-':$reservation->getDateDebut();
-            $dateFin=($reservation->getDateFin()==null)?'-':$reservation->getDateFin();
-            $salarie=($reservation->getObjSalarie()==null)?'-':$reservation->getObjSalarie()->__toString();
-            $status=($reservation->getObjStatus()==null)?'-':$reservation->getObjStatus()->getStrLibelle();
-            $vehicule=($reservation->getObjVehicule()==null)?'-':$reservation->getObjVehicule()->getStrMarque().' '.$reservation->getObjVehicule()->getStrModel();
-            $raison=($reservation->getStrRaison()==null)?'-':$reservation->getStrRaison();
+        if($arr_reservation != null) {
 
 
+            foreach ($arr_reservation as $reservation) {
+                //chargemet du détails des reservations
 
-            $formAccept = new htmlForm('index.php', 'POST');
-            $formAccept->addHidden('idReservationAccept', $reservation->getIntId());
-            $formAccept->addHidden('mode', 'accept');
-            $formAccept->addBtSubmit('Accepter la demande de reservation',"Submit","btn");
-            $formRefuse = new htmlForm('index.php', 'POST');
-            $formRefuse->addHidden('idReservationRefuse', $reservation->getIntId());
-            $formRefuse->addHidden('mode', 'refuse');
-            $formRefuse->addBtSubmit('Refuser la demande de reservation',"Submit","btn");
-            $obj_table->tr()
-                ->td($id)
-                ->td($dateDebut)
-                ->td($dateFin)
-                ->td($salarie)
-                ->td($vehicule)
-                ->td($raison)
-                ->td($status)
-                ->td($formAccept->render().$formRefuse->render());
+                $id = ($reservation->getIntId() == null) ? '-' : $reservation->getIntId();
+                $dateDebut = ($reservation->getDateDebut() == null) ? '-' : $reservation->getDateDebut();
+                $dateFin = ($reservation->getDateFin() == null) ? '-' : $reservation->getDateFin();
+                $salarie = ($reservation->getObjSalarie() == null) ? '-' : $reservation->getObjSalarie()->__toString();
+                $status = ($reservation->getObjStatus() == null) ? '-' : $reservation->getObjStatus()->getStrLibelle();
+                $vehicule = ($reservation->getObjVehicule() == null) ? '-' : $reservation->getObjVehicule()->getStrMarque() . ' ' . $reservation->getObjVehicule()->getStrModel();
+                $raison = ($reservation->getStrRaison() == null) ? '-' : $reservation->getStrRaison();
+
+
+                $formAccept = new htmlForm('index.php', 'POST');
+                $formAccept->addHidden('idReservationAccept', $reservation->getIntId());
+                $formAccept->addHidden('mode', 'accept');
+                $formAccept->addBtSubmit('Accepter la demande de reservation', "Submit", "btn");
+                $formRefuse = new htmlForm('index.php', 'POST');
+                $formRefuse->addHidden('idReservationRefuse', $reservation->getIntId());
+                $formRefuse->addHidden('mode', 'refuse');
+                $formRefuse->addBtSubmit('Refuser la demande de reservation', "Submit", "btn");
+                $obj_table->tr()
+                    ->td($id)
+                    ->td($dateDebut)
+                    ->td($dateFin)
+                    ->td($salarie)
+                    ->td($vehicule)
+                    ->td($raison)
+                    ->td($status)
+                    ->td($formAccept->render() . $formRefuse->render());
+            }
         }
 
 
@@ -403,7 +409,7 @@ class reservation_viewer
         $formAdd=new htmlForm('index.php', 'POST');
         $formAdd->addFreeText('Salarié : ');
         $formAdd->addSelect('user', "form-control", 'resa_user_list');
-        $formAdd->addSelectOption('user', '*', 'Tous', true);
+        $formAdd->addSelectOption('user', '0', 'Tous', true);
         foreach ($arr_users as $user){
             $formAdd->addSelectOption('user', $user->getIntId(), $user->__toString(), false);
 
@@ -433,7 +439,7 @@ class reservation_viewer
 
         $str_template='<div class="col">';
         $formAdd=new htmlForm('index.php', 'POST');
-        $formAdd->addFreeText('Date de '.$periode);
+        $formAdd->addFreeText('Réservation en cours au : ');
         $formAdd->addDate('resa_date'.$periode,'','resa_date'.$periode, '', '',"form_datetime");
         $str_template.=$formAdd->render().'</div>';
         return $str_template;

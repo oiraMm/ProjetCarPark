@@ -82,7 +82,7 @@ $(document).ready(function(){
             function(data){
                 $("#Reservations").empty();
 
-                alert(data);
+                //alert(data);
                 $("#Reservations").append(data);
                 /*
                 //Ca dessous ca marche pour récup Key, Value
@@ -90,6 +90,32 @@ $(document).ready(function(){
                     $list.append($("<option></option>")
                         .attr("value", key).text(val));
                 });*/
+            },
+            ///http://www.journaldunet.com/developpeur/tutoriel/dht/040421-javascript-remplir-dynamiquement-liste.shtml
+            'text'
+        );
+    });
+    $("#wrappervalid").on('change', function (){
+        $.post(
+            'pkg_reservation/script/script_reservation.php',
+            {
+                dateDebut : $("#resa_dateDebut").val(),
+                idVehicule: $("#resa_vehicule_list").val(),
+                idStatus: $("#resa_status_list").val(),
+                idUser: $("#resa_user_list").val(),
+                ajaxResaList : 'ajaxResaListValid'
+            },
+            function(data){
+                $("#Reservations").empty();
+
+                alert(data);
+                $("#Reservations").append(data);
+                /*
+                 //Ca dessous ca marche pour récup Key, Value
+                 $.each(data, function (key, val) {
+                 $list.append($("<option></option>")
+                 .attr("value", key).text(val));
+                 });*/
             },
             ///http://www.journaldunet.com/developpeur/tutoriel/dht/040421-javascript-remplir-dynamiquement-liste.shtml
             'text'
