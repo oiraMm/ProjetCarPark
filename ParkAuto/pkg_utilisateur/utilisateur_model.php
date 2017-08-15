@@ -120,6 +120,53 @@ class utilisateur_model
 
         return $arr_user;
     }
+
+
+    public function loadAllUserExeptResp($idUser)
+    {
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'utilisateur';
+        $condition = 'utilisateur_responsable != "'.$idUser.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        $arr_user = null;
+        foreach ($arr_result as $user)
+        {
+            $obj_utilisateur =  new utilisateur_entity();
+            $obj_utilisateur->setIntId($user['utilisateur_id']);
+            $obj_utilisateur->setStrNom($user['utilisateur_nom']);
+            $obj_utilisateur->setStrPrenom($user['utilisateur_prenom']);
+            $obj_utilisateur->setStrMail($user['utilisateur_mail']);
+            $obj_utilisateur->setDteDateDeNaissance($user['utilisateur_dateDeNaissance']);
+            $obj_utilisateur->setStrTelephone($user['utilisateur_telephone']);
+            $obj_utilisateur->setStrMotDePasse($user['utilisateur_motDePasse']);
+            if ($user['utilisateur_service'] != null) {
+                //instancie le modele de l'objet utilisateur
+                $obj_service_controller = new service_controller();
+                //utilise le model charger pour charger l'objet role de l'utilisateur
+                $obj_service = $obj_service_controller->serviceOf($user['utilisateur_service']);
+                $obj_utilisateur->setObjService($obj_service);
+            }
+            //instancie le modele de l'objet utilisateur
+            $obj_role_controller = new role_controller();
+            //utilise le model charger pour charger l'objet role de l'utilisateur
+            $obj_role = $obj_role_controller->getObjRoleModel()->roleOf($user['utilisateur_role']);
+            $obj_utilisateur->setObjRole($obj_role);
+            if ($user['utilisateur_responsable'] != null){
+                //instancie le modele de l'objet utilisateur
+                $obj_utilisateur_controller = new utilisateur_controller();
+                //utilise le model charger pour charger l'objet role de l'utilisateur
+                $obj_responsable = $obj_utilisateur_controller->getObjUtilisateurModel()->loadUtilisateurById($user['utilisateur_responsable']);
+                $obj_utilisateur->setObjResponsable($obj_responsable);
+            }
+            $obj_utilisateur->setBoolIsChefService($user['utilisateur_isChef']);
+            $arr_user[] = $obj_utilisateur;
+        }
+
+
+        return $arr_user;
+    }
+
     public function aUserIsChefService($idService)
     {
         $obj_bdd = new bdd();
@@ -191,9 +238,22 @@ class utilisateur_model
     }
     public function deleteUser ($id)
     {
-
+        //suppression des fichier
         $obj_bdd = new bdd();
-        //$champ = '*';
+        $champ = 'document_name';
+        $table = 'document';
+        $condition = 'document_salarie = "'.$id.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        foreach ($arr_result as $name)
+        {
+            unlink('./upload/'.$name["document_name"]);
+        }
+        //suppression des documents de l'utilisateur de la base
+        $obj_bdd = new bdd();
+        $table = 'document';
+        $condition = 'document_salarie =  "'.$id.'"';
+        $res_req = $obj_bdd->delete($table, $condition);
+        //suppression de l'utilisateur
         $table = 'utilisateur';
         $condition = 'utilisateur_id = "'.$id.'"';
         $res_req = $obj_bdd->delete($table, $condition);
@@ -217,5 +277,51 @@ class utilisateur_model
             return false;
         }
         return true;
+    }
+
+
+    public function loadUtilisateurByNameMail($nom, $prenom, $mail)
+    {
+        //charge les donné de l'utilisateur connecté dans l'objet utilisateur en fonction de l'identifiant fournie
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'utilisateur';
+        $condition = 'utilisateur_nom = "'.$nom.'" AND utilisateur_prenom = "'.$prenom.'" AND utilisateur_mail = "'.$mail.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        $obj_utilisateur =  new utilisateur_entity();
+        if (isset($arr_result[0]))
+        {
+            if ($arr_result[0] != null)
+            {
+                $obj_utilisateur->setIntId($arr_result[0]['utilisateur_id']);
+                $obj_utilisateur->setStrNom($arr_result[0]['utilisateur_nom']);
+                $obj_utilisateur->setStrPrenom($arr_result[0]['utilisateur_prenom']);
+                $obj_utilisateur->setStrMail($arr_result[0]['utilisateur_mail']);
+                $obj_utilisateur->setDteDateDeNaissance($arr_result[0]['utilisateur_dateDeNaissance']);
+                $obj_utilisateur->setStrTelephone($arr_result[0]['utilisateur_telephone']);
+                $obj_utilisateur->setStrMotDePasse($arr_result[0]['utilisateur_motDePasse']);
+                if ($arr_result[0]['utilisateur_service'] != null) {
+                    //instancie le modele de l'objet utilisateur
+                    $obj_service_controller = new service_controller();
+                    //utilise le model charger pour charger l'objet role de l'utilisateur
+                    $obj_service = $obj_service_controller->serviceOf($arr_result[0]['utilisateur_service']);
+                    $obj_utilisateur->setObjService($obj_service);
+                }
+                //instancie le modele de l'objet utilisateur
+                $obj_role_controller = new role_controller();
+                //utilise le model charger pour charger l'objet role de l'utilisateur
+                $obj_role = $obj_role_controller->roleOf($arr_result[0]['utilisateur_role']);
+                $obj_utilisateur->setObjRole($obj_role);
+                if ($arr_result[0]['utilisateur_responsable'] != null){
+                    //instancie le modele de l'objet utilisateur
+                    $obj_utilisateur_controller = new utilisateur_controller();
+                    //utilise le model charger pour charger l'objet role de l'utilisateur
+                    $obj_responsable = $obj_utilisateur_controller->getObjUtilisateurModel()->loadUtilisateurById($arr_result[0]['utilisateur_responsable']);
+                    $obj_utilisateur->setObjResponsable($obj_responsable);
+                }
+                $obj_utilisateur->setBoolIsChefService($arr_result[0]['utilisateur_isChef']);
+            }
+        }
+        return $obj_utilisateur;
     }
 }

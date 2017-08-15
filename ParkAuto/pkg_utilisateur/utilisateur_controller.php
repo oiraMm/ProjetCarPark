@@ -72,7 +72,13 @@ class utilisateur_controller
         elseif (isset($_POST['userMode']))
         {
             $obj_user = $this->retrievePostData();
-            $save = $this->getObjUtilisateurModel()->saveUser($obj_user);
+            $saveUser = $this->getObjUtilisateurModel()->saveUser($obj_user);
+            if ($_FILES["permis"]["name"])
+            {
+                $obj_document = $this->retrieveUploadFilesData($obj_user);
+                $obj_document_controller=new document_controller();
+                $obj_document_controller->saveDocument($obj_document);
+            }
             $arr_user = $this->obj_utilisateur_model->loadAllUser();
             $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
         }
@@ -82,6 +88,22 @@ class utilisateur_controller
             $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
         }
         return $str_template;
+    }
+
+    public function retrieveUploadFilesData($obj_user_temp)
+    {
+        //recupération de l'id
+        $obj_user = $this->obj_utilisateur_model->loadUtilisateurByNameMail($obj_user_temp->getStrNom(), $obj_user_temp->getStrPrenom(), $obj_user_temp->getStrMail());
+        $obj_document = new document_entity();
+        $obj_document->setObjSalarie($obj_user);
+        $arra_name = explode(".", $_FILES["permis"]["name"]);
+        $today = date('j-m-y-h-i-s');
+        $file_name = $arra_name[0].$today.'.'.$arra_name[1];
+        $obj_document->setStrName($file_name);
+        $stri_path = "/upload/".$file_name;
+        $obj_document->setStrPath($stri_path);
+        move_uploaded_file($_FILES["permis"]["tmp_name"], "./".$stri_path);
+        return $obj_document;
     }
 
     public function retrievePostData()
@@ -115,6 +137,12 @@ class utilisateur_controller
     public function getAllUser()
     {
         $arr_user = $this->getObjUtilisateurModel()->loadAllUser();
+        return $arr_user;
+    }
+
+    public function loadAllUserExeptResp($idUser)
+    {
+        $arr_user = $this->getObjUtilisateurModel()->loadAllUserExeptResp($idUser);
         return $arr_user;
     }
 

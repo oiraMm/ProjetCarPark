@@ -12,7 +12,7 @@ class document_controller
     //controller et model de la classe
     private $obj_document_model;
     private $obj_document_viewer;
-    public function __construct($str_action = "", $roleId)
+    public function __construct()
     {
         $this->obj_document_model = new document_model();
         $this->obj_document_viewer = new document_viewer();
@@ -48,6 +48,16 @@ class document_controller
     public function setObjDocumentViewer(document_viewer $obj_document_viewer)
     {
         $this->obj_document_viewer = $obj_document_viewer;
+    }
+
+    public function saveDocument($document)
+    {
+        $this->obj_document_model->saveDocument($document);
+    }
+
+    public function loadPathPermi($userId)
+    {
+        return $this->obj_document_model->loadPathPermi($userId);
     }
 
 }
