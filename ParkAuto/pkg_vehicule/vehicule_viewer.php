@@ -47,7 +47,12 @@ class vehicule_viewer
                 $formDelete = new htmlForm('index.php', 'POST');
                 $formDelete->addHidden('idVehiculeDelete', $vehicule->getIntId());
                 $formDelete->addHidden('mode', 'delete');
-                $formDelete->addBtSubmit('Supprimer vehicule', "Submit", "btn", "deleteVehicule");
+                $reservation_controller = new reservation_controller();
+                $nb_resa = $reservation_controller->nbREservationFroVehicule($vehicule->getIntId());
+                if ($nb_resa == 0)
+                {
+                    $formDelete->addBtSubmit('Supprimer vehicule', "Submit", "btn", "deleteVehicule");
+                }
             }
             elseif ($mode == "visu")
             {
@@ -160,6 +165,9 @@ class vehicule_viewer
             $valEtat = ($vehicule->getObjEtat()!=null)?$vehicule->getObjEtat()->getIntId():'';
             $valTypeCarburant = ($vehicule->getObjTypeCarburant()!=null)?$vehicule->getObjTypeCarburant()->getIntId():'';
             $valEssence = ($vehicule->getObjNiveauCarburant()!=null)?$vehicule->getObjNiveauCarburant()->getIntId():'';
+            $obj_document_controller = new document_controller();
+            $obj_document = $obj_document_controller->loadPathCG($int_vehicule_id);
+            $pathCG = $obj_document->getStrPath();
         }
         else
         {
@@ -171,6 +179,7 @@ class vehicule_viewer
             $valTypeCarburant = '';
             $valEssence='';
             $valId='';
+            $pathCG='';
         }
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('idVehicule', $valId, 'idVehicule');
@@ -230,6 +239,29 @@ class vehicule_viewer
                 ($valEtat == $oneEtat->getIntId()) ? $selected = true : $selected = false;
                 $formAdd->addSelectOption('etat', $oneEtat->getIntId(), $oneEtat->getStrLibelle(), $selected);
             }
+        }
+
+        $formAdd->addFreeText('Carte grise numérisé : ');
+        if ($pathCG == '')
+        {
+            $formAdd->addFile('cg', '1000000', 'cg', "form-control");
+        }
+        else
+        {
+            $chemin = $_SERVER['PHP_SELF'];
+            $arra_chemin = explode("/", $chemin);
+            $realPath = '';
+            foreach ($arra_chemin as $key=>$part)
+            {
+                if (isset($arra_chemin[$key+1])) {
+                    if ($arra_chemin[$key + 1] != null) {
+                        $realPath .= $part . '/';
+                    }
+                }
+            }
+            $formAdd->addFreeText('<a href="'.$realPath.$pathCG.'" target="_blank">Carte Grise</a>');
+            $formAdd->addBtSubmit('Supprimer la CG', 'DeleteCG', 'btn');
+            $formAdd->addFreeText('<br/>');
         }
         $formAdd->addHidden('vehiculeMode', 'saveVehicule');
         $formAdd->addBtSubmit('Valider',"Submit","btn");

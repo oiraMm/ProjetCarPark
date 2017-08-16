@@ -97,6 +97,9 @@ class utilisateur_viewer
             $valResponsable = ($user->getObjResponsable()!=null)?$user->getObjResponsable()->getIntId():'';
             $valChef = ($user->getBoolIsChefService()!=null)?$user->getBoolIsChefService():'';
             $checkBoxChefDisabled = ($user->getObjService()!=null)?$user_controller->aUserIsChefService($user->getObjService()->getIntId()):false;
+            $obj_document_controller = new document_controller();
+            $obj_document = $obj_document_controller->loadPathPermi($int_user_id);
+            $pathPermis = $obj_document->getStrPath();
         }
         else
         {
@@ -112,6 +115,7 @@ class utilisateur_viewer
             $valResponsable='';
             $valChef='';
             $checkBoxChefDisabled=false;
+            $pathPermis = '';
         }
         $formAdd = new htmlForm('index.php', 'POST');
         $formAdd->addHidden('idUser', $valId, 'idUser');
@@ -156,7 +160,15 @@ class utilisateur_viewer
 
         $formAdd->addFreeText('Responsable : ');
         $obj_utilisateur_controller = new utilisateur_controller();
-        $arr_utilisateur = $obj_utilisateur_controller->getAllUser();
+        if ($valId == '')
+        {
+            $arr_utilisateur = $obj_utilisateur_controller->getAllUser();
+        }
+        else
+        {
+            $arr_utilisateur = $obj_utilisateur_controller->loadAllUserExeptResp($valId);
+        }
+
         $formAdd->addSelect('utilisateurResp', "form-control");
         if ($valResponsable == '')
         {
@@ -169,7 +181,29 @@ class utilisateur_viewer
                 $formAdd->addSelectOption('utilisateurResp', $oneUtilisateur->getIntId(), $oneUtilisateur->__ToString(), $selected);
             }
         }
-        //$formAdd->addFile('permis', '10000', 'permis', "form-control");
+
+        $formAdd->addFreeText('Permis de conduire numérisé : ');
+        if ($pathPermis == '')
+        {
+            $formAdd->addFile('permis', '1000000', 'permis', "form-control");
+        }
+        else
+        {
+            $chemin = $_SERVER['PHP_SELF'];
+            $arra_chemin = explode("/", $chemin);
+            $realPath = '';
+            foreach ($arra_chemin as $key=>$part)
+            {
+                if (isset($arra_chemin[$key+1])) {
+                    if ($arra_chemin[$key + 1] != null) {
+                        $realPath .= $part . '/';
+                    }
+                }
+            }
+            $formAdd->addFreeText('<a href="'.$realPath.$pathPermis.'" target="_blank">Permi</a>');
+            $formAdd->addBtSubmit('Supprimer le permis', 'DeletePermis', 'btn');
+            $formAdd->addFreeText('<br/>');
+        }
         $formAdd->addHidden('userMode', 'saveUser');
         $formAdd->addBtSubmit('Valider',"Submit","btn");
         return $formAdd->render();

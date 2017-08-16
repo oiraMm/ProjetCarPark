@@ -64,8 +64,6 @@ class bdd
         $str_value .= ')';
         $str_champ .= ')';
         $str_query.=$str_champ.' VALUES '. $str_value;
-
-        print_r($str_query);
         $insert = $db->prepare($str_query);
         $result = $insert->execute();
 
@@ -105,7 +103,6 @@ class bdd
 
         $db = $this->connexion();
         $str_query = 'DELETE FROM '. $table. ' WHERE '. $condition;
-
         $delete = $db->prepare($str_query);
         $result = $delete->execute();
 
