@@ -194,12 +194,15 @@ class utilisateur_viewer
             $realPath = '';
             foreach ($arra_chemin as $key=>$part)
             {
-                if ($arra_chemin[$key+1] != null)
-                {
-                    $realPath .= $part.'/';
+                if (isset($arra_chemin[$key+1])) {
+                    if ($arra_chemin[$key + 1] != null) {
+                        $realPath .= $part . '/';
+                    }
                 }
             }
-            $formAdd->addFreeText('<a href="'.$realPath.$pathPermis.'" target="_blank">Permi</a></br>');
+            $formAdd->addFreeText('<a href="'.$realPath.$pathPermis.'" target="_blank">Permi</a>');
+            $formAdd->addBtSubmit('Supprimer le permis', 'DeletePermis', 'btn');
+            $formAdd->addFreeText('<br/>');
         }
         $formAdd->addHidden('userMode', 'saveUser');
         $formAdd->addBtSubmit('Valider',"Submit","btn");

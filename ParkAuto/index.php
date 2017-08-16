@@ -36,6 +36,7 @@ if ($str_page_request != null)
         case 'Gestion des utilisateurs':
         case 'Editer utilisateur':
         case 'Supprimer utilisateur':
+        case 'Supprimer le permis':
         case 'Ajouter utilisateur':
         case 'saveUser':
             $page = gestionUtilisateur($page);

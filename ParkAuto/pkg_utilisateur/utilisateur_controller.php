@@ -53,6 +53,12 @@ class utilisateur_controller
 
     public function getTemplateCrudUser()
     {
+        if ($_POST['DeletePermis'])
+        {
+            $delete = $this->getObjUtilisateurModel()->deletePermisOf($_POST['idUser']);
+            $_POST['mode'] = 'edit';
+            $_POST['idUserEdit'] = $_POST['idUser'];
+        }
         if (isset($_POST['mode']))
         {
             switch ($_POST['mode']) {
@@ -73,11 +79,14 @@ class utilisateur_controller
         {
             $obj_user = $this->retrievePostData();
             $saveUser = $this->getObjUtilisateurModel()->saveUser($obj_user);
-            if ($_FILES["permis"]["name"])
+            if (isset($_FILES["permis"]))
             {
-                $obj_document = $this->retrieveUploadFilesData($obj_user);
-                $obj_document_controller=new document_controller();
-                $obj_document_controller->saveDocument($obj_document);
+                if ($_FILES["permis"]["name"])
+                {
+                    $obj_document = $this->retrieveUploadFilesData($obj_user);
+                    $obj_document_controller=new document_controller();
+                    $obj_document_controller->saveDocument($obj_document);
+                }
             }
             $arr_user = $this->obj_utilisateur_model->loadAllUser();
             $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);

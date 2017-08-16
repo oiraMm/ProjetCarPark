@@ -324,4 +324,22 @@ class utilisateur_model
         }
         return $obj_utilisateur;
     }
+
+    public function deletePermisOf($userId)
+    {
+        $obj_bdd = new bdd();
+        $champ = 'document_name';
+        $table = 'document';
+        $condition = 'document_salarie = "'.$userId.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        foreach ($arr_result as $name)
+        {
+            unlink('./upload/'.$name["document_name"]);
+        }
+        //suppression des documents de l'utilisateur de la base
+        $obj_bdd = new bdd();
+        $table = 'document';
+        $condition = 'document_salarie =  "'.$userId.'"';
+        $res_req = $obj_bdd->delete($table, $condition);
+    }
 }
