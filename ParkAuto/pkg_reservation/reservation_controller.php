@@ -100,6 +100,24 @@ class reservation_controller
         }
 
 
+// To
+        $to = 'mariomoulin42@gmail.com';
+
+// Subject
+        $subject = 'Developpez.com - Test Mail';
+
+// Message
+        $msg = 'Developpez.com - Message du mail ...';
+
+// Headers
+        $headers = 'From: Adrien Pellegrini <mail@server.com>'."\r\n";
+        $headers .= 'Bcc: Moi <moi@server.com>; lui <lui@server2.com>'."\r\n";
+        $headers .= "\r\n";
+
+// Function mail()
+        mail($to, $subject, $msg, $headers);
+
+
         return $str_template;
     }
 

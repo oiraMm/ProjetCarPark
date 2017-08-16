@@ -231,13 +231,16 @@ class reservation_viewer
                     $formEdit->addHidden('mode', 'edit');
                     $formEdit->addBtSubmit('Editer la reservation', "Submit", "btn");
                     $editForm = $formEdit->render();
+                    $formDelete = new htmlForm('index.php', 'POST');
+                    $formDelete->addHidden('idReservationDelete', $reservation->getIntId());
+                    $formDelete->addHidden('mode', 'delete');
+                    $formDelete->addBtSubmit('Supprimer la reservation', "Submit", "btn");
+                    $delForm=$formDelete->render();
                 } else {
                     $editForm = '';
+                    $delForm=' -- ';
                 }
-                $formDelete = new htmlForm('index.php', 'POST');
-                $formDelete->addHidden('idReservationDelete', $reservation->getIntId());
-                $formDelete->addHidden('mode', 'delete');
-                $formDelete->addBtSubmit('Supprimer la reservation', "Submit", "btn");
+
                 $obj_table->tr()
                     ->td($id)
                     ->td($dateDebut)
@@ -246,7 +249,7 @@ class reservation_viewer
                     ->td($vehicule)
                     ->td($raison)
                     ->td($status)
-                    ->td($editForm . $formDelete->render());
+                    ->td($editForm . $delForm );
             }
         }
 

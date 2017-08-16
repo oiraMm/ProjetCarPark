@@ -247,7 +247,7 @@ final class STable
      */
     public function getTable() {
         // return table HTML
-        return "<table border=\"{$this->border}\""
+        return "<div class='table-responsive table-bordered'><table class=\"table table-striped\" border=\"{$this->border}\""
             // set ID if set, set class and attributes
             . ( $this->id ? " id=\"{$this->id}\"" : null ) . $this->_formatAttributeClass($this->class)
             . $this->_formatAttributes($this->attributes)
@@ -265,6 +265,6 @@ final class STable
             . $this->_table
 
             // close table
-            . "</table>" . self::EOF_LINE;
+            . "</table></div>" . self::EOF_LINE;
     }
 }
