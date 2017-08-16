@@ -103,7 +103,6 @@ class bdd
 
         $db = $this->connexion();
         $str_query = 'DELETE FROM '. $table. ' WHERE '. $condition;
-
         $delete = $db->prepare($str_query);
         $result = $delete->execute();
 

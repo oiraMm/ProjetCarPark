@@ -335,4 +335,9 @@ class reservation_controller
         return $obj_reservation;
     }
 
+    public function nbREservationFroVehicule($vehiculeid)
+    {
+        return $this->obj_reservation_model->nbREservationFroVehicule($vehiculeid);
+    }
+
 }

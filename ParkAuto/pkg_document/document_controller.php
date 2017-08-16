@@ -59,5 +59,9 @@ class document_controller
     {
         return $this->obj_document_model->loadPathPermi($userId);
     }
+    public function loadPathCG($vehiculeId)
+    {
+        return $this->obj_document_model->loadPathCG($vehiculeId);
+    }
 
 }

@@ -44,6 +44,7 @@ if ($str_page_request != null)
         case 'Gestion des vehicules':
         case 'Editer vehicule':
         case 'Supprimer vehicule':
+        case 'Supprimer la CG':
         case 'Ajouter vehicule':
         case 'saveVehicule':
             $page = gestionVehicules($page);

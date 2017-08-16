@@ -24,6 +24,19 @@ class vehicule_controller
 
     public function getTemplateCrudVehicule()
     {
+        if (isset($_POST['DeleteCG']))
+        {
+            $delete = $this->getObjVehiculeModel()->deleteCgOf($_POST['idVehicule']);
+            if (isset($_POST['mode'])) {
+                if ($_POST['mode'] != 'delete') {
+                    $_POST['mode'] = 'edit';
+                }
+            }
+            else{
+                $_POST['mode'] = 'edit';
+            }
+            $_POST['idVehiculeEdit'] = $_POST['idVehicule'];
+        }
         if (isset($_POST['mode']))
         {
             switch ($_POST['mode']) {
@@ -48,6 +61,15 @@ class vehicule_controller
         {
             $obj_vehicule = $this->retrievePostData();
             $save = $this->getObjVehiculeModel()->saveVehicule($obj_vehicule);
+            if (isset($_FILES["cg"]))
+            {
+                if ($_FILES["cg"]["name"])
+                {
+                    $obj_document = $this->retrieveUploadFilesData($obj_vehicule);
+                    $obj_document_controller=new document_controller();
+                    $obj_document_controller->saveDocument($obj_document);
+                }
+            }
             $arr_vehicule = $this->obj_vehicule_model->loadAllVehicules();
             $str_template = $this->obj_vehicule_viewer->templateCrudVehiculeDefault($arr_vehicule);
         }
@@ -59,6 +81,22 @@ class vehicule_controller
         return $str_template;
     }
 
+
+    public function retrieveUploadFilesData($obj_vehicule_temp)
+    {
+        //recupération de l'id
+        $obj_vehicule = $this->obj_vehicule_model->loadVehiculeByMarqueModelImmat($obj_vehicule_temp->getStrMarque(), $obj_vehicule_temp->getStrModel(), $obj_vehicule_temp->getStrImmatriculation());
+        $obj_document = new document_entity();
+        $obj_document->setObjVehicule($obj_vehicule);
+        $arra_name = explode(".", $_FILES["cg"]["name"]);
+        $today = date('j-m-y-h-i-s');
+        $file_name = $arra_name[0].$today.'.'.$arra_name[1];
+        $obj_document->setStrName($file_name);
+        $stri_path = "/upload/".$file_name;
+        $obj_document->setStrPath($stri_path);
+        move_uploaded_file($_FILES["cg"]["tmp_name"], "./".$stri_path);
+        return $obj_document;
+    }
 
     public function retrievePostData()
     {

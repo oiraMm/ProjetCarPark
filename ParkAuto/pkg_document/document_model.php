@@ -50,4 +50,30 @@ class document_model
         }
         return $obj_document;
     }
+
+    public function loadPathCG($vehiculeId)
+    {
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'document';
+        $condition = 'document_vehicule = "'.$vehiculeId.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        $obj_document =  new document_entity();
+        if (isset($arr_result[0])) {
+            if ($arr_result[0] != null) {
+                $obj_document->setIntId($arr_result[0]['document_id']);
+                $obj_document->setStrName($arr_result[0]['document_name']);
+                $obj_document->setStrPath($arr_result[0]['document_path']);
+                if ($arr_result[0]['document_vehicule'] != null)
+                {
+                    //instancie le modele de l'objet utilisateur
+                    $obj_vehicule_controller = new vehicule_controller();
+                    //utilise le model charger pour charger l'objet role de l'utilisateur
+                    $obj_vehicule = $obj_vehicule_controller->getVehiculeById($arr_result[0]['document_vehicule']);
+                    $obj_document->setObjVehicule($obj_vehicule);
+                }
+            }
+        }
+        return $obj_document;
+    }
 }

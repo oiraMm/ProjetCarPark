@@ -221,7 +221,20 @@ class vehicule_model
     }
     public function deleteVehicule ($id)
     {
-
+        $obj_bdd = new bdd();
+        $champ = 'document_name';
+        $table = 'document';
+        $condition = 'document_vehicule = "'.$id.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        foreach ($arr_result as $name)
+        {
+            unlink('./upload/'.$name["document_name"]);
+        }
+        //suppression des documents de l'utilisateur de la base
+        $obj_bdd = new bdd();
+        $table = 'document';
+        $condition = 'document_vehicule =  "'.$id.'"';
+        $res_req = $obj_bdd->delete($table, $condition);
         $obj_bdd = new bdd();
         //$champ = '*';
         $table = 'vehicule';
@@ -234,5 +247,67 @@ class vehicule_model
         }
         return $res_req;
     }
-    
+
+    public function deleteCgOf($vehiculeId)
+    {
+        $obj_bdd = new bdd();
+        $champ = 'document_name';
+        $table = 'document';
+        $condition = 'document_vehicule = "'.$vehiculeId.'"';
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        foreach ($arr_result as $name)
+        {
+            unlink('./upload/'.$name["document_name"]);
+        }
+        //suppression des documents de l'utilisateur de la base
+        $obj_bdd = new bdd();
+        $table = 'document';
+        $condition = 'document_vehicule =  "'.$vehiculeId.'"';
+        $res_req = $obj_bdd->delete($table, $condition);
+    }
+
+    public function loadVehiculeByMarqueModelImmat($marque, $model, $immat){
+
+        $obj_bdd = new bdd();
+        $champ = '*';
+        $table = 'vehicule';
+        $condition='vehicule_marque = "'.$marque.'" AND vehicule_modele = "'.$model.'" AND vehicule_immatriculation = "'.$immat.'"';
+        $arr_result = $obj_bdd->select($champ, $table,$condition);
+
+        foreach ($arr_result as $vehicule)
+        {
+            $obj_vehicule =  new vehicule_entity();
+            $obj_vehicule->setIntId($vehicule['vehicule_id']);
+            $obj_vehicule->setIntKm($vehicule['vehicule_km']);
+            $obj_vehicule->setStrMarque($vehicule['vehicule_marque']);
+            $obj_vehicule->setStrModel($vehicule['vehicule_modele']);
+            $obj_vehicule->setStrImmatriculation($vehicule['vehicule_immatriculation']);
+
+            if (isset($vehicule['vehicule_etat'])) {
+                if ($vehicule['vehicule_etat'] != null) {
+                    $obj_etat_controller = new etat_vehicule_controller();
+                    $obj_etat = $obj_etat_controller->loadEtatById($vehicule['vehicule_etat']);
+                    $obj_vehicule->setObjEtat($obj_etat);
+                }
+            }
+
+            if (isset($vehicule['vehicule_essence'])) {
+                if ($vehicule['vehicule_essence'] != null) {
+                    $obj_niveau_carburant_controller = new niveau_carburant_controller();
+                    $obj_niveau_carburant = $obj_niveau_carburant_controller->loadNiveauById($vehicule['vehicule_essence']);
+                    $obj_vehicule->setObjNiveauCarburant($obj_niveau_carburant);
+                }
+            }
+            if (isset($vehicule['vehicule_type_carburant'])) {
+                if ($vehicule['vehicule_type_carburant'] != null) {
+                    $obj_vehicule_type_carburant_controller = new type_carburant_controller();
+                    $obj_type_carburant = $obj_vehicule_type_carburant_controller->loadTypeCarburantById($vehicule['vehicule_type_carburant']);
+                    $obj_vehicule->setObjTypeCarburant($obj_type_carburant);
+                }
+            }
+        }
+        return $obj_vehicule;
+
+
+    }
 }

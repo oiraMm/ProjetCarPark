@@ -266,4 +266,13 @@ class reservation_model
         }
         return $tabObjReservation;
     }
+    public function nbREservationFroVehicule($vehiculeid)
+    {
+        $obj_bdd = new bdd();
+        $champ = 'COUNT(reservation_id)';
+        $table = 'reservation';
+        $condition = 'reservation_vehicule = '. $vehiculeid;
+        $arr_result = $obj_bdd->select($champ, $table, $condition);
+        return $arr_result[0]["COUNT(reservation_id)"];
+    }
 }
