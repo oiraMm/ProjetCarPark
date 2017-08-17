@@ -15,6 +15,9 @@ class reservation_entity
     private $obj_vehicule;
     private $obj_status;
     private $str_raison;
+    private $str_com_start;
+    private $str_com_current;
+    private $str_com_end;
 
 
 
@@ -129,6 +132,54 @@ class reservation_entity
     public function setStrRaison($str_raison)
     {
         $this->str_raison = $str_raison;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStrComStart()
+    {
+        return $this->str_com_start;
+    }
+
+    /**
+     * @param mixed $str_com_start
+     */
+    public function setStrComStart($str_com_start)
+    {
+        $this->str_com_start = $str_com_start;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStrComCurrent()
+    {
+        return $this->str_com_current;
+    }
+
+    /**
+     * @param mixed $str_com_current
+     */
+    public function setStrComCurrent($str_com_current)
+    {
+        $this->str_com_current = $str_com_current;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStrComEnd()
+    {
+        return $this->str_com_end;
+    }
+
+    /**
+     * @param mixed $str_com_end
+     */
+    public function setStrComEnd($str_com_end)
+    {
+        $this->str_com_end = $str_com_end;
     }
 
 }
