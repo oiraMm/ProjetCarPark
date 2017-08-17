@@ -67,9 +67,8 @@ class vehicule_viewer
                     foreach ($obj_reservation as $one_objReservation) {
                         if ($one_objReservation->getObjStatus() != null) {
                             $today = date("Y/m/d H:m:s");
-
                             if (strtotime($one_objReservation->getDateDebut()) <= strtotime($today) && strtotime($one_objReservation->getDateFin()) >= strtotime($today)) {
-                                if ($one_objReservation->getObjStatus()->getIntId() == 1) {
+                                if ($one_objReservation->getObjStatus()->getIntId() == 5) {
                                     if ($status != "")
                                     {
                                         $status .= '<br>';
@@ -81,6 +80,20 @@ class vehicule_viewer
                                         $status .= '<br>';
                                     }
                                     $status .= 'Demande de reservation en attente pour la periode du ' . $one_objReservation->getDateDebut() . ' au ' . $one_objReservation->getDateFin();
+                                } elseif($one_objReservation->getObjStatus()->getIntId() == 1) {
+                                    if ($status != "")
+                                    {
+                                        $status .= '<br>';
+                                    }
+                                    $status .= 'Demande de reservation accepté pour la periode du ' . $one_objReservation->getDateDebut() . ' au ' . $one_objReservation->getDateFin();
+                                }
+                                else
+                                {
+                                    if ($status != "")
+                                    {
+                                        $status .= '<br>';
+                                    }
+                                    $status .= 'Véhicule libre à ce jour.';
                                 }
                             }
                         }
@@ -103,11 +116,11 @@ class vehicule_viewer
                 }*/
                 else
                 {
-                    $status='-';
+                    $status='Véhicule libre à ce jour.';
                 }
                 if ($status=='')
                 {
-                    $status='-';
+                    $status='Véhicule libre à ce jour.';
                 }
             }
 

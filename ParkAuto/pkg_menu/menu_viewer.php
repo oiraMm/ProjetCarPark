@@ -12,7 +12,7 @@ class menu_viewer
     {
 
         //liste des titres principaux
-        $listeAction=array('Accueil' =>'Simple' ,'Mes reservations'=>'Simple','Signalement'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Simple');
+        $listeAction=array('Accueil' =>'Simple' ,'Mes reservations'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Simple');
 
         //liste des titres dropdown menu
         $listeActionDropDown=null;
@@ -28,7 +28,7 @@ class menu_viewer
     {
 
         //liste des titres principaux
-        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Signalement'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Simple');
+        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Simple');
 
         //liste des titres dropdown menu
         $listeActionDropDown=null;
@@ -43,7 +43,7 @@ class menu_viewer
     {
 
         //liste des titres principaux
-        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Signalement'=>'Simple','Profil'=>'Simple','Administration'=>'DropDown','Deconnexion'=>'Simple');
+        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Profil'=>'Simple','Administration'=>'DropDown','Deconnexion'=>'Simple');
 
         //liste des titres dropdown menu
         $listeActionDropDown=array('Gestion des utilisateurs'=> 'Administration','Gestion des vehicules'=> 'Administration');

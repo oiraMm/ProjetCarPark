@@ -27,9 +27,9 @@ if ($str_page_request != null)
         case 'saveReservation':
             $page = reservation($page);
             break;
-        case 'Signalement':
+        /*case 'Signalement':
             $page = signalement($page);
-            break;
+            break;*/
         case 'Profil':
             $page = profil($page);
             break;
@@ -181,7 +181,7 @@ function reservation($page)
     $page=str_replace("%content%",$obj_reservation_controller->getTemplateCrudReservation(),$page);
     $page=str_replace("%title%",'Mes reservations',$page);
     return $page;
-}
+}/*
 function signalement($page)
 {
     $obj_menu = new menu_controller();
@@ -189,7 +189,7 @@ function signalement($page)
     $page=str_replace("%content%",'Signalement est un écran à venir',$page);
     $page=str_replace("%title%",'Signalement',$page);
     return $page;
-}
+}*/
 function profil($page)
 {
     $obj_menu = new menu_controller();

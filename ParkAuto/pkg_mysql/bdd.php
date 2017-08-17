@@ -50,6 +50,7 @@ class bdd
      */
     public function insert ($table, $arra_champ_value)
     {
+        //$arra_champ_value[$table.'_createdAt'] = ;
         $db = $this->connexion();
         $str_query = 'INSERT INTO '. $table;
         $compteurChamp = 0;
