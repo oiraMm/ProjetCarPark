@@ -108,7 +108,7 @@ $(document).ready(function(){
             function(data){
                 $("#Reservations").empty();
 
-                alert(data);
+                //alert(data);
                 $("#Reservations").append(data);
                 /*
                  //Ca dessous ca marche pour récup Key, Value

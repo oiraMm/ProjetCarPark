@@ -63,11 +63,8 @@ if (isset($_POST['ajaxResaList'])){
         $idStatus=null;
     }
     if($_POST['ajaxResaList']=='ajaxResaListValid'){
-        if($_POST['idUser']!=0){
-            $idUser=$_POST['idUser'];
-        }else{
-            $idUser=null;
-        }
+        $idUser=$_POST['idUser'];
+
         echo $ctrl_reservation->getTemplateValidation(false,$dateDebut,$idVehicule,$idStatus,$idUser);
     }else{
         echo $ctrl_reservation->getTemplateCrudReservation(false,$dateDebut,$idVehicule,$idStatus);

@@ -57,6 +57,8 @@ if ($str_page_request != null)
         case 'Récupération du véhicule':
         case 'saveRecuperation':
         case 'rendreVehicule':
+        case 'comCurrent':
+        case 'saveCurrentCom':
         case 'saveRendreVehicule':
             $page = gestionResa($page);
             break;
@@ -69,11 +71,7 @@ if ($str_page_request != null)
 else if (isset($_SESSION['current_user']))
 {
 
-    $obj_menu = new menu_controller();
-    $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-    $obj_news_controller = new news_controller();
-    $page=str_replace("%content%",$obj_news_controller->getTemplateNews(),$page);
-    $page=str_replace("%title%",'Accueil',$page);
+    $page=acceuil($page);
 }
 else
 {
@@ -210,7 +208,6 @@ function validation($page)
 
 function gestionResa($page)
 {
-    echo 'okokokokokokoko';
     $obj_menu = new menu_controller();
     $obj_reservation_controller=new reservation_controller();
     $content=$obj_reservation_controller->recuperationVehicule($_POST['idResa']);

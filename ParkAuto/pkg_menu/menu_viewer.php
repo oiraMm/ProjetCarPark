@@ -12,7 +12,7 @@ class menu_viewer
     {
 
         //liste des titres principaux
-        $listeAction=array('Accueil' =>'Simple' ,'Mes reservations'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Simple');
+        $listeAction=array('Accueil' =>'Simple' ,'Mes reservations'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Right');
 
         //liste des titres dropdown menu
         $listeActionDropDown=null;
@@ -28,7 +28,7 @@ class menu_viewer
     {
 
         //liste des titres principaux
-        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Simple');
+        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Profil'=>'Simple','Deconnexion'=>'Right');
 
         //liste des titres dropdown menu
         $listeActionDropDown=null;
@@ -43,10 +43,10 @@ class menu_viewer
     {
 
         //liste des titres principaux
-        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Profil'=>'Simple','Administration'=>'DropDown','Deconnexion'=>'Simple');
+        $listeAction=array('Accueil' =>'Simple' ,'Etat du parc'=>'Simple','Mes reservations'=>'Simple','Validation'=>'Simple','Profil'=>'Simple','Gestion des utilisateurs'=> 'Simple','Gestion des vehicules'=> 'Simple','Deconnexion'=>'Right');
 
         //liste des titres dropdown menu
-        $listeActionDropDown=array('Gestion des utilisateurs'=> 'Administration','Gestion des vehicules'=> 'Administration');
+        $listeActionDropDown=null;
 
         //Genere chaque formulaire en tenant compte des drop down menu...
         $collection=$this->generateMenu($listeAction,$listeActionDropDown);
@@ -62,6 +62,8 @@ class menu_viewer
         foreach ($listeAction as $item => $type){
 
             if($type == 'Simple'){
+                $collection[$this->addItem($item)->render()]=$type;
+            }elseif ($type == 'Right'){
                 $collection[$this->addItem($item)->render()]=$type;
             }
             elseif ($type == 'DropDown'){
@@ -79,6 +81,8 @@ class menu_viewer
         foreach ($collection as $item => $type){
             if($type == 'Simple'){
                 $menu.="<li class=\"nav-item\">".$item."</li>";
+            }elseif ($type == 'Right'){
+                $menu.="<li class=\"nav-item pull-xs-right\">".$item."</li>";
             }
             elseif ($type == 'DropDownMenu'){
                 $menu.=$item;

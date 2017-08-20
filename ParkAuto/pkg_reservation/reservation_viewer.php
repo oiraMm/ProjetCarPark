@@ -8,6 +8,23 @@
  */
 class reservation_viewer
 {
+    public function templateCurrentCom($obj_resa){
+
+        if($obj_resa->getStrComCurrent()!=''){
+            $com=$obj_resa->getStrComCurrent();
+        }else{$com='';}
+        $str_template= '<h2>Commentaire sur le véhicule '.$obj_resa->getObjVehicule()->getStrMarque().' '.$obj_resa->getObjVehicule()->getStrModel().' </h1>';
+        $formAdd = new htmlForm('index.php', 'POST');
+        $formAdd->addHidden('idResa', $obj_resa->getIntId());
+        $formAdd->addFreeText('</br>Commentaires :');
+        $formAdd->addTextarea('commentaire',$com,2,50);
+        $formAdd->addHidden('reservationMode', 'saveCurrentCom');
+        $formAdd->addBtSubmit('Valider',"Submit","btn");
+
+        $str_template .= $formAdd->render();
+
+        return $str_template;
+    }
     public function templateRendreVehicule($obj_resa){
 
         $ctrl_carburant=new niveau_carburant_controller();
@@ -135,6 +152,18 @@ class reservation_viewer
                 $formAdd->addHidden('idResa', $resa->getIntId());
                 $formAdd->addBtSubmit('Rendre le véhicule',"Submit","btn");
                 $btn=$formAdd->render();
+
+                $formMod = new htmlForm('index.php', 'POST');
+                $formMod->addHidden('reservationMode','comCurrent');
+                $formMod->addHidden('idResa', $resa->getIntId());
+                if($resa->getStrComCurrent()!=''){
+                    $titleCom='Modifier le commentaire';
+                }else{
+                    $titleCom='Faire un commentaire';
+                }
+                $formMod->addBtSubmit($titleCom,"Submit","btn");
+                $btn.=$formMod->render();
+
             }
             elseif ($status == 6){
                 $str_resa_template .= '<li class="list-group-item list-group-item-info">';
@@ -224,7 +253,6 @@ class reservation_viewer
                 $vehicule = ($reservation->getObjVehicule() == null) ? '-' : $reservation->getObjVehicule()->getStrMarque() . ' ' . $reservation->getObjVehicule()->getStrModel();
                 $raison = ($reservation->getStrRaison() == null) ? '-' : $reservation->getStrRaison();
 
-
                 if ($reservation->getObjStatus()->getIntId() == 3) {
                     $formEdit = new htmlForm('index.php', 'POST');
                     $formEdit->addHidden('idReservationEdit', $reservation->getIntId());
@@ -241,6 +269,7 @@ class reservation_viewer
                     $delForm=' -- ';
                 }
 
+
                 $obj_table->tr()
                     ->td($id)
                     ->td($dateDebut)
@@ -249,7 +278,7 @@ class reservation_viewer
                     ->td($vehicule)
                     ->td($raison)
                     ->td($status)
-                    ->td($editForm . $delForm );
+                    ->td($editForm. $delForm);
             }
         }
 
@@ -263,7 +292,7 @@ class reservation_viewer
         
 
         
-        $page.=$obj_table->getTable().$form;
+        $page.=$form.$obj_table->getTable();
         return $page;
     }
     
@@ -360,14 +389,38 @@ class reservation_viewer
                 $raison = ($reservation->getStrRaison() == null) ? '-' : $reservation->getStrRaison();
 
 
-                $formAccept = new htmlForm('index.php', 'POST');
-                $formAccept->addHidden('idReservationAccept', $reservation->getIntId());
-                $formAccept->addHidden('mode', 'accept');
-                $formAccept->addBtSubmit('Accepter la demande de reservation', "Submit", "btn");
-                $formRefuse = new htmlForm('index.php', 'POST');
-                $formRefuse->addHidden('idReservationRefuse', $reservation->getIntId());
-                $formRefuse->addHidden('mode', 'refuse');
-                $formRefuse->addBtSubmit('Refuser la demande de reservation', "Submit", "btn");
+                $refuse='';
+                $accept='';
+                if($reservation->getObjStatus()->getIntId()<4){
+                    if($reservation->getObjStatus()->getIntId()==1){
+                        $formRefuse = new htmlForm('index.php', 'POST');
+                        $formRefuse->addHidden('idReservationRefuse', $reservation->getIntId());
+                        $formRefuse->addHidden('mode', 'refuse');
+                        $formRefuse->addBtSubmit('Refuser la demande de reservation', "Submit", "btn btn-default");
+                        $refuse.=$formRefuse->render();
+                    }
+                    elseif ($reservation->getObjStatus()->getIntId()==1){
+                        $formAccept = new htmlForm('index.php', 'POST');
+                        $formAccept->addHidden('idReservationAccept', $reservation->getIntId());
+                        $formAccept->addHidden('mode', 'accept');
+                        $formAccept->addBtSubmit('Accepter la demande de reservation', "Submit", "btn btn-default");
+                        $accept.=$formAccept->render();
+                    }
+                    else{
+                        $formRefuse = new htmlForm('index.php', 'POST');
+                        $formRefuse->addHidden('idReservationRefuse', $reservation->getIntId());
+                        $formRefuse->addHidden('mode', 'refuse');
+                        $formRefuse->addBtSubmit('Refuser la demande de reservation', "Submit", "btn btn-default");
+                        $refuse.=$formRefuse->render();
+
+                        $formAccept = new htmlForm('index.php', 'POST');
+                        $formAccept->addHidden('idReservationAccept', $reservation->getIntId());
+                        $formAccept->addHidden('mode', 'accept');
+                        $formAccept->addBtSubmit('Accepter la demande de reservation', "Submit", "btn btn-default");
+                        $accept.=$formAccept->render();
+                    }
+                }
+
                 $obj_table->tr()
                     ->td($id)
                     ->td($dateDebut)
@@ -376,7 +429,7 @@ class reservation_viewer
                     ->td($vehicule)
                     ->td($raison)
                     ->td($status)
-                    ->td($formAccept->render() . $formRefuse->render());
+                    ->td($accept . $refuse);
             }
         }
 

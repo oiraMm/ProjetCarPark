@@ -91,6 +91,18 @@ class reservation_model
             return 'mod-fail';
         }
 
+        if($obj_reservation->getStrComStart()!=''){
+            $arra_champ_value['reservation_com_start']='\''.$obj_reservation->getStrComStart().'\'';
+        }
+
+        if($obj_reservation->getStrComCurrent()!=''){
+            $arra_champ_value['reservation_com_current']='\''.$obj_reservation->getStrComCurrent().'\'';
+        }
+
+        if($obj_reservation->getStrComEnd()!=''){
+            $arra_champ_value['reservation_com_end']='\''.$obj_reservation->getStrComEnd().'\'';
+        }
+
 
 
         if ($obj_reservation->getObjStatus()!=null){
@@ -144,17 +156,17 @@ class reservation_model
 
     //Permet de chargé les réservations d'un salarié
     //Si aucun paramètre n'est passé, il renvoie la liste de toutes les reservations
-    public function loadReservations($salarie=null,$date=null,$idVehicule=null,$idStatus=null,$idUtilisateur=null){
+    public function loadReservations($salarie=null,$date=null,$idVehicule=null,$idStatus=null,$idUtilisateur='one'){
         
         $obj_bdd = new bdd();
         $champ = '*';
         $table = 'reservation';
         $condition='';
         if($salarie!=null){
-            if($idUtilisateur==null){
+            if($idUtilisateur=='one'){
                 $condition.='reservation_salarie = "' .$salarie->getIntId(). '"';
-            }elseif($idUtilisateur==0){
-                $condition.='reservation_salarie = *';
+            }elseif($idUtilisateur==0) {
+                $condition .= 'reservation_salarie like "%"';
             }else{
                 $condition.='reservation_salarie = "'.$idUtilisateur.'"';
             }
@@ -201,7 +213,10 @@ class reservation_model
             $obj_reservation->setObjSalarie($ctrl_utilisateur->getUserById($reservation['reservation_salarie']));
             $obj_reservation->setObjVehicule($ctrl_vehicule->getVehicule($arr_vehicules,$reservation['reservation_vehicule']));
             $obj_reservation->setStrRaison($reservation['reservation_raison']);
-            
+            $obj_reservation->setStrComStart($reservation['reservation_com_start']);
+            $obj_reservation->setStrComCurrent($reservation['reservation_com_current']);
+            $obj_reservation->setStrComEnd($reservation['reservation_com_end']);
+
             $arr_reservation[] = $obj_reservation;
         }
 
@@ -232,6 +247,9 @@ class reservation_model
             $obj_reservation->setObjSalarie($ctrl_user->getUserById($reservation['reservation_salarie']));      
             $obj_reservation->setObjVehicule($ctrl_vehicule->getVehiculeById($reservation['reservation_vehicule']));
             $obj_reservation->setStrRaison($reservation['reservation_raison']);
+            $obj_reservation->setStrComStart($reservation['reservation_com_start']);
+            $obj_reservation->setStrComCurrent($reservation['reservation_com_current']);
+            $obj_reservation->setStrComEnd($reservation['reservation_com_end']);
         }
         
         

@@ -45,7 +45,7 @@ class reservation_controller
 
     //TODO A optimiser dans switch case MODE
     //Ajouter menu déroulant sélection
-    public function getTemplateValidation($withFilters=true,$dateDebut=null,$idVehicule=null,$idStatus=null,$idUser=0)
+    public function getTemplateValidation($withFilters=true,$dateDebut=null,$idVehicule=null,$idStatus=null,$idUser='one')
     {
         $str_template='';
         if (isset($_SESSION['current_user'])) {
@@ -103,21 +103,27 @@ class reservation_controller
         return $str_template;
     }
 
-    public function rendreVehicule($idResa){
+    public function rendreVehicule($idResa,$currentCom=false)
+    {
 
-        $ctrl_niveau_carburant=new niveau_carburant_controller();
-        $ctr_statuts=new status_reservation_controller();
-        $ctrl_vehicule=new vehicule_controller();
-        $ctrl_etat_vehicule=new etat_vehicule_controller();
+        $ctrl_niveau_carburant = new niveau_carburant_controller();
+        $ctr_statuts = new status_reservation_controller();
+        $ctrl_vehicule = new vehicule_controller();
+        $ctrl_etat_vehicule = new etat_vehicule_controller();
+        $obj_resa = $this->getObjReservationModel()->loadReservationById($idResa);
+        if (!$currentCom) {
 
-        $obj_resa=$this->getObjReservationModel()->loadReservationById($idResa);
-        $obj_niveau_carburant=$ctrl_niveau_carburant->loadNiveauById($_POST['plein']);
-        $obj_resa->getObjVehicule()->setObjNiveauCarburant($obj_niveau_carburant);
-        $obj_etat_vehicule=$ctrl_etat_vehicule->loadEtatById($_POST['etatVehicule']);
-        $obj_resa->getObjVehicule()->setObjEtat($obj_etat_vehicule);
-        $obj_resa->getObjVehicule()->setIntKm($_POST['kilometrage']);
-        $obj_resa->setObjStatus($ctr_statuts->getStatusByID(6));
-
+            $obj_niveau_carburant = $ctrl_niveau_carburant->loadNiveauById($_POST['plein']);
+            $obj_resa->getObjVehicule()->setObjNiveauCarburant($obj_niveau_carburant);
+            $obj_etat_vehicule = $ctrl_etat_vehicule->loadEtatById($_POST['etatVehicule']);
+            $obj_resa->getObjVehicule()->setObjEtat($obj_etat_vehicule);
+            $obj_resa->getObjVehicule()->setIntKm($_POST['kilometrage']);
+            $obj_resa->setObjStatus($ctr_statuts->getStatusByID(6));
+            $obj_resa->setStrComEnd($_POST['commentaire']);
+        }else{
+            $obj_resa->setObjStatus($ctr_statuts->getStatusByID(5));
+            $obj_resa->setStrComCurrent($_POST['commentaire']);
+        }
 
         $ctrl_vehicule->saveVehicule($obj_resa->getObjVehicule());
         $this->getObjReservationModel()->saveReservation($obj_resa);
@@ -139,6 +145,7 @@ class reservation_controller
             $obj_resa->getObjVehicule()->setObjNiveauCarburant($obj_niveau_carburant);
             $obj_resa->getObjVehicule()->setIntKm($_POST['kilometrage']);
             $obj_resa->setObjStatus($ctr_statuts->getStatusByID(5));
+            $obj_resa->setStrComStart($_POST['commentaire']);
 
 
             $ctrl_vehicule->saveVehicule($obj_resa->getObjVehicule());
@@ -153,6 +160,14 @@ class reservation_controller
             $obj_resa = $this->getReservationById($idResa);
             $str_template = $this->obj_reservation_viewer->templateRendreVehicule($obj_resa);
         }
+        elseif ($_POST['reservationMode'] == 'comCurrent'){
+            $obj_resa = $this->getReservationById($idResa);
+            $str_template = $this->obj_reservation_viewer->templateCurrentCom($obj_resa);
+        }
+        elseif ($_POST['reservationMode'] == 'saveCurrentCom'){
+            $this->rendreVehicule($idResa,true);
+            $str_template = 'inserted';
+        }
         elseif($_POST['reservationMode'] == 'saveRendreVehicule'){
             $this->rendreVehicule($idResa);
             $str_template = 'inserted';
@@ -161,7 +176,7 @@ class reservation_controller
         return $str_template;
     }
 
-    public function getTemplateCrudReservation($withFilters=true,$dateDebut=null, $idVehicule=null, $idStatus=null, $idUser=null){
+    public function getTemplateCrudReservation($withFilters=true,$dateDebut=null, $idVehicule=null, $idStatus=null, $idUser='one'){
        
         //TODO Verification des requetes en base
         if (isset($_SESSION['current_user']))    
