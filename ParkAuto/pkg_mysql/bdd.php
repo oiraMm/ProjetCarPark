@@ -11,7 +11,7 @@ class bdd
     private function connexion()
     {
         // Connexion à la base de données
-        $db = new PDO('mysql:host=163.172.59.3;port=2206;dbname=beta', 'beta', 'PvlQ6TpblgkbPziP');
+        $db = new PDO('mysql:host=195.154.169.70;port=2206;dbname=beta', 'beta', 'PvlQ6TpblgkbPziP');
         //$db = new PDO('mysql:host=localhost;port=2206;dbname=beta', 'beta', 'PvlQ6TpblgkbPziP');
         return $db;
     }
@@ -23,18 +23,23 @@ class bdd
      * @param $str_orderBy : string (chaine de caractère contenant les orderby. exemple 'saison DESC, numero DESC')
      * @return array
      */
-    public function select ($str_champ, $str_table, $str_condition = '', $str_orderBy = '')
+    public function select ($str_champ, $str_table, $str_condition = '', $str_orderBy = '', $bool_archivage = 1)
     {
         $db = $this->connexion();
         $str_query = 'SELECT '. $str_champ . ' FROM '. $str_table ;
         if ($str_condition != '')
         {
-            $str_query.= ' WHERE '.$str_condition;
+            $str_query.= ' WHERE '.$str_condition . " AND ".$str_table."_archivage = ". 1 . " ";
+        }
+        else
+        {
+            $str_query.= ' WHERE '.$str_table."_archivage = ". 1 . " ";
         }
         if ($str_orderBy != '')
         {
             $str_query.= ' ORDER BY '.$str_orderBy;
         }
+
         $select = $db->prepare($str_query);
         $select->execute();
         $result = $select->fetchAll();
@@ -50,6 +55,9 @@ class bdd
      */
     public function insert ($table, $arra_champ_value)
     {
+        $arra_champ_value[$table.'_createdBy'] = $_SESSION["current_user"];
+        $arra_champ_value[$table.'_createdAt'] = '"'.date("Y-m-d H:m:s").'"';
+        $arra_champ_value[$table.'_archivage'] = 1;
         //$arra_champ_value[$table.'_createdAt'] = ;
         $db = $this->connexion();
         $str_query = 'INSERT INTO '. $table;
@@ -80,6 +88,9 @@ class bdd
     public function update ($table, $arra_champ_value, $condition)
     {
         $db = $this->connexion();
+        $arra_champ_value[$table.'_updatedBy'] = $_SESSION["current_user"];
+        $arra_champ_value[$table.'_updatedAt'] = '"'.date("Y-m-d H:m:s").'"';
+        $arra_champ_value[$table.'_archivage'] = 1;
         $str_query = 'UPDATE '. $table. ' SET ';
         $compteurChamp = 0;
         foreach ($arra_champ_value as $champ => $value)
@@ -103,7 +114,8 @@ class bdd
     {
 
         $db = $this->connexion();
-        $str_query = 'DELETE FROM '. $table. ' WHERE '. $condition;
+        //$str_query = 'DELETE FROM '. $table. ' WHERE '. $condition;
+        $str_query = 'UPDATE '. $table. ' SET ' .$table. '_archivage = 0 WHERE '. $condition;
         $delete = $db->prepare($str_query);
         $result = $delete->execute();
 

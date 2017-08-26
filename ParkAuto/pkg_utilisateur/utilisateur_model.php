@@ -272,9 +272,10 @@ class utilisateur_model
         $table = 'utilisateur';
         $condition = 'utilisateur_id = "'.$idUser.'"';
         $arr_result = $obj_bdd->select($champ, $table, $condition);
-        if ($arr_result[0]['utilisateur_motDePasse'] == $mdp)
-        {
-            return false;
+        if (isset($arr_result[0]['utilisateur_motDePasse'])) {
+            if ($arr_result[0]['utilisateur_motDePasse'] == $mdp) {
+                return false;
+            }
         }
         return true;
     }
