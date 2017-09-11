@@ -196,9 +196,9 @@ function acceuil($page)
 
 //=====Création du header de l'e-mail.
 
-    $header = "From: \"WeaponsB\"<weaponsb@mail.fr>".$passage_ligne;
+    $header = "From: \"Maxime\"<root@scuti.mavril.fr>".$passage_ligne;
 
-    $header.= "Reply-to: \"WeaponsB\" <weaponsb@mail.fr>".$passage_ligne;
+    $header.= "Reply-to: \"Maxime\" <root@scuti.mavril.fr>".$passage_ligne;
 
     $header.= "MIME-Version: 1.0".$passage_ligne;
 
