@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f045f453-1171-4ae7-8397-e8f1c6c50f5c" name="Default" comment="test phpstorm 2 22">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ParkAuto/pkg_mail/mail_loader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/general_loader.php" afterPath="$PROJECT_DIR$/ParkAuto/general_loader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_controller.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_controller.php" />
-    </list>
+    <list default="true" id="f045f453-1171-4ae7-8397-e8f1c6c50f5c" name="Default" comment="test phpstorm 2 22" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,10 +36,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reservation_controller.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="reservation_controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
+            <state relative-caret-position="3364">
               <caret line="216" column="72" lean-forward="false" selection-start-line="216" selection-start-column="72" selection-end-line="216" selection-end-column="72" />
               <folding />
             </state>
@@ -64,10 +58,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mail_entity.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mail_entity.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
+            <state relative-caret-position="-88">
               <caret line="117" column="155" lean-forward="false" selection-start-line="117" selection-start-column="155" selection-end-line="117" selection-end-column="155" />
               <folding />
             </state>
@@ -470,7 +464,7 @@
       <workItem from="1498632087184" duration="20904000" />
       <workItem from="1498806295051" duration="4853000" />
       <workItem from="1498844457948" duration="11008000" />
-      <workItem from="1505200205816" duration="3657000" />
+      <workItem from="1505200205816" duration="4694000" />
     </task>
     <task id="LOCAL-00001" summary="test phpstorm">
       <created>1494441088298</created>
@@ -546,7 +540,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142166000" />
+    <option name="totallyTimeSpent" value="143203000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -559,7 +553,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1922" height="1054" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13020833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17604166" sideWeight="0.4897436" order="0" side_tool="false" content_ui="combo" />
@@ -569,7 +562,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33082706" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24425887" sideWeight="0.65520835" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24425887" sideWeight="0.65520835" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1765625" sideWeight="0.5102564" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -952,18 +945,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php">
+    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="117" column="155" lean-forward="false" selection-start-line="117" selection-start-column="155" selection-end-line="117" selection-end-column="155" />
+        <state relative-caret-position="3364">
+          <caret line="216" column="72" lean-forward="false" selection-start-line="216" selection-start-column="72" selection-end-line="216" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_controller.php">
+    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="216" column="72" lean-forward="false" selection-start-line="216" selection-start-column="72" selection-end-line="216" selection-end-column="72" />
+        <state relative-caret-position="-88">
+          <caret line="117" column="155" lean-forward="false" selection-start-line="117" selection-start-column="155" selection-end-line="117" selection-end-column="155" />
           <folding />
         </state>
       </provider>
