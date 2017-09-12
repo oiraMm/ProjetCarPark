@@ -76,7 +76,11 @@ class mail_entity
                             '.$obj_reservation->getStrRaison().'
                             
                             Connectez vous à la plateforme beta.mavril.fr pour accepter ou refuser la demande de reservation');
-        $this->setAddresse($obj_reservation->getObjSalarie()->getStrMail());
+        if($obj_reservation->getObjSalarie()->getObjResponsable()==NULL){
+            $this->setAddresse($obj_reservation->getObjSalarie()->getStrMail());
+        }else{
+            $this->setAddresse($obj_reservation->getObjSalarie()->getObjResponsable()->getStrMail());
+        }
         $this->sendMail();
     }
 
@@ -89,7 +93,11 @@ class mail_entity
                             '.$obj_reservation->getStrRaison().'
                             
                             Connectez vous à la plateforme beta.mavril.fr pour accepter ou refuser la demande de reservation');
-        $this->setAddresse($obj_reservation->getObjSalarie()->getObjResponsable()->getStrMail());
+        if($obj_reservation->getObjSalarie()->getObjResponsable()==NULL){
+            $this->setAddresse($obj_reservation->getObjSalarie()->getStrMail());
+        }else{
+            $this->setAddresse($obj_reservation->getObjSalarie()->getObjResponsable()->getStrMail());
+        }
         $this->sendMail();
 
     }

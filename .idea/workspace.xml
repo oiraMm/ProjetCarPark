@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f045f453-1171-4ae7-8397-e8f1c6c50f5c" name="Default" comment="test phpstorm 2 22" />
+    <list default="true" id="f045f453-1171-4ae7-8397-e8f1c6c50f5c" name="Default" comment="test phpstorm 2 22">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php" afterPath="$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,8 +42,8 @@
       <file leaf-file-name="reservation_controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="214" column="28" lean-forward="false" selection-start-line="214" selection-start-column="28" selection-end-line="214" selection-end-column="28" />
+            <state relative-caret-position="178">
+              <caret line="213" column="41" lean-forward="true" selection-start-line="213" selection-start-column="41" selection-end-line="213" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -50,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_mail/mail_loader.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
-              <caret line="10" column="40" lean-forward="true" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+              <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
               <folding>
                 <element signature="e#6#87#0#PHP" expanded="true" />
               </folding>
@@ -61,8 +64,8 @@
       <file leaf-file-name="mail_entity.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="89" column="28" lean-forward="true" selection-start-line="89" selection-start-column="28" selection-end-line="89" selection-end-column="28" />
+            <state relative-caret-position="398">
+              <caret line="81" column="101" lean-forward="false" selection-start-line="81" selection-start-column="101" selection-end-line="81" selection-end-column="101" />
               <folding />
             </state>
           </provider>
@@ -101,8 +104,8 @@
       <file leaf-file-name="utilisateur_entity.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_entity.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1368">
-              <caret line="76" column="7" lean-forward="false" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
+            <state relative-caret-position="450">
+              <caret line="193" column="38" lean-forward="false" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -124,12 +127,12 @@
             <state relative-caret-position="5364">
               <caret line="298" column="21" lean-forward="false" selection-start-line="298" selection-start-column="21" selection-end-line="298" selection-end-column="21" />
               <folding>
-                <marker date="1505141595264" expanded="true" signature="7566:7695" ph="..." />
-                <marker date="1505141595264" expanded="true" signature="7809:7924" ph="..." />
-                <marker date="1505141595264" expanded="true" signature="8032:8155" ph="..." />
-                <marker date="1505141595264" expanded="true" signature="8267:8393" ph="..." />
-                <marker date="1505141595264" expanded="true" signature="8505:8621" ph="..." />
-                <marker date="1505141595264" expanded="true" signature="8729:8860" ph="..." />
+                <marker date="1505208679687" expanded="true" signature="7566:7695" ph="..." />
+                <marker date="1505208679687" expanded="true" signature="7809:7924" ph="..." />
+                <marker date="1505208679687" expanded="true" signature="8032:8155" ph="..." />
+                <marker date="1505208679687" expanded="true" signature="8267:8393" ph="..." />
+                <marker date="1505208679687" expanded="true" signature="8505:8621" ph="..." />
+                <marker date="1505208679687" expanded="true" signature="8729:8860" ph="..." />
               </folding>
             </state>
           </provider>
@@ -173,7 +176,6 @@
         <option value="$PROJECT_DIR$/ParkAuto/pkg_html/html_class.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_news/news_entity.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_html/htmlClass.php" />
-        <option value="$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_entity.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_news/news_controller.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_news/news_model.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_news/news_viewer.php" />
@@ -204,9 +206,10 @@
         <option value="$PROJECT_DIR$/ParkAuto/pkg_jquery/reservation_script.js" />
         <option value="$PROJECT_DIR$/ParkAuto/index.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_mail/mail_loader.php" />
-        <option value="$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php" />
         <option value="$PROJECT_DIR$/ParkAuto/general_loader.php" />
         <option value="$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_controller.php" />
+        <option value="$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_entity.php" />
+        <option value="$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php" />
       </list>
     </option>
   </component>
@@ -255,6 +258,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ParkAuto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjetCarPark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjetCarPark" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ParkAuto" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pkg_utilisateur" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -446,7 +467,7 @@
       <workItem from="1498632087184" duration="20904000" />
       <workItem from="1498806295051" duration="4853000" />
       <workItem from="1498844457948" duration="11008000" />
-      <workItem from="1505200205816" duration="6252000" />
+      <workItem from="1505200205816" duration="7556000" />
     </task>
     <task id="LOCAL-00001" summary="test phpstorm">
       <created>1494441088298</created>
@@ -522,7 +543,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="144761000" />
+    <option name="totallyTimeSpent" value="146065000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -534,7 +555,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="27" width="1922" height="1054" extended-state="7" />
+    <frame x="-1" y="27" width="1922" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13020833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -860,12 +881,12 @@
         <state relative-caret-position="5364">
           <caret line="298" column="21" lean-forward="false" selection-start-line="298" selection-start-column="21" selection-end-line="298" selection-end-column="21" />
           <folding>
-            <marker date="1505141595264" expanded="true" signature="7566:7695" ph="..." />
-            <marker date="1505141595264" expanded="true" signature="7809:7924" ph="..." />
-            <marker date="1505141595264" expanded="true" signature="8032:8155" ph="..." />
-            <marker date="1505141595264" expanded="true" signature="8267:8393" ph="..." />
-            <marker date="1505141595264" expanded="true" signature="8505:8621" ph="..." />
-            <marker date="1505141595264" expanded="true" signature="8729:8860" ph="..." />
+            <marker date="1505208679687" expanded="true" signature="7566:7695" ph="..." />
+            <marker date="1505208679687" expanded="true" signature="7809:7924" ph="..." />
+            <marker date="1505208679687" expanded="true" signature="8032:8155" ph="..." />
+            <marker date="1505208679687" expanded="true" signature="8267:8393" ph="..." />
+            <marker date="1505208679687" expanded="true" signature="8505:8621" ph="..." />
+            <marker date="1505208679687" expanded="true" signature="8729:8860" ph="..." />
           </folding>
         </state>
       </provider>
@@ -878,29 +899,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_entity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1368">
-          <caret line="76" column="7" lean-forward="false" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_entity.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="3" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_mail/mail_loader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="40" lean-forward="true" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-          <folding>
-            <element signature="e#6#87#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -930,16 +933,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_reservation/reservation_controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="214" column="28" lean-forward="false" selection-start-line="214" selection-start-column="28" selection-end-line="214" selection-end-column="28" />
+        <state relative-caret-position="178">
+          <caret line="213" column="41" lean-forward="true" selection-start-line="213" selection-start-column="41" selection-end-line="213" selection-end-column="41" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_utilisateur/utilisateur_entity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="193" column="38" lean-forward="false" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_mail/mail_loader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding>
+            <element signature="e#6#87#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ParkAuto/pkg_mail/mail_entity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="89" column="28" lean-forward="true" selection-start-line="89" selection-start-column="28" selection-end-line="89" selection-end-column="28" />
+        <state relative-caret-position="398">
+          <caret line="81" column="101" lean-forward="false" selection-start-line="81" selection-start-column="101" selection-end-line="81" selection-end-column="101" />
           <folding />
         </state>
       </provider>
