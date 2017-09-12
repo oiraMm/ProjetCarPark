@@ -212,7 +212,7 @@ class reservation_controller
                         //Si demande réservation crée ou modifiée avec success
                         $obj_mail=new mail_entity();
                         if($save=='add'){
-                            $obj_mail->acceptedReservation($obj_reservation);
+                            $obj_mail->newReservation($obj_reservation);
                         }elseif ($save=='mod'){
                             $obj_mail->modReservation($obj_reservation);
                         }
