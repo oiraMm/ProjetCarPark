@@ -76,7 +76,7 @@ class mail_entity
                             '.$obj_reservation->getStrRaison().'
                             
                             Connectez vous à la plateforme beta.mavril.fr pour accepter ou refuser la demande de reservation');
-        $this->setAddresse($obj_reservation->getObjSalarie()->getObjResponsable()->getStrMail());
+        $this->setAddresse($obj_reservation->getObjSalarie()->getStrMail());
         $this->sendMail();
     }
 
