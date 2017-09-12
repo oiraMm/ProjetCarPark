@@ -21,3 +21,4 @@ include_once  'pkg_document/document_loader.php';
 include_once  'pkg_status_reservation/status_reservation_loader.php';
 include_once  'pkg_reservation/reservation_loader.php';
 include_once  'pkg_type_carburant/type_carburant_loader.php';
+include_once  'pkg_mail/mail_loader.php';

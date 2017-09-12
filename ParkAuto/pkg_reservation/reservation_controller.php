@@ -210,27 +210,11 @@ class reservation_controller
                         $obj_reservation = $this->retrievePostData();
                         $save = $this->obj_reservation_model->saveReservation($obj_reservation);
                         //Si demande réservation crée ou modifiée avec success
+                        $obj_mail=new mail_entity();
                         if($save=='add'){
-                            $emailSubject='Nouvelle Reservation';
-                            $emailContent='Nouvelle demande de reseravtion de '.$obj_reservation->getObjSalarie()->getStrPrenom().' '.$obj_reservation->getObjSalarie()->getStrNom().
-                            ' du '.$obj_reservation->getDateDebut().' au '.$obj_reservation->getDateFin().
-                            ' avec le véhicule '.$obj_reservation->getObjVehicule()->getStrMarque().' '.$obj_reservation->getObjVehicule()->getStrModel().
-                            ' pour la raison suivante :
-                            '.$obj_reservation->getStrRaison().'
-                            
-                            Connectez vous à la plateforme beta.mavril.fr pour accepter ou refuser la demande de reservation';
-                            $this->sendMail($obj_reservation->getObjSalarie()->getObjResponsable()->getStrMail(),$emailSubject,$emailContent);
+                            $obj_mail->acceptedReservation($obj_reservation);
                         }elseif ($save=='mod'){
-                            $emailSubject='Rervation de '.$obj_reservation->getObjSalarie()->getStrPrenom().' '.$obj_reservation->getObjSalarie()->getStrNom().' modifiée';
-                            $emailContent='Modification de reseravtion de '.$obj_reservation->getObjSalarie()->getStrPrenom().' '.$obj_reservation->getObjSalarie()->getStrNom().
-                                ' du '.$obj_reservation->getDateDebut().' au '.$obj_reservation->getDateFin().
-                                ' avec le véhicule '.$obj_reservation->getObjVehicule()->getStrMarque().' '.$obj_reservation->getObjVehicule()->getStrModel().
-                                ' pour la raison suivante :
-                            '.$obj_reservation->getStrRaison().'
-                            
-                            Connectez vous à la plateforme beta.mavril.fr pour accepter ou refuser la demande de reservation';
-                            $this->sendMail($obj_reservation->getObjSalarie()->getObjResponsable()->getStrMail(),$emailSubject,$emailContent);
-
+                            $obj_mail->modReservation($obj_reservation);
                         }
                         $arr_reservation = $this->obj_reservation_model->loadReservations($current_user,$save);
                         $str_template = $this->obj_reservation_viewer->templateCrudReservationDefault($arr_reservation,$save);
@@ -378,62 +362,7 @@ class reservation_controller
         return $this->obj_reservation_model->nbREservationFroVehicule($vehiculeid);
     }
 
-    public function sendMail($emailAddress,$emailSubject,$emailContent){
 
-        //$mail=$emailAddress;
-        //Laissé pour test
-        $mail = 'max.nos@hotmail.fr'; // Déclaration de l'adresse de destination.
-        if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
-        {
-            $passage_ligne = "\r\n";
-        }
-        else
-        {
-            $passage_ligne = "\n";
-        }
-
-        //=====Déclaration des messages au format texte et au format HTML.
-        $message_txt=$emailContent;
-        //Laissé pour test
-        //$message_txt = "Salut à tous, voici un e-mail envoyé par un script PHP.";
-        $message_html= "<html><head></head><body>".$message_txt."</body></html>";
-
-        //=====Création de la boundary
-        $boundary = "-----=".md5(rand());
-
-        //=====Définition du sujet.
-        $sujet = "Gestion des véhicules : ";
-
-        $sujet.= $emailSubject;
-
-        //=====Création du header de l'e-mail.
-        $header = "From: \"ROOT\"<root@scuti.mavril.fr>".$passage_ligne;
-        $header.= "Reply-to: \"ROOT\" <root@scuti.mavril.fr>".$passage_ligne;
-        $header.= "MIME-Version: 1.0".$passage_ligne;
-        $header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
-
-        //=====Création du message.
-        $message = $passage_ligne."--".$boundary.$passage_ligne;
-
-        //=====Ajout du message au format texte.
-        $message.= "Content-Type: text/plain; charset=\"ISO-8859-1\"".$passage_ligne;
-        $message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
-        $message.= $passage_ligne.$message_txt.$passage_ligne;
-
-        $message.= $passage_ligne."--".$boundary.$passage_ligne;
-
-        //=====Ajout du message au format HTML
-        $message.= "Content-Type: text/html; charset=\"ISO-8859-1\"".$passage_ligne;
-        $message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
-        $message.= $passage_ligne.$message_html.$passage_ligne;
-
-        $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
-        $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
-
-        //=====Envoi de l'e-mail.
-        mail($mail,$sujet,$message,$header);
-
-    }
 
 }
 
