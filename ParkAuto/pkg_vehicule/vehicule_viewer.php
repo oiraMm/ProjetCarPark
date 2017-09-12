@@ -261,18 +261,7 @@ class vehicule_viewer
         }
         else
         {
-            $chemin = $_SERVER['PHP_SELF'];
-            $arra_chemin = explode("/", $chemin);
-            $realPath = '';
-            foreach ($arra_chemin as $key=>$part)
-            {
-                if (isset($arra_chemin[$key+1])) {
-                    if ($arra_chemin[$key + 1] != null) {
-                        $realPath .= $part . '/';
-                    }
-                }
-            }
-            $formAdd->addFreeText('<a href="'.$realPath.$pathCG.'" target="_blank">Carte Grise</a>');
+            $formAdd->addFreeText('<a href="'.$_SESSION['server_path'].$pathCG.'" target="_blank">Carte Grise</a>');
             $formAdd->addBtSubmit('Supprimer la CG', 'DeleteCG', 'btn');
             $formAdd->addFreeText('<br/>');
         }
