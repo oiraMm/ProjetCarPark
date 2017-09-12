@@ -189,7 +189,7 @@ class utilisateur_viewer
         }
         else
         {
-            $chemin = $_SERVER['PHP_SELF'];
+            /*$chemin = $_SERVER['PHP_SELF'];
             $arra_chemin = explode("/", $chemin);
             $realPath = '';
             foreach ($arra_chemin as $key=>$part)
@@ -199,8 +199,9 @@ class utilisateur_viewer
                         $realPath .= $part . '/';
                     }
                 }
-            }
-            $formAdd->addFreeText('<a href="'.$realPath.$pathPermis.'" target="_blank">Permi</a>');
+            }*/
+
+            $formAdd->addFreeText('<a href="'.$_SESSION['server_path'].$pathPermis.'" target="_blank">Permi</a>');
             $formAdd->addBtSubmit('Supprimer le permis', 'DeletePermis', 'btn');
             $formAdd->addFreeText('<br/>');
         }

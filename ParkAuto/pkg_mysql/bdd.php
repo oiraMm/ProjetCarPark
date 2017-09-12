@@ -10,6 +10,8 @@ class bdd
 {
     private function connexion()
     {
+        //Génération du chemin d'upload
+        $_SESSION['server_path'] = 'https://beta.mavril.fr';
         // Connexion à la base de données
         $db = new PDO('mysql:host=195.154.169.70;port=2206;dbname=beta', 'beta', 'PvlQ6TpblgkbPziP');
         //$db = new PDO('mysql:host=localhost;port=2206;dbname=beta', 'beta', 'PvlQ6TpblgkbPziP');
