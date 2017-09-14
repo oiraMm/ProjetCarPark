@@ -178,10 +178,10 @@ class reservation_model
                 $condition.=' AND reservation_status = "'.$idStatus.'"';
             }
             if($date == null) {
-                //$condition.=' AND reservation_dateDebut > "'.date("Y-m-d").' 00:00:00"';
+                $condition.=' AND reservation_dateDebut > "'.date("Y-m-d").' 00:00:00"';
                 $arr_result = $obj_bdd->select($champ, $table, $condition);
             }else {
-                $condition = 'reservation_salarie = "' . $salarie->getIntId() . '" AND reservation_dateDebut < "'.$date.' 23:59:59" AND reservation_dateFin > "'.$date.' 00:00:00"';
+                $condition .= ' AND reservation_dateDebut < "'.$date.' 23:59:59" AND reservation_dateFin > "'.$date.' 00:00:00"';
                 $arr_result = $obj_bdd->select($champ, $table, $condition);
             }
         }else {
@@ -200,6 +200,7 @@ class reservation_model
         $arr_status=$ctrl_status->getAllStatus();
 
         $ctrl_utilisateur=new utilisateur_controller();
+
 
         foreach ($arr_result as $reservation)
         {

@@ -54,19 +54,26 @@ class reservation_controller
             $current_user = $current_user_model->loadUtilisateurById($int_id_current_user);
             if (isset($_POST['mode']))
             {
+                $str_template='';
+                if($withFilters){
+                    $arr_filters=array('dateDebut','vehicule','user','status');
+                    $str_template .= $this->getFilters($arr_filters,'valid');
+
+                }
                 switch ($_POST['mode']) {
                     case 'accept':
                         $res_req=$this->obj_reservation_model->changeReservationStatus($_POST['idReservationAccept'],'1');
-                        $arr_reservation= $this->obj_reservation_model->loadReservations();
-                        $str_template = $this->obj_reservation_viewer->templateValidation($arr_reservation);
+                        $arr_reservation= $this->obj_reservation_model->loadReservations($current_user,$dateDebut,$idVehicule,$idStatus,$idUser);
+                        $str_template .= $this->obj_reservation_viewer->templateValidation($arr_reservation);
                         break;
                     case 'refuse':
                         $res_req=$this->obj_reservation_model->changeReservationStatus($_POST['idReservationRefuse'],'2');
-                        $arr_reservation= $this->obj_reservation_model->loadReservations();
-                        $str_template = $this->obj_reservation_viewer->templateValidation($arr_reservation);
+                        $arr_reservation= $this->obj_reservation_model->loadReservations($current_user,$dateDebut,$idVehicule,$idStatus,$idUser);
+                        $str_template .= $this->obj_reservation_viewer->templateValidation($arr_reservation);
                         break;
 
                 }
+
             }elseif($current_user->getObjRole()->getIntId()=='1' || $current_user->getObjRole()->getIntId()=='2'){
                 $str_template='';
                 if($withFilters){

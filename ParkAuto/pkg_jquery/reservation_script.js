@@ -58,8 +58,9 @@ $(document).ready(function(){
             },
             function(data){
                 var $list = $("#vehicule_list");
-                $list.empty(); //vide la liste
 
+                $list.empty(); //vide la liste
+                $("#noResa").empty();
                 //Ca dessous ca marche pour récup Key, Value
                 $.each(data, function (key, val) {
                     $list.append($("<option></option>")
@@ -81,6 +82,7 @@ $(document).ready(function(){
             },
             function(data){
                 $("#Reservations").empty();
+                $("#noResa").empty();
 
                 //alert(data);
                 $("#Reservations").append(data);
@@ -107,6 +109,7 @@ $(document).ready(function(){
             },
             function(data){
                 $("#Reservations").empty();
+                $("#noResa").empty();
 
                 //alert(data);
                 $("#Reservations").append(data);

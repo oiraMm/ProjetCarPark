@@ -226,10 +226,9 @@ class reservation_viewer
         }
 
 
-
         $obj_table = new STable();
         $obj_table->border = 1;
-        $obj_table->id='Reservations';
+        $obj_table->id = 'Reservations';
         $obj_table->thead()
             ->th("ID")
             ->th("Date de debut")
@@ -239,7 +238,9 @@ class reservation_viewer
             ->th("Raison")
             ->th("Status")
             ->th("Action");
+
         if($arr_reservation!=null) {
+
 
 
             foreach ($arr_reservation as $reservation) {
@@ -263,10 +264,10 @@ class reservation_viewer
                     $formDelete->addHidden('idReservationDelete', $reservation->getIntId());
                     $formDelete->addHidden('mode', 'delete');
                     $formDelete->addBtSubmit('Supprimer', "Submit", "btn btn-outline-danger");
-                    $delForm=$formDelete->render();
+                    $delForm = $formDelete->render();
                 } else {
                     $editForm = '';
-                    $delForm=' -- ';
+                    $delForm = ' -- ';
                 }
 
 
@@ -278,10 +279,10 @@ class reservation_viewer
                     ->td($vehicule)
                     ->td($raison)
                     ->td($status)
-                    ->td($editForm. $delForm);
+                    ->td($editForm . $delForm);
             }
-        }
 
+        }
         $form='';
         if($withNewBtn){
             $formAdd = new htmlForm('index.php', 'POST');
@@ -291,8 +292,15 @@ class reservation_viewer
         }
         
 
-        
-        $page.=$form.$obj_table->getTable();
+        if($arr_reservation!=NULL){
+            $page.=$form.$obj_table->getTable();
+        }else{
+            $page.=$form.$obj_table->getTable();
+            $page.='<div id="noResa"><div class="alert alert-danger" >
+                            <strong>Aucune reservation trouvée pour les critères demandés</strong>
+                        </div></div>';
+        }
+
         return $page;
     }
     
@@ -434,9 +442,15 @@ class reservation_viewer
         }
 
 
+        if($arr_reservation!=NULL){
+            $page.=$obj_table->getTable();
+        }else{
+            $page.=$obj_table->getTable();
+            $page.='<div id="noResa"><div class="alert alert-danger" >
+                            <strong>Aucune reservation trouvée pour les critères demandés</strong>
+                        </div></div>';
+        }
 
-
-        $page.=$obj_table->getTable();
         return $page;
 
     }

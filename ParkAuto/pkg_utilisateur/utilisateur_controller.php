@@ -88,7 +88,7 @@ class utilisateur_controller
         elseif (isset($_POST['userMode']))
         {
 
-            if($_POST['userMode']='saveUserProfile'){
+            if($_POST['userMode']=='saveUserProfile'){
                 $obj_user = $this->getObjUtilisateurModel()->loadUtilisateurById($_SESSION['current_user']);
                 $obj_user = $this->retrievePostDataProfile($obj_user);
 
@@ -106,7 +106,7 @@ class utilisateur_controller
                     $obj_document_controller->saveDocument($obj_document);
                 }
             }
-            if($_POST['userMode']='saveUserProfile'){
+            if($_POST['userMode']=='saveUserProfile'){
                 $str_template = $this->obj_utilisateur_viewer->templateUserProfil($obj_user);
             }else{
                 $arr_user = $this->obj_utilisateur_model->loadAllUser();
