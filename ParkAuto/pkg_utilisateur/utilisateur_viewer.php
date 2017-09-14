@@ -24,6 +24,52 @@ class utilisateur_viewer
         return $myform->render();
     }
 
+    public function templateUserProfil($obj_user){
+
+        $formAdd = new htmlForm('index.php', 'POST');
+        $formAdd->addHidden('idUser', $obj_user->getIntId(), 'idUser');
+        $formAdd->addFreeText('Prénom : ');
+
+        $formAdd->addText('prenomSaisi',$obj_user->getStrPrenom(), '', '', '',"form-control", 'required');
+        $formAdd->addFreeText('Nom : ');
+        $formAdd->addText('nomSaisi',$obj_user->getStrNom(), '', '', '',"form-control", 'required');
+        $formAdd->addFreeText('Adresse email : ');
+        $formAdd->addText('mailSaisi',$obj_user->getStrMail(), '', '', '',"form-control", 'required');
+        $formAdd->addFreeText('Téléphone : ');
+        $formAdd->addText('telSaisi',$obj_user->getStrTelephone(), '', '', '',"form-control", 'required');
+        $formAdd->addHidden('userMode', 'saveUserProfile');
+        $obj_document_controller = new document_controller();
+        $obj_document = $obj_document_controller->loadPathPermi($obj_user->getIntId());
+        $pathPermis = $obj_document->getStrPath();
+
+        $formAdd->addFreeText('Permis de conduire numérisé : ');
+        if ($pathPermis == '')
+        {
+            $formAdd->addFile('permis', '1000000', 'permis', "form-control");
+        }
+        else
+        {
+            /*$chemin = $_SERVER['PHP_SELF'];
+            $arra_chemin = explode("/", $chemin);
+            $realPath = '';
+            foreach ($arra_chemin as $key=>$part)
+            {
+                if (isset($arra_chemin[$key+1])) {
+                    if ($arra_chemin[$key + 1] != null) {
+                        $realPath .= $part . '/';
+                    }
+                }
+            }*/
+
+            $formAdd->addFreeText('<a href="'.$_SESSION['server_path'].$pathPermis.'" target="_blank">Permi</a>');
+            $formAdd->addBtSubmit('Supprimer le permis', 'DeletePermis', 'btn');
+            $formAdd->addFreeText('<br/>');
+        }
+        $formAdd->addBtSubmit('Valider','Submit','btn btn-outline-success');
+        return $formAdd->render();
+
+    }
+
     public function templateCrudUserDefault($arr_user)
     {
         //echo'<pre>';var_dump($arr_user);echo'</pre>';

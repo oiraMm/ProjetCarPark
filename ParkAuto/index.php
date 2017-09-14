@@ -21,9 +21,9 @@ if ($str_page_request != null)
             $page = etatPark($page);
             break;
         case 'Mes reservations':
-        case 'Editer la reservation':
-        case 'Supprimer la reservation':
-        case 'Nouvelle demande de reservation':
+        case 'Editer':
+        case 'Supprimer':
+        case 'Nouvelle demande':
         case 'saveReservation':
             $page = reservation($page);
             break;
@@ -38,6 +38,7 @@ if ($str_page_request != null)
         case 'Supprimer utilisateur':
         case 'Supprimer le permis':
         case 'Ajouter utilisateur':
+        case 'saveUserProfile':
         case 'saveUser':
             $page = gestionUtilisateur($page);
             break;
@@ -50,8 +51,8 @@ if ($str_page_request != null)
             $page = gestionVehicules($page);
             break;
         case 'Validation':
-        case 'Accepter la demande de reservation' :
-        case 'Refuser la demande de reservation' :
+        case 'Accepter' :
+        case 'Refuser' :
             $page = validation($page);
             break;
         case 'Récupération du véhicule':
@@ -192,7 +193,8 @@ function profil($page)
 {
     $obj_menu = new menu_controller();
     $page=str_replace("%navbar%",$obj_menu->getTemplateMenu(),$page);
-    $page=str_replace("%content%",'Profil est un écran à venir',$page);
+    $obj_utilisateur_controller=new utilisateur_controller();
+    $page=str_replace("%content%",$obj_utilisateur_controller->getTemplateUserProfil(),$page);
     $page=str_replace("%title%",'Profil',$page);
     return $page;
 }

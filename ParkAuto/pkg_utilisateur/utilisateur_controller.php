@@ -13,6 +13,7 @@ class utilisateur_controller
     private $obj_utilisateur_model;
     private $obj_utilisateur_viewer;
 
+
     public function __construct($str_action = "")
     {
         $this->obj_utilisateur_model = new utilisateur_model();
@@ -25,6 +26,15 @@ class utilisateur_controller
             $this->connexion();
             return 0;
         }
+    }
+
+    public function getTemplateUserProfil(){
+
+        $int_id_current_user = $_SESSION['current_user'];
+        $current_user_model = new utilisateur_model();
+        $current_user = $current_user_model->loadUtilisateurById($int_id_current_user);
+
+        return $this->obj_utilisateur_viewer->templateUserProfil($current_user);
     }
 
     public function connexion()
@@ -77,8 +87,16 @@ class utilisateur_controller
         }
         elseif (isset($_POST['userMode']))
         {
-            $obj_user = $this->retrievePostData();
+
+            if($_POST['userMode']='saveUserProfile'){
+                $obj_user = $this->getObjUtilisateurModel()->loadUtilisateurById($_SESSION['current_user']);
+                $obj_user = $this->retrievePostDataProfile($obj_user);
+
+            }else{
+                $obj_user = $this->retrievePostData();
+            }
             $saveUser = $this->getObjUtilisateurModel()->saveUser($obj_user);
+
             if (isset($_FILES["permis"]))
             {
                 if ($_FILES["permis"]["name"])
@@ -88,8 +106,13 @@ class utilisateur_controller
                     $obj_document_controller->saveDocument($obj_document);
                 }
             }
-            $arr_user = $this->obj_utilisateur_model->loadAllUser();
-            $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
+            if($_POST['userMode']='saveUserProfile'){
+                $str_template = $this->obj_utilisateur_viewer->templateUserProfil($obj_user);
+            }else{
+                $arr_user = $this->obj_utilisateur_model->loadAllUser();
+                $str_template = $this->obj_utilisateur_viewer->templateCrudUserDefault($arr_user);
+            }
+
         }
         else
         {
@@ -115,6 +138,14 @@ class utilisateur_controller
         return $obj_document;
     }
 
+    public function retrievePostDataProfile($obj_user){
+        $obj_user->setStrNom($_POST['nomSaisi']);
+        $obj_user->setStrPrenom($_POST['prenomSaisi']);
+        $obj_user->setStrMail($_POST['mailSaisi']);
+        $obj_user->setStrTelephone($_POST['telSaisi']);
+
+        return $obj_user;
+    }
     public function retrievePostData()
     {
         $obj_user = new utilisateur_entity();

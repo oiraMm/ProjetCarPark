@@ -142,7 +142,7 @@ class reservation_viewer
                 $str_resa_template .= '<li class="list-group-item list-group-item-success">';
                 $formAdd = new htmlForm('index.php', 'POST');
                 $formAdd->addHidden('idResa', $resa->getIntId());
-                $formAdd->addBtSubmit('Récupération du véhicule',"Submit","btn");
+                $formAdd->addBtSubmit('Récupération du véhicule',"Submit","btn btn-outline-primary");
                 $btn=$formAdd->render();
 
             }elseif ($status == 5){
@@ -150,7 +150,7 @@ class reservation_viewer
                 $formAdd = new htmlForm('index.php', 'POST');
                 $formAdd->addHidden('reservationMode','rendreVehicule');
                 $formAdd->addHidden('idResa', $resa->getIntId());
-                $formAdd->addBtSubmit('Rendre le véhicule',"Submit","btn");
+                $formAdd->addBtSubmit('Rendre le véhicule',"Submit","btn btn-outline-success");
                 $btn=$formAdd->render();
 
                 $formMod = new htmlForm('index.php', 'POST');
@@ -161,7 +161,7 @@ class reservation_viewer
                 }else{
                     $titleCom='Faire un commentaire';
                 }
-                $formMod->addBtSubmit($titleCom,"Submit","btn");
+                $formMod->addBtSubmit($titleCom,"Submit","btn btn-outline-success");
                 $btn.=$formMod->render();
 
             }
@@ -257,12 +257,12 @@ class reservation_viewer
                     $formEdit = new htmlForm('index.php', 'POST');
                     $formEdit->addHidden('idReservationEdit', $reservation->getIntId());
                     $formEdit->addHidden('mode', 'edit');
-                    $formEdit->addBtSubmit('Editer la reservation', "Submit", "btn");
+                    $formEdit->addBtSubmit('Editer', "Submit", "btn btn-outline-warning");
                     $editForm = $formEdit->render();
                     $formDelete = new htmlForm('index.php', 'POST');
                     $formDelete->addHidden('idReservationDelete', $reservation->getIntId());
                     $formDelete->addHidden('mode', 'delete');
-                    $formDelete->addBtSubmit('Supprimer la reservation', "Submit", "btn");
+                    $formDelete->addBtSubmit('Supprimer', "Submit", "btn btn-outline-danger");
                     $delForm=$formDelete->render();
                 } else {
                     $editForm = '';
@@ -286,7 +286,7 @@ class reservation_viewer
         if($withNewBtn){
             $formAdd = new htmlForm('index.php', 'POST');
             $formAdd->addHidden('mode', 'add');
-            $formAdd->addBtSubmit('Nouvelle demande de reservation',"Submit","btn");
+            $formAdd->addBtSubmit('Nouvelle demande',"Submit","btn btn-outline-success");
             $form=$formAdd->render();
         }
         
@@ -334,7 +334,7 @@ class reservation_viewer
         $formAdd->addHidden('idStatus', $valStatus);
         $obj_vehicule_controller = new vehicule_controller();
         $arr_vehicule = $obj_vehicule_controller->getAllVehicules();
-        $formAdd->addSelect('vehicule', "form-control", 'vehicule_list');
+        $formAdd->addSelect('vehicule', "selectpicker", 'vehicule_list');
         if($valVehicule == '') {
             $formAdd->addSelectOption('vehicule', '', '- Selectionnez un véhicule -', true);
         }else{
@@ -396,27 +396,27 @@ class reservation_viewer
                         $formRefuse = new htmlForm('index.php', 'POST');
                         $formRefuse->addHidden('idReservationRefuse', $reservation->getIntId());
                         $formRefuse->addHidden('mode', 'refuse');
-                        $formRefuse->addBtSubmit('Refuser la demande de reservation', "Submit", "btn btn-default");
+                        $formRefuse->addBtSubmit('Refuser', "Submit", "btn btn-outline-danger");
                         $refuse.=$formRefuse->render();
                     }
                     elseif ($reservation->getObjStatus()->getIntId()==1){
                         $formAccept = new htmlForm('index.php', 'POST');
                         $formAccept->addHidden('idReservationAccept', $reservation->getIntId());
                         $formAccept->addHidden('mode', 'accept');
-                        $formAccept->addBtSubmit('Accepter la demande de reservation', "Submit", "btn btn-default");
+                        $formAccept->addBtSubmit('Accepter', "Submit", "btn btn-outline-success");
                         $accept.=$formAccept->render();
                     }
                     else{
                         $formRefuse = new htmlForm('index.php', 'POST');
                         $formRefuse->addHidden('idReservationRefuse', $reservation->getIntId());
                         $formRefuse->addHidden('mode', 'refuse');
-                        $formRefuse->addBtSubmit('Refuser la demande de reservation', "Submit", "btn btn-default");
+                        $formRefuse->addBtSubmit('Refuser', "Submit", "btn btn-outline-danger");
                         $refuse.=$formRefuse->render();
 
                         $formAccept = new htmlForm('index.php', 'POST');
                         $formAccept->addHidden('idReservationAccept', $reservation->getIntId());
                         $formAccept->addHidden('mode', 'accept');
-                        $formAccept->addBtSubmit('Accepter la demande de reservation', "Submit", "btn btn-default");
+                        $formAccept->addBtSubmit('Accepter', "Submit", "btn btn-outline-success");
                         $accept.=$formAccept->render();
                     }
                 }
